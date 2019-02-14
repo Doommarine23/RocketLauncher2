@@ -77,8 +77,8 @@ RocketLauncher2::RocketLauncher2(QWidget *parent, int argc, char *argv[]) :
     parseCmdLine(argc,argv);
     //ui->listbox_pwadload->setDragDropOverwriteMode(false);
 
-    pwadFilter = tr("WAD/PK3/ZIP/PK7/PKZ/P7Z "
-            "(*.wad *.pk3 *.zip *.pk7 *.pkz)"
+    pwadFilter = tr("WAD/PK3/ZIP/PK7/PKZ/P7Z/KPF "
+            "(*.wad *.pk3 *.zip *.pk7 *.pkz *.kpf)"
             ";;WAD Files (*.wad)"
             ";;PK3 Files (*.pk3)"
             ";;Patch Files (*.bex *.deh)"
@@ -86,12 +86,16 @@ RocketLauncher2::RocketLauncher2(QWidget *parent, int argc, char *argv[]) :
             ";;PKZ Files (*.pkz)"
             ";;P7Z Files (*.p7z)"
             ";;zip Files (*.zip)"
+            ";;kpf Files (*.kpf)"
             ";;Any files (*)");
 }
 
 RocketLauncher2::~RocketLauncher2()
 {
     delete ui;
+
+
+
 }
 
 void RocketLauncher2::initPixmaps()
@@ -111,6 +115,7 @@ void RocketLauncher2::initPixmaps()
     enginepics->append((QPixmap(":/engine/img/retrologo.png").scaled(105,105,Qt::KeepAspectRatio))); //11 RetroDoom
     enginepics->append((QPixmap(":/engine/img/vavoom2.png").scaled(105,105,Qt::KeepAspectRatio))); //12 Vavoom
     enginepics->append((QPixmap(":/engine/img/ddlogo.png").scaled(105,105,Qt::KeepAspectRatio))); //13 DoomsDay
+    enginepics->append((QPixmap(":/engine/img/turoklogo.png").scaled(105,105,Qt::KeepAspectRatio))); //14 Turok Doommarine23
     ui->img_engine->setPixmap(enginepics->at(0));
 }
 
@@ -241,22 +246,23 @@ void RocketLauncher2::parseCmdLine(int argc, char *argv[])
 
 QStringList RocketLauncher2::genCommandline()
 {
+
     if (enginelist->getCurrentEngine()->type == Engine_DosBox)
     {
         return genDOSBoxcmd();
     }
+        //If we're Turok, do Turok
+    if (enginelist->getCurrentEngine()->type == Engine_Turok1)
+    {
+        return genturok1cmds();
+    }
+
 
     QStringList ret;
     QString iwadpath = returnSelectedDndViewItemData(ui->listbox_IWADs);
     bool filesadded = false;
+
     ret << "-IWAD";
-
-    if (iwadpath == "")
-    {
-        ret << "fail_IWADSELECT";
-        return ret;
-    }
-
     ret << iwadpath;
 
     if (reslist->rowCount() > 0)
@@ -303,6 +309,7 @@ QStringList RocketLauncher2::genCommandline()
             ret << "-warp";
             ret.append(warp);
         }
+
     }
 
     if (ui->combo_skill->currentText() != "Default")
@@ -328,6 +335,93 @@ QStringList RocketLauncher2::genCommandline()
 
     return ret;
 }
+
+//Doommarine23 Turok1 Commands
+
+QStringList RocketLauncher2::genturok1cmds()
+{
+    QStringList ret;
+    //QString iwadpath = returnSelectedDndViewItemData(ui->listbox_IWADs);
+    bool filesadded = false;
+
+    ret << "blank";
+
+    ret << "ignore us";
+
+    if (reslist->rowCount() > 0)
+    {
+        for (int i = 0; i < reslist->rowCount(); i++)
+        {
+            if (reslist->item(i)->checkState() == Qt::Checked)
+            {
+                if (!filesadded)
+                {
+                    ret << "-file";
+                    filesadded = true;
+                }
+                ret << reslist->item(i)->data(Qt::UserRole).toString();
+            }
+        }
+    }
+
+    if (pwadloadlist->rowCount() > 0)
+    {
+        for (int i = 0; i < pwadloadlist->rowCount(); i++ )
+        {
+            if (pwadloadlist->item(i)->checkState() == Qt::Checked)
+            {
+                if (!filesadded)
+                {
+                    ret << "-file";
+                    filesadded = true;
+                }
+                ret << pwadloadlist->item(i)->data(Qt::UserRole).toString();
+            }
+        }
+    }
+
+        //Launching a specific map might be possible, but for now it is non-fuctional but harmless.
+    if (ui->input_map->text() != "" && ui->input_map->text() != NULL)
+    {
+          ret << "-runmap" << "levels/" + ui->input_map->text() + ".map";
+    }
+
+      /* Basically Unusable right now
+
+       * if (ui->combo_skill->currentText() != "Default")
+     {
+        qint16 skill = ui->combo_skill->currentIndex();
+       ret << "DifficultyMode = " + QString::number(skill);
+        ret << "g_difficulty" + QString::number(skill);
+        ret << "snd_musicvolume " + QString::number(0.2);
+     }
+
+         Right now, its basically impossible for these to be used with Turok. So they are disabled.
+        This code is ran when the game is launched, its basically just to ensure nothing happens at all.
+
+      */
+        // No Difficulty Change
+        ui->combo_skill->currentText() = "Default";
+        ui->combo_skill->setEnabled(false);
+        //No Monsters
+        ui->check_nomonsters->setEnabled(false);
+        ui->check_nomonsters->setChecked(false);
+        // No Music
+        ui->check_nomusic->setEnabled(false);
+        ui->check_nomusic->setChecked(false);
+        // No Recording
+        ui->check_record->setEnabled(false);
+        ui->check_record->setChecked(false);
+
+    if (ui->input_argbox->text() != "" && ui->input_argbox->text() != NULL)
+        ret.append(splitArgs(ui->input_argbox->text()));
+
+    return ret;
+}
+
+
+
+
 
 QStringList RocketLauncher2::genDOSBoxcmd()
 {
@@ -479,6 +573,44 @@ void RocketLauncher2::on_combo_Engines_currentIndexChanged(int index)
 {
     enginelist->setCurrentEngine(index);
     SetEnginePic(enginelist->getCurrentEngine()->EngineImage);
+
+    //Make this a seperate function later that would be totally amazing and sexy and everything good in this world.
+    if (enginelist->getCurrentEngine()->type == Engine_Turok1)
+    {
+        //Play Turok! button
+        ui->pushButton_3->setText("Play Turok!");
+
+        // No Difficulty Change
+        ui->combo_skill->currentText() = "Default";
+        ui->combo_skill->setEnabled(false);
+
+        //No IWAD
+        ui->button_addiwad->setEnabled(false);
+        ui->button_deliwad->setEnabled(false);
+
+        //No Monsters
+        ui->check_nomonsters->setEnabled(false);
+        ui->check_nomonsters->setChecked(false);
+
+        // No Music
+        ui->check_nomusic->setEnabled(false);
+        ui->check_nomusic->setChecked(false);
+
+        // No Recording
+        ui->check_record->setEnabled(false);
+        ui->check_record->setChecked(false);
+    }
+    else
+    {
+        ui->pushButton_3->setText("Play Doom!");
+        ui->button_addiwad->setEnabled(true);
+        ui->button_deliwad->setEnabled(true);
+        ui->combo_skill->setEnabled(true);
+        ui->check_nomonsters->setEnabled(true);
+        ui->check_nomusic->setEnabled(true);
+        ui->check_record->setEnabled(true);
+    }
+
 }
 
 void RocketLauncher2::SetEnginePic(EnginePic pic)
@@ -511,6 +643,9 @@ void RocketLauncher2::SetEnginePic(EnginePic pic)
         ui->img_engine->setPixmap(enginepics->at(12));
     else if (pic == Pic_Doomsday)
         ui->img_engine->setPixmap(enginepics->at(13));
+    else if (pic == Pic_Turok1)
+        ui->img_engine->setPixmap(enginepics->at(14));
+
 }
 
 
@@ -555,8 +690,8 @@ void RocketLauncher2::updateFavs(QString filepath, bool save)
 void RocketLauncher2::on_button_add_clicked()
 {
     /*
-    const QString filter = tr("WAD/PK3/ZIP/PK7/PKZ/P7Z "
-            "(*.wad *.pk3 *.zip *.pk7 *.pkz"
+    const QString filter = tr("WAD/PK3/ZIP/PK7/PKZ/P7Z/KPF "
+            "(*.wad *.pk3 *.zip *.pk7 *.pkz *.kpf"
             ";;WAD Files (*.wad)"
             ";;PK3 Files (*.pk3)"
             ";;Patch Files (*.bex *.deh)"
@@ -564,6 +699,7 @@ void RocketLauncher2::on_button_add_clicked()
             ";;PKZ Files (*.pkz)"
             ";;P7Z Files (*.p7z)"
             ";;zip Files (*.zip)"
+            ";;kpf Files (*.kpf)"
             ";;Any files (*)");
             */
     addpwad(QFileDialog::getOpenFileName(this,tr("Add a pwad"),"",pwadFilter));

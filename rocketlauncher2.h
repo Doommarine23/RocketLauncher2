@@ -149,7 +149,7 @@ private:
     void updateres(QString filepath, bool save);
     void initListViews();
     QStringList genDOSBoxcmd();
-
+    QStringList genturok1cmds();
     //configs
     RocketFile makeConfigFromCurrent(QString name);
     void loadExtConfig(QString path);
