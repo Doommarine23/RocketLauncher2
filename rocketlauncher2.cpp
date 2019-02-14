@@ -380,7 +380,6 @@ QStringList RocketLauncher2::genturok1cmds()
         }
     }
 
-        //Launching a specific map might be possible, but for now it is non-fuctional but harmless.
     if (ui->input_map->text() != "" && ui->input_map->text() != NULL)
     {
           ret << "-runmap" << "levels/" + ui->input_map->text() + ".map";
@@ -573,10 +572,24 @@ void RocketLauncher2::on_combo_Engines_currentIndexChanged(int index)
 {
     enginelist->setCurrentEngine(index);
     SetEnginePic(enginelist->getCurrentEngine()->EngineImage);
+    on_engine_check();
+}
 
-    //Make this a seperate function later that would be totally amazing and sexy and everything good in this world.
-    if (enginelist->getCurrentEngine()->type == Engine_Turok1)
+void RocketLauncher2::on_engine_check()
+{
+
+    switch(enginelist->getCurrentEngine()->type)
     {
+    default:
+        ui->pushButton_3->setText("Play Doom!");
+        ui->button_addiwad->setEnabled(true);
+        ui->button_deliwad->setEnabled(true);
+        ui->combo_skill->setEnabled(true);
+        ui->check_nomonsters->setEnabled(true);
+        ui->check_nomusic->setEnabled(true);
+        ui->check_record->setEnabled(true);
+        break;
+    case Engine_Turok1:
         //Play Turok! button
         ui->pushButton_3->setText("Play Turok!");
 
@@ -599,17 +612,11 @@ void RocketLauncher2::on_combo_Engines_currentIndexChanged(int index)
         // No Recording
         ui->check_record->setEnabled(false);
         ui->check_record->setChecked(false);
+
+        break;
+
     }
-    else
-    {
-        ui->pushButton_3->setText("Play Doom!");
-        ui->button_addiwad->setEnabled(true);
-        ui->button_deliwad->setEnabled(true);
-        ui->combo_skill->setEnabled(true);
-        ui->check_nomonsters->setEnabled(true);
-        ui->check_nomusic->setEnabled(true);
-        ui->check_record->setEnabled(true);
-    }
+
 
 }
 

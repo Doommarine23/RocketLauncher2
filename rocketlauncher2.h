@@ -50,6 +50,7 @@ private slots:
     void on_pushButton_2_clicked();
 
     void on_combo_Engines_currentIndexChanged(int index);
+    void on_engine_check();
 
     void addpwad(QString filepath);
 
