@@ -251,7 +251,7 @@ QStringList RocketLauncher2::genCommandline()
     {
         return genDOSBoxcmd();
     }
-        //If we're Turok, do Turok
+        //DoomMarine23 If we're Turok, do Turok
     if (enginelist->getCurrentEngine()->type == Engine_Turok1)
     {
         return genturok1cmds();
@@ -344,6 +344,7 @@ QStringList RocketLauncher2::genturok1cmds()
     //QString iwadpath = returnSelectedDndViewItemData(ui->listbox_IWADs);
     bool filesadded = false;
 
+    // Trying to disable IWAD Loading is proving to be a challenge. So these are just dummy messages to prevent crashes.
     ret << "blank";
 
     ret << "ignore us";
@@ -394,23 +395,7 @@ QStringList RocketLauncher2::genturok1cmds()
         ret << "g_difficulty" + QString::number(skill);
         ret << "snd_musicvolume " + QString::number(0.2);
      }
-
-         Right now, its basically impossible for these to be used with Turok. So they are disabled.
-        This code is ran when the game is launched, its basically just to ensure nothing happens at all.
-
       */
-        // No Difficulty Change
-        ui->combo_skill->currentText() = "Default";
-        ui->combo_skill->setEnabled(false);
-        //No Monsters
-        ui->check_nomonsters->setEnabled(false);
-        ui->check_nomonsters->setChecked(false);
-        // No Music
-        ui->check_nomusic->setEnabled(false);
-        ui->check_nomusic->setChecked(false);
-        // No Recording
-        ui->check_record->setEnabled(false);
-        ui->check_record->setChecked(false);
 
     if (ui->input_argbox->text() != "" && ui->input_argbox->text() != NULL)
         ret.append(splitArgs(ui->input_argbox->text()));
@@ -580,39 +565,64 @@ void RocketLauncher2::on_engine_check()
 
     switch(enginelist->getCurrentEngine()->type)
     {
+
     default:
         ui->pushButton_3->setText("Play Doom!");
-        ui->button_addiwad->setEnabled(true);
-        ui->button_deliwad->setEnabled(true);
-        ui->combo_skill->setEnabled(true);
-        ui->check_nomonsters->setEnabled(true);
-        ui->check_nomusic->setEnabled(true);
-        ui->check_record->setEnabled(true);
+
+        //Disable IWAD and Patch Wad Boxes
+        ui->IWAD_label->setHidden(false);
+
+        ui->label_res->setHidden(false);
+
+        ui->listbox_IWADs->setHidden(false);
+        ui->listbox_res->setHidden(false);
+
+        //Disable Skill, IWAD, Patch Wad, Monsters, and Demo Recording Buttons
+        ui->combo_skill->setHidden(false);
+        ui->button_addiwad->setHidden(false);
+        ui->button_deliwad->setHidden(false);
+        ui->button_addres->setHidden(false);
+        ui->button_delres->setHidden(false);
+        ui->check_nomonsters->setHidden(false);
+        ui->check_nomusic->setHidden(true);
+        ui->check_record->setHidden(false);
+        ui->input_record->setHidden(false);
+        ui->combo_skill->setHidden(false);
+        ui->label_skill->setHidden(false);
         break;
+
     case Engine_Turok1:
-        //Play Turok! button
         ui->pushButton_3->setText("Play Turok!");
 
-        // No Difficulty Change
+        //Disable IWAD and Patch Wad Boxes
+        ui->IWAD_label->setHidden(true);
+        ui->label_res->setHidden(true);
+
+        ui->listbox_IWADs->setHidden(true);
+        ui->listbox_res->setHidden(true);
+
+        //Disable Skill, IWAD, Patch Wad, Monsters, and Demo Recording Buttons
         ui->combo_skill->currentText() = "Default";
         ui->combo_skill->setEnabled(false);
 
-        //No IWAD
-        ui->button_addiwad->setEnabled(false);
-        ui->button_deliwad->setEnabled(false);
+        ui->button_addiwad->setHidden(true);
+        ui->button_deliwad->setHidden(true);
 
-        //No Monsters
-        ui->check_nomonsters->setEnabled(false);
+        ui->button_addres->setHidden(true);
+        ui->button_delres->setHidden(true);
+
+        ui->check_nomonsters->setHidden(true);
         ui->check_nomonsters->setChecked(false);
 
-        // No Music
-        ui->check_nomusic->setEnabled(false);
+        ui->check_nomusic->setHidden(true);
         ui->check_nomusic->setChecked(false);
 
-        // No Recording
-        ui->check_record->setEnabled(false);
+        ui->check_record->setHidden(true);
         ui->check_record->setChecked(false);
+        ui->input_record->setHidden(true);
 
+        ui->combo_skill->setHidden(true);
+        ui->label_skill->setHidden(true);
         break;
 
     }
@@ -834,6 +844,8 @@ void RocketLauncher2::on_listbox_IWADs_clicked(const QModelIndex &index)
 
 //==========MISC==========
 
+//Add a proper help function that documents the program.
+
 bool RocketLauncher2::savesettings(QString key, QString value)
 {
     if (key == "" || key == NULL || value == "" || value == NULL)
@@ -843,7 +855,7 @@ bool RocketLauncher2::savesettings(QString key, QString value)
     settings.setValue(key, value);
     return true;
 }
-
+//Change this to open from a help file, making life easier for writing.
 void RocketLauncher2::on_button_helpmap_clicked()
 {
     QMessageBox::information(this, "Map/Warp",
