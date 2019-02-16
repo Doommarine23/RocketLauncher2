@@ -341,29 +341,7 @@ QStringList RocketLauncher2::genCommandline()
 QStringList RocketLauncher2::genturok1cmds()
 {
     QStringList ret;
-    //QString iwadpath = returnSelectedDndViewItemData(ui->listbox_IWADs);
     bool filesadded = false;
-
-    // Trying to disable IWAD Loading is proving to be a challenge. So these are just dummy messages to prevent crashes.
-    ret << "blank";
-
-    ret << "ignore us";
-
-    if (reslist->rowCount() > 0)
-    {
-        for (int i = 0; i < reslist->rowCount(); i++)
-        {
-            if (reslist->item(i)->checkState() == Qt::Checked)
-            {
-                if (!filesadded)
-                {
-                    ret << "-file";
-                    filesadded = true;
-                }
-                ret << reslist->item(i)->data(Qt::UserRole).toString();
-            }
-        }
-    }
 
     if (pwadloadlist->rowCount() > 0)
     {
@@ -386,7 +364,7 @@ QStringList RocketLauncher2::genturok1cmds()
           ret << "-runmap" << "levels/" + ui->input_map->text() + ".map";
     }
 
-      /* Basically Unusable right now
+      /* Basically Unusable right now. Investigate these functions.
 
        * if (ui->combo_skill->currentText() != "Default")
      {
