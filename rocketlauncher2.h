@@ -151,6 +151,7 @@ private:
     void initListViews();
     QStringList genDOSBoxcmd();
     QStringList genturok1cmds();
+    QStringList genZDoomcmds();
     //configs
     RocketFile makeConfigFromCurrent(QString name);
     void loadExtConfig(QString path);

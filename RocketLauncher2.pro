@@ -20,7 +20,8 @@ SOURCES += main.cpp\
     configs.cpp \
     enginesetup.cpp \
     engine_turok.cpp \
-    engine_dosdoom.cpp
+    engine_dosdoom.cpp \
+    engine_ZDoom.cpp
 
 HEADERS  += rocketlauncher2.h \
     abstractmodels.h \

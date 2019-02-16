@@ -1,4 +1,4 @@
-/*  This file (engine_turok) is part of Rocket Launcher 2.0 - A cross platform
+/*  This file (engine_dosdoom) is part of Rocket Launcher 2.0 - A cross platform
  *  front end for all DOOM engine source ports.
  *
  *  Copyright (C) Hypnotoad

@@ -244,96 +244,31 @@ void RocketLauncher2::parseCmdLine(int argc, char *argv[])
 
 //==========LAUNCH ENGINE==========
 
+//Doommarine23 These functions are now externalized to their own cpp files.
 QStringList RocketLauncher2::genCommandline()
-{
-
+{   
     if (enginelist->getCurrentEngine()->type == Engine_DosBox)
     {
         return genDOSBoxcmd();
     }
-        //DoomMarine23 If we're Turok, do Turok
+
     if (enginelist->getCurrentEngine()->type == Engine_Turok1)
     {
         return genturok1cmds();
     }
 
-
-    QStringList ret;
-    QString iwadpath = returnSelectedDndViewItemData(ui->listbox_IWADs);
-    bool filesadded = false;
-
-    ret << "-IWAD";
-    ret << iwadpath;
-
-    if (reslist->rowCount() > 0)
+    //Find out what is unique about ZDoom
+    if (enginelist->getCurrentEngine()->type == Engine_ZDoom)
     {
-        for (int i = 0; i < reslist->rowCount(); i++)
-        {
-            if (reslist->item(i)->checkState() == Qt::Checked)
-            {
-                if (!filesadded)
-                {
-                    ret << "-file";
-                    filesadded = true;
-                }
-                ret << reslist->item(i)->data(Qt::UserRole).toString();
-            }
-        }
+        return genZDoomcmds();
     }
 
-    if (pwadloadlist->rowCount() > 0)
+   //Find out what is unique for Default and Oldschool engines
+    if (enginelist->getCurrentEngine()->type == Engine_Default || Engine_Oldschool)
     {
-        for (int i = 0; i < pwadloadlist->rowCount(); i++ )
-        {
-            if (pwadloadlist->item(i)->checkState() == Qt::Checked)
-            {
-                if (!filesadded)
-                {
-                    ret << "-file";
-                    filesadded = true;
-                }
-                ret << pwadloadlist->item(i)->data(Qt::UserRole).toString();
-            }
-        }
+        return genZDoomcmds();
     }
 
-    if (ui->input_map->text() != "" && ui->input_map->text() != NULL)
-    {
-        if (enginelist->getEngineType() == Engine_ZDoom)
-        {
-            ret << "+MAP" << ui->input_map->text();
-        }
-        else
-        {
-            QStringList warp = ui->input_map->text().split(" ");
-            ret << "-warp";
-            ret.append(warp);
-        }
-
-    }
-
-    if (ui->combo_skill->currentText() != "Default")
-    {
-        qint16 skill = ui->combo_skill->currentIndex();
-        ret << "-skill" << QString::number(skill);
-    }
-
-    if (ui->check_nomonsters->isChecked())
-        ret << "-nomonsters";
-
-    if (ui->check_nomusic->isChecked())
-        ret << "-nomusic";
-
-    if (ui->check_record->isChecked())
-    {
-        ret << "-record";
-        ret << ui->input_record->text();
-    }
-
-    if (ui->input_argbox->text() != "" && ui->input_argbox->text() != NULL)
-        ret.append(splitArgs(ui->input_argbox->text()));
-
-    return ret;
 }
 
 void RocketLauncher2::on_pushButton_3_clicked() //RUN
