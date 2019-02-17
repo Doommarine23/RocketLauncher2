@@ -43,6 +43,10 @@ extern QStringList RocketLauncher2::genturok1cmds()
     QStringList ret;
     bool filesadded = false;
 
+    //DoomMarine23 its starting to crash again, so these test messages are here until I solve it.
+    ret << "TEST";
+    ret << "IGNORE";
+
     if (pwadloadlist->rowCount() > 0)
     {
         for (int i = 0; i < pwadloadlist->rowCount(); i++ )

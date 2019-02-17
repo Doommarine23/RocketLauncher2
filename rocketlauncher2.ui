@@ -33,7 +33,7 @@
        <string/>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tab_launchwad">
        <attribute name="title">
@@ -934,12 +934,12 @@ External File</string>
              </item>
              <item>
               <property name="text">
-               <string>Oldschool</string>
+               <string>DosBox</string>
               </property>
              </item>
              <item>
               <property name="text">
-               <string>DosBox</string>
+               <string>Oldschool</string>
               </property>
              </item>
              <item>
