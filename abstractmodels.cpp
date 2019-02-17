@@ -73,6 +73,12 @@ QString EngineListModel::addEngine(QFileInfo file)
     {
         return updateEngine("Zandronum", file.absoluteFilePath(), Engine_ZDoom, Pic_Zandronum, true);
     }
+    //Turok Doommarine23
+    //TurokEX is for Linux versions of Turok
+    if (file.baseName().compare( QString("sobek"), Qt::CaseInsensitive) == 0 or file.baseName().compare( QString("TurokEX"), Qt::CaseInsensitive) == 0  )
+    {
+        return updateEngine("Turok", file.absoluteFilePath(), Engine_Turok1, Pic_Turok1, true);
+    }
     else if (file.baseName().compare( QString("zdoom"), Qt::CaseInsensitive) == 0)
     {
         return updateEngine("ZDoom", file.absoluteFilePath(), Engine_ZDoom, Pic_Zdoom, true);

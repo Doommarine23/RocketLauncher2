@@ -55,6 +55,7 @@ private slots:
     void on_pushButton_2_clicked();
 
     void on_combo_Engines_currentIndexChanged(int index);
+    void on_engine_check();
 
     bool addpwad(QString filepath);
 
@@ -154,7 +155,8 @@ private:
     void initListViews();
     void setupAdditionalUi();
     QStringList genDOSBoxcmd();
-
+    QStringList genturok1cmds();
+    QStringList genZDoomcmds();
     //configs
     RocketFile makeConfigFromCurrent(QString name);
     void loadExtConfig(QString path);

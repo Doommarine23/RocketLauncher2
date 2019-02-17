@@ -76,6 +76,8 @@ void RocketLauncher2::on_listbox_engines_clicked(const QModelIndex &index)
         ui->combo_EngType->setCurrentText("Oldschool");
     else if (temptype == Engine_ZDoom)
         ui->combo_EngType->setCurrentText("ZDoom");
+    else if (temptype == Engine_Turok1)
+        ui->combo_EngType->setCurrentText("Turok");
 
     EnginePic pic = enginelist->getEnginePicFromIndex(index);
 
@@ -107,7 +109,8 @@ void RocketLauncher2::on_listbox_engines_clicked(const QModelIndex &index)
         ui->combo_EngPic->setCurrentText("Vavoom");
     else if (pic == Pic_Doomsday)
         ui->combo_EngPic->setCurrentText("Doomsday");
-
+    else if (pic == Pic_Turok1)
+        ui->combo_EngPic->setCurrentText("Turok");
 }
 
 void RocketLauncher2::on_button_addCustEng_clicked()
@@ -167,6 +170,8 @@ void RocketLauncher2::on_combo_EngType_currentTextChanged(const QString &arg1)
         enginelist->setTypeFromIndex(Engine_Oldschool, index);
     else if (arg1 == "ZDoom")
         enginelist->setTypeFromIndex(Engine_ZDoom, index);
+    else if (arg1 == "Turok")
+        enginelist->setTypeFromIndex(Engine_Turok1, index);
 }
 
 void RocketLauncher2::on_combo_EngPic_currentTextChanged(const QString &arg1)
@@ -203,6 +208,8 @@ void RocketLauncher2::on_combo_EngPic_currentTextChanged(const QString &arg1)
         enginelist->setPicFromIndex(Pic_ZDaemon, index);
     else if (arg1 == "Zdoom")
         enginelist->setPicFromIndex(Pic_Zdoom, index);
+    else if (arg1 == "Turok")
+        enginelist->setPicFromIndex(Pic_Turok1, index);
 
     SetEnginePic(enginelist->getCurrentEngine()->EngineImage);
 }

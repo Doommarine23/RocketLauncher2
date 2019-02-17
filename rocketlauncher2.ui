@@ -481,6 +481,20 @@
           </item>
          </layout>
         </item>
+        <item row="2" column="0">
+         <layout class="QVBoxLayout" name="verticalLayout_4">
+          <item>
+           <widget class="QLabel" name="label_4">
+            <property name="text">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;Additional Command Line Arguments&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="input_argbox"/>
+          </item>
+         </layout>
+        </item>
         <item row="1" column="0">
          <widget class="QGroupBox" name="wadGroupBox">
           <property name="enabled">
@@ -523,14 +537,18 @@
               <number>6</number>
              </property>
              <item>
-              <widget class="QLabel" name="label">
+              <widget class="QLabel" name="IWAD_label">
                <property name="text">
                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;IWAD&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                </property>
               </widget>
              </item>
              <item>
-              <widget class="DndFileSystemListView" name="listbox_IWADs"/>
+              <widget class="DndFileSystemListView" name="listbox_IWADs">
+               <property name="enabled">
+                <bool>true</bool>
+               </property>
+              </widget>
              </item>
              <item>
               <layout class="QHBoxLayout" name="liblayout">
@@ -676,20 +694,6 @@
            </item>
           </layout>
          </widget>
-        </item>
-        <item row="2" column="0">
-         <layout class="QVBoxLayout" name="verticalLayout_4">
-          <item>
-           <widget class="QLabel" name="label_4">
-            <property name="text">
-             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;Additional Command Line Arguments&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLineEdit" name="input_argbox"/>
-          </item>
-         </layout>
         </item>
        </layout>
       </widget>
@@ -967,12 +971,17 @@ External File</string>
              </item>
              <item>
               <property name="text">
+               <string>DosBox</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
                <string>Oldschool</string>
               </property>
              </item>
              <item>
               <property name="text">
-               <string>DosBox</string>
+               <string>Turok</string>
               </property>
              </item>
             </widget>
@@ -1054,6 +1063,11 @@ External File</string>
              <item>
               <property name="text">
                <string>Doomsday</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Turok</string>
               </property>
              </item>
             </widget>

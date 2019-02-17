@@ -19,6 +19,10 @@ SOURCES += main.cpp\
     hyp_commonfunc.cpp \
     configs.cpp \
     enginesetup.cpp \
+    engine_turok.cpp \
+    engine_dosdoom.cpp \
+    engine_ZDoom.cpp
+    enginesetup.cpp \
     commandlinedialog.cpp
 
 HEADERS  += rocketlauncher2.h \
@@ -39,6 +43,7 @@ CONFIG(release, debug|release):DEFINES += QT_NO_DEBUG_OUTPUT
 RC_ICONS = RocketLauncher2.ico
 
 CONFIG += c++11
+CONFIG += static
 
 VERSION = 0.1.0.2
 QMAKE_TARGET_COMPANY = Techpillar

@@ -105,6 +105,9 @@ void RocketLauncher2::closeEvent(QCloseEvent* event){
 RocketLauncher2::~RocketLauncher2()
 {
     delete ui;
+
+
+
 }
 
 void RocketLauncher2::initPixmaps()
@@ -124,6 +127,7 @@ void RocketLauncher2::initPixmaps()
     enginepics->append((QPixmap(":/engine/img/retrologo.png").scaled(105,105,Qt::KeepAspectRatio))); //11 RetroDoom
     enginepics->append((QPixmap(":/engine/img/vavoom2.png").scaled(105,105,Qt::KeepAspectRatio))); //12 Vavoom
     enginepics->append((QPixmap(":/engine/img/ddlogo.png").scaled(105,105,Qt::KeepAspectRatio))); //13 DoomsDay
+    enginepics->append((QPixmap(":/engine/img/turoklogo.png").scaled(105,105,Qt::KeepAspectRatio))); //14 Turok Doommarine23
     ui->img_engine->setPixmap(enginepics->at(0));
 }
 
@@ -301,15 +305,9 @@ QStringList RocketLauncher2::genCommandline(bool displayOnly=false)
         return genDOSBoxcmd();
     }
 
-    QStringList ret;
-    QString iwadpath = returnSelectedDndViewItemData(ui->listbox_IWADs);
-    bool filesadded = false;
-    ret << "-IWAD";
-
-    if (iwadpath == "")
+    if (enginelist->getCurrentEngine()->type == Engine_Turok1)
     {
-        ret << "fail_IWADSELECT";
-        return ret;
+        return genturok1cmds();
     }
     if (displayOnly == true){
        ret << '"'+iwadpath+'"';
@@ -317,7 +315,7 @@ QStringList RocketLauncher2::genCommandline(bool displayOnly=false)
        ret << iwadpath;
     }
 
-    if (pwadloadlist->rowCount() > 0)
+    if (enginelist->getCurrentEngine()->type == Engine_Default || Engine_Oldschool)
     {
         for (int i = 0; i < pwadloadlist->rowCount(); i++ )
         {
@@ -337,42 +335,6 @@ QStringList RocketLauncher2::genCommandline(bool displayOnly=false)
         }
     }
 
-    if (ui->input_map->text() != "" && ui->input_map->text() != NULL)
-    {
-        if (enginelist->getEngineType() == Engine_ZDoom)
-        {
-            ret << "+MAP" << ui->input_map->text();
-        }
-        else
-        {
-            QStringList warp = ui->input_map->text().split(" ");
-            ret << "-warp";
-            ret.append(warp);
-        }
-    }
-
-    if (ui->combo_skill->currentText() != "Default")
-    {
-        qint16 skill = ui->combo_skill->currentIndex();
-        ret << "-skill" << QString::number(skill);
-    }
-
-    if (ui->check_nomonsters->isChecked())
-        ret << "-nomonsters";
-
-    if (ui->check_nomusic->isChecked())
-        ret << "-nomusic";
-
-    if (ui->check_record->isChecked())
-    {
-        ret << "-record";
-        ret << ui->input_record->text();
-    }
-
-    if (ui->input_argbox->text() != "" && ui->input_argbox->text() != NULL)
-        ret.append(splitArgs(ui->input_argbox->text()));
-
-    return ret;
 }
 
 QStringList RocketLauncher2::genDOSBoxcmd()
@@ -504,6 +466,79 @@ void RocketLauncher2::on_combo_Engines_currentIndexChanged(int index)
 {
     enginelist->setCurrentEngine(index);
     SetEnginePic(enginelist->getCurrentEngine()->EngineImage);
+    on_engine_check();
+}
+
+void RocketLauncher2::on_engine_check()
+{
+
+    // Hide/Enable features specific to your chosen engine.
+    // Possibly externalize these functions?
+    switch(enginelist->getCurrentEngine()->type)
+    {
+
+    default:
+        ui->pushButton_3->setText("Play Doom!");
+
+        //Enable IWAD and Patch Wad Boxes
+        ui->IWAD_label->setHidden(false);
+
+        ui->label_res->setHidden(false);
+
+        ui->listbox_IWADs->setHidden(false);
+        ui->listbox_res->setHidden(false);
+
+        //Enable Skill, IWAD, Patch Wad, Monsters, and Demo Recording Buttons
+        ui->combo_skill->setHidden(false);
+        ui->button_addiwad->setHidden(false);
+        ui->button_deliwad->setHidden(false);
+        ui->button_addres->setHidden(false);
+        ui->button_delres->setHidden(false);
+        ui->check_nomonsters->setHidden(false);
+        ui->check_nomusic->setHidden(true);
+        ui->check_record->setHidden(false);
+        ui->input_record->setHidden(false);
+        ui->combo_skill->setHidden(false);
+        ui->label_skill->setHidden(false);
+        break;
+
+    case Engine_Turok1:
+        ui->pushButton_3->setText("Play Turok!");
+
+        //Disable IWAD and Patch Wad Boxes
+        ui->IWAD_label->setHidden(true);
+        ui->label_res->setHidden(true);
+
+        ui->listbox_IWADs->setHidden(true);
+        ui->listbox_res->setHidden(true);
+
+        //Disable Skill, IWAD, Patch Wad, Monsters, and Demo Recording Buttons
+        ui->combo_skill->currentText() = "Default";
+        ui->combo_skill->setEnabled(false);
+
+        ui->button_addiwad->setHidden(true);
+        ui->button_deliwad->setHidden(true);
+
+        ui->button_addres->setHidden(true);
+        ui->button_delres->setHidden(true);
+
+        ui->check_nomonsters->setHidden(true);
+        ui->check_nomonsters->setChecked(false);
+
+        ui->check_nomusic->setHidden(true);
+        ui->check_nomusic->setChecked(false);
+
+        ui->check_record->setHidden(true);
+        ui->check_record->setChecked(false);
+        ui->input_record->setHidden(true);
+
+        ui->combo_skill->setHidden(true);
+        ui->label_skill->setHidden(true);
+        break;
+
+    }
+
+
 }
 
 void RocketLauncher2::SetEnginePic(EnginePic pic)
@@ -536,6 +571,9 @@ void RocketLauncher2::SetEnginePic(EnginePic pic)
         ui->img_engine->setPixmap(enginepics->at(12));
     else if (pic == Pic_Doomsday)
         ui->img_engine->setPixmap(enginepics->at(13));
+    else if (pic == Pic_Turok1)
+        ui->img_engine->setPixmap(enginepics->at(14));
+
 }
 
 
@@ -580,8 +618,8 @@ void RocketLauncher2::updateFavs(QString filepath, bool save)
 void RocketLauncher2::on_button_add_clicked()
 {
     /*
-    const QString filter = tr("WAD/PK3/ZIP/PK7/PKZ/P7Z "
-            "(*.wad *.pk3 *.zip *.pk7 *.pkz"
+    const QString filter = tr("WAD/PK3/ZIP/PK7/PKZ/P7Z/KPF "
+            "(*.wad *.pk3 *.zip *.pk7 *.pkz *.kpf"
             ";;WAD Files (*.wad)"
             ";;PK3 Files (*.pk3)"
             ";;Patch Files (*.bex *.deh)"
@@ -589,6 +627,7 @@ void RocketLauncher2::on_button_add_clicked()
             ";;PKZ Files (*.pkz)"
             ";;P7Z Files (*.p7z)"
             ";;zip Files (*.zip)"
+            ";;kpf Files (*.kpf)"
             ";;Any files (*)");
             */
     addpwad(QFileDialog::getOpenFileName(this,tr("Add a pwad"),"",pwadFilter));
@@ -682,6 +721,8 @@ void RocketLauncher2::on_listbox_IWADs_clicked(const QModelIndex &index)
 
 //==========MISC==========
 
+//Add a proper help function that documents the program.
+
 bool RocketLauncher2::savesettings(QString key, QString value)
 {
     if (key == "" || key == NULL || value == "" || value == NULL)
@@ -691,9 +732,9 @@ bool RocketLauncher2::savesettings(QString key, QString value)
     settings.setValue(key, value);
     return true;
 }
-
+//Change this to open from a help file, making life easier for writing.
 void RocketLauncher2::on_button_helpmap_clicked()
 {
     QMessageBox::information(this, "Map/Warp",
-                             "If the engine is a modern ZDoom based engine, use the maplump name, e.g. 'MAP01', otherwise if it's a more oldschool engine, use the map number, e.g. '01'");
+                             "If chosen engine is Turok, use the map name, e.g 'leve06'. If your level is embedded deeper, add it. e.g. 'doommarine23/level06'. If the engine is a modern ZDoom based engine, use the maplump name, e.g. 'MAP01', otherwise if it's a more oldschool engine, use the map number, e.g. '01'");
 }
