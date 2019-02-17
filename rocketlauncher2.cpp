@@ -257,13 +257,13 @@ QStringList RocketLauncher2::genCommandline()
         return genturok1cmds();
     }
 
-    //Find out what is unique about ZDoom
+   // Rocket Launcher's functions seem the same across "Default", "ZDoom" and "Oldschool" Engines.
+   // Thus, "Default" and "Oldschool" use the ZDoom engine commands.
     if (enginelist->getCurrentEngine()->type == Engine_ZDoom)
     {
         return genZDoomcmds();
     }
 
-   //Find out what is unique for Default and Oldschool engines
     if (enginelist->getCurrentEngine()->type == Engine_Default || Engine_Oldschool)
     {
         return genZDoomcmds();
@@ -340,13 +340,15 @@ void RocketLauncher2::on_combo_Engines_currentIndexChanged(int index)
 void RocketLauncher2::on_engine_check()
 {
 
+    // Hide/Enable features specific to your chosen engine.
+    // Possibly externalize these functions?
     switch(enginelist->getCurrentEngine()->type)
     {
 
     default:
         ui->pushButton_3->setText("Play Doom!");
 
-        //Disable IWAD and Patch Wad Boxes
+        //Enable IWAD and Patch Wad Boxes
         ui->IWAD_label->setHidden(false);
 
         ui->label_res->setHidden(false);
@@ -354,7 +356,7 @@ void RocketLauncher2::on_engine_check()
         ui->listbox_IWADs->setHidden(false);
         ui->listbox_res->setHidden(false);
 
-        //Disable Skill, IWAD, Patch Wad, Monsters, and Demo Recording Buttons
+        //Enable Skill, IWAD, Patch Wad, Monsters, and Demo Recording Buttons
         ui->combo_skill->setHidden(false);
         ui->button_addiwad->setHidden(false);
         ui->button_deliwad->setHidden(false);
