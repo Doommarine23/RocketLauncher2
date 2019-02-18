@@ -17,7 +17,6 @@
  *  along with Rocket Launcher.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-
 #include <QSettings>
 #include <QDir>
 #include <QDir>
@@ -32,20 +31,24 @@
 #include <QDragEnterEvent>
 #include <QDropEvent>
 #include <QMimeData>
+#include <QMenu>
+#include <QShortcut>
 
 #include "dndfilesystemlistview.h"
 #include "rocketlauncher2.h"
 #include "ui_rocketlauncher2.h"
 #include "hyp_commonfunc.h"
+#include "commandlinedialog.h"
 
-extern QStringList RocketLauncher2::genturok1cmds()
+extern QStringList RocketLauncher2::genturok1cmds(bool displayOnly=true)
 {
     QStringList ret;
+
+    //Doommarine23 - Just a message to prevent crashes as I try to figure out how to prevent them.
+    //Basically, Rocket Launcher freaks out if there is no string data for the IWAD, even if I've removed all the checks for it.
+    ret << "IGNORE";
     bool filesadded = false;
 
-    //DoomMarine23 its starting to crash again, so these test messages are here until I solve it.
-    ret << "TEST";
-    ret << "IGNORE";
 
     if (pwadloadlist->rowCount() > 0)
     {
@@ -58,15 +61,26 @@ extern QStringList RocketLauncher2::genturok1cmds()
                     ret << "-file";
                     filesadded = true;
                 }
-                ret << pwadloadlist->item(i)->data(Qt::UserRole).toString();
+                if (displayOnly == true){
+                    ret << '"'+pwadloadlist->item(i)->data(Qt::UserRole).toString()+'"';
+                } else {
+                  ret << pwadloadlist->item(i)->data(Qt::UserRole).toString();
+                }
             }
         }
     }
 
     if (ui->input_map->text() != "" && ui->input_map->text() != NULL)
     {
+
           ret << "-runmap" << "levels/" + ui->input_map->text() + ".map";
     }
+
+    //DoomMarine23 NEW FEATURES
+
+    if (ui->check_nointro->isChecked())
+        ret << "-skipintromovies";
+                // ret << "-uselocalmods";
 
       /* Basically Unusable right now. Investigate these functions.
 

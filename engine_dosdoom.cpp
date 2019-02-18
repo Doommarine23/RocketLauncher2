@@ -17,7 +17,6 @@
  *  along with Rocket Launcher.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-
 #include <QSettings>
 #include <QDir>
 #include <QDir>
@@ -32,11 +31,14 @@
 #include <QDragEnterEvent>
 #include <QDropEvent>
 #include <QMimeData>
+#include <QMenu>
+#include <QShortcut>
 
 #include "dndfilesystemlistview.h"
 #include "rocketlauncher2.h"
 #include "ui_rocketlauncher2.h"
 #include "hyp_commonfunc.h"
+#include "commandlinedialog.h"
 
 extern QStringList RocketLauncher2::genDOSBoxcmd()
 {
@@ -61,22 +63,6 @@ extern QStringList RocketLauncher2::genDOSBoxcmd()
     ret << "-c";
     ret << "aspect = true";
     bool filesadded = false;
-
-    if (reslist->rowCount() > 0)
-    {
-        for (int i = 0; i < reslist->rowCount(); i++)
-        {
-            if (reslist->item(i)->checkState() == Qt::Checked)
-            {
-                if (!filesadded)
-                {
-                    dosTemp << "-file";
-                    filesadded = true;
-                }
-                dosTemp << reslist->item(i)->data(Qt::UserRole).toString();
-            }
-        }
-    }
 
     if (pwadloadlist->rowCount() > 0)
     {

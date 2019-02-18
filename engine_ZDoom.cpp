@@ -32,88 +32,87 @@
 #include <QDragEnterEvent>
 #include <QDropEvent>
 #include <QMimeData>
+#include <QMenu>
+#include <QShortcut>
 
 #include "dndfilesystemlistview.h"
 #include "rocketlauncher2.h"
 #include "ui_rocketlauncher2.h"
 #include "hyp_commonfunc.h"
+#include "commandlinedialog.h"
 
-extern QStringList RocketLauncher2::genZDoomcmds()
+extern QStringList RocketLauncher2::genZDoomcmds(bool displayOnly)
 {
-QStringList ret;
-QString iwadpath = returnSelectedDndViewItemData(ui->listbox_IWADs);
-bool filesadded = false;
+    QStringList ret;
+    QString iwadpath = returnSelectedDndViewItemData(ui->listbox_IWADs);
+    bool filesadded = false;
+    ret << "-IWAD";
 
-ret << "-IWAD";
-ret << iwadpath;
-
-if (reslist->rowCount() > 0)
-{
-    for (int i = 0; i < reslist->rowCount(); i++)
+    if (iwadpath == "")
     {
-        if (reslist->item(i)->checkState() == Qt::Checked)
+        ret << "fail_IWADSELECT";
+        return ret;
+    }
+    if (displayOnly == true){
+       ret << '"'+iwadpath+'"';
+    } else {
+       ret << iwadpath;
+    }
+
+    if (pwadloadlist->rowCount() > 0)
+    {
+        for (int i = 0; i < pwadloadlist->rowCount(); i++ )
         {
-            if (!filesadded)
+            if (pwadloadlist->item(i)->checkState() == Qt::Checked)
             {
-                ret << "-file";
-                filesadded = true;
+                if (!filesadded)
+                {
+                    ret << "-file";
+                    filesadded = true;
+                }
+                if (displayOnly == true){
+                    ret << '"'+pwadloadlist->item(i)->data(Qt::UserRole).toString()+'"';
+                } else {
+                  ret << pwadloadlist->item(i)->data(Qt::UserRole).toString();
+                }
             }
-            ret << reslist->item(i)->data(Qt::UserRole).toString();
         }
     }
-}
 
-if (pwadloadlist->rowCount() > 0)
-{
-    for (int i = 0; i < pwadloadlist->rowCount(); i++ )
+    if (ui->input_map->text() != "" && ui->input_map->text() != NULL)
     {
-        if (pwadloadlist->item(i)->checkState() == Qt::Checked)
+        if (enginelist->getEngineType() == Engine_ZDoom)
         {
-            if (!filesadded)
-            {
-                ret << "-file";
-                filesadded = true;
-            }
-            ret << pwadloadlist->item(i)->data(Qt::UserRole).toString();
+            ret << "+MAP" << ui->input_map->text();
+        }
+        else
+        {
+            QStringList warp = ui->input_map->text().split(" ");
+            ret << "-warp";
+            ret.append(warp);
         }
     }
-}
 
-if (ui->input_map->text() != "" && ui->input_map->text() != NULL)
-{
-    if (enginelist->getEngineType() == Engine_ZDoom)
+    if (ui->combo_skill->currentText() != "Default")
     {
-        ret << "+MAP" << ui->input_map->text();
-    }
-    else
-    {
-        QStringList warp = ui->input_map->text().split(" ");
-        ret << "-warp";
-        ret.append(warp);
+        qint16 skill = ui->combo_skill->currentIndex();
+        ret << "-skill" << QString::number(skill);
     }
 
-}
+    if (ui->check_nomonsters->isChecked())
+        ret << "-nomonsters";
 
-if (ui->combo_skill->currentText() != "Default")
-{
-    qint16 skill = ui->combo_skill->currentIndex();
-    ret << "-skill" << QString::number(skill);
-}
+    if (ui->check_nomusic->isChecked())
+        ret << "-nomusic";
 
-if (ui->check_nomonsters->isChecked())
-    ret << "-nomonsters";
+    if (ui->check_record->isChecked())
+    {
+        ret << "-record";
+        ret << ui->input_record->text();
+    }
 
-if (ui->check_nomusic->isChecked())
-    ret << "-nomusic";
+    if (ui->input_argbox->text() != "" && ui->input_argbox->text() != NULL)
+        ret.append(splitArgs(ui->input_argbox->text()));
 
-if (ui->check_record->isChecked())
-{
-    ret << "-record";
-    ret << ui->input_record->text();
-}
-
-if (ui->input_argbox->text() != "" && ui->input_argbox->text() != NULL)
-    ret.append(splitArgs(ui->input_argbox->text()));
-
-return ret;
+    return ret;
 }

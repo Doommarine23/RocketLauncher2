@@ -21,8 +21,7 @@ SOURCES += main.cpp\
     enginesetup.cpp \
     engine_turok.cpp \
     engine_dosdoom.cpp \
-    engine_ZDoom.cpp
-    enginesetup.cpp \
+    engine_ZDoom.cpp \
     commandlinedialog.cpp
 
 HEADERS  += rocketlauncher2.h \

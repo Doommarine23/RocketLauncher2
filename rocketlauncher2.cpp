@@ -83,14 +83,15 @@ RocketLauncher2::RocketLauncher2(QWidget *parent, int argc, char *argv[]) :
     //ui->listbox_pwadload->setDragDropOverwriteMode(false);
 
     pwadFilter = tr("Any files (*)"
-            ";;WAD/PK3/ZIP/PK7/PKZ/P7Z "
-            "(*.wad *.pk3 *.zip *.pk7 *.pkz *.WAD *.PK3 *.ZIP *.PK7 *.PKZ *.P7Z)"
+            ";;WAD/PK3/ZIP/PK7/PKZ/P7Z/KPF "
+            "(*.wad *.pk3 *.zip *.pk7 *.pkz *.WAD *.PK3 *.ZIP *.PK7 *.PKZ *.P7Z *.KPF)"
             ";;WAD Files (*.wad *.WAD)"
             ";;PK3 Files (*.pk3 *.PK3)"
             ";;Patch Files (*.bex *.deh *.BEX *.DEH)"
             ";;PK7 Files (*.pk7 *.PK7)"
             ";;PKZ Files (*.pkz *.PKZ)"
             ";;P7Z Files (*.p7z *.P7Z)"
+            ";;KPF Files (*.kpf)"
             ";;zip Files (*.zip *.ZIP)");
 }
 
@@ -298,6 +299,7 @@ void RocketLauncher2::showCommandLine(){
 
 //==========LAUNCH ENGINE==========
 
+
 QStringList RocketLauncher2::genCommandline(bool displayOnly=false)
 {
     if (enginelist->getCurrentEngine()->type == Engine_DosBox)
@@ -307,7 +309,20 @@ QStringList RocketLauncher2::genCommandline(bool displayOnly=false)
 
     if (enginelist->getCurrentEngine()->type == Engine_Turok1)
     {
-        return genturok1cmds();
+        return genturok1cmds(false);
+    }
+
+    //Externalize ZDoom and other engines again later.
+
+    QStringList ret;
+    QString iwadpath = returnSelectedDndViewItemData(ui->listbox_IWADs);
+    bool filesadded = false;
+    ret << "-IWAD";
+
+    if (iwadpath == "")
+    {
+        ret << "fail_IWADSELECT";
+        return ret;
     }
     if (displayOnly == true){
        ret << '"'+iwadpath+'"';
@@ -315,7 +330,7 @@ QStringList RocketLauncher2::genCommandline(bool displayOnly=false)
        ret << iwadpath;
     }
 
-    if (enginelist->getCurrentEngine()->type == Engine_Default || Engine_Oldschool)
+    if (pwadloadlist->rowCount() > 0)
     {
         for (int i = 0; i < pwadloadlist->rowCount(); i++ )
         {
@@ -335,75 +350,40 @@ QStringList RocketLauncher2::genCommandline(bool displayOnly=false)
         }
     }
 
-}
-
-QStringList RocketLauncher2::genDOSBoxcmd()
-{
-    QStringList ret;
-    QStringList dosTemp;
-    QFileInfo doomExeFile(enginelist->DoomExePath);
-    QDir root(doomExeFile.absolutePath());
-
-    if (!doomExeFile.exists())
-    {
-        ret << "fail_DOOMEXE";
-        return ret;
-    }
-
-    QString mountfold = doomExeFile.absolutePath();
-    ret << "-c";
-    ret << "MOUNT C " + root.rootPath();
-    ret << "-c";
-    ret << "C:";
-    ret << "-c";
-    ret << "cd " + mountfold;
-    ret << "-c";
-    ret << "aspect = true";
-    bool filesadded = false;
-
-    if (pwadloadlist->rowCount() > 0)
-    {
-        for (int i = 0; i < pwadloadlist->rowCount(); i++ )
-        {
-            if (pwadloadlist->item(i)->checkState() == Qt::Checked)
-            {
-                if (!filesadded)
-                {
-                    dosTemp << "-file";
-                    filesadded = true;
-                }
-                dosTemp << pwadloadlist->item(i)->data(Qt::UserRole).toString();
-            }
-        }
-    }
-
     if (ui->input_map->text() != "" && ui->input_map->text() != NULL)
     {
-        dosTemp << "-warp" << ui->input_map->text();
+        if (enginelist->getEngineType() == Engine_ZDoom)
+        {
+            ret << "+MAP" << ui->input_map->text();
+        }
+        else
+        {
+            QStringList warp = ui->input_map->text().split(" ");
+            ret << "-warp";
+            ret.append(warp);
+        }
     }
 
     if (ui->combo_skill->currentText() != "Default")
     {
         qint16 skill = ui->combo_skill->currentIndex();
-        dosTemp << "-skill" << QString::number(skill);
+        ret << "-skill" << QString::number(skill);
     }
 
     if (ui->check_nomonsters->isChecked())
-        dosTemp << "-nomonsters";
+        ret << "-nomonsters";
 
     if (ui->check_nomusic->isChecked())
-        dosTemp << "-nomusic";
+        ret << "-nomusic";
 
     if (ui->check_record->isChecked())
-        dosTemp << "-record " + ui->input_record->text();
+    {
+        ret << "-record";
+        ret << ui->input_record->text();
+    }
 
     if (ui->input_argbox->text() != "" && ui->input_argbox->text() != NULL)
-        dosTemp.append(ui->input_argbox->text().split(" "));
-
-    ret << "-c";
-    ret << doomExeFile.fileName() + " " + dosTemp.join(" ");
-    ret << "-c";
-    ret << "exit";
+        ret.append(splitArgs(ui->input_argbox->text()));
 
     return ret;
 }
@@ -483,19 +463,19 @@ void RocketLauncher2::on_engine_check()
         //Enable IWAD and Patch Wad Boxes
         ui->IWAD_label->setHidden(false);
 
-        ui->label_res->setHidden(false);
+       // ui->label_res->setHidden(false);
 
         ui->listbox_IWADs->setHidden(false);
-        ui->listbox_res->setHidden(false);
+       // ui->listbox_res->setHidden(false);
 
         //Enable Skill, IWAD, Patch Wad, Monsters, and Demo Recording Buttons
         ui->combo_skill->setHidden(false);
         ui->button_addiwad->setHidden(false);
         ui->button_deliwad->setHidden(false);
-        ui->button_addres->setHidden(false);
-        ui->button_delres->setHidden(false);
+    //    ui->button_addres->setHidden(false);
+     //   ui->button_delres->setHidden(false);
         ui->check_nomonsters->setHidden(false);
-        ui->check_nomusic->setHidden(true);
+        ui->check_nomusic->setHidden(false);
         ui->check_record->setHidden(false);
         ui->input_record->setHidden(false);
         ui->combo_skill->setHidden(false);
@@ -507,10 +487,10 @@ void RocketLauncher2::on_engine_check()
 
         //Disable IWAD and Patch Wad Boxes
         ui->IWAD_label->setHidden(true);
-        ui->label_res->setHidden(true);
+    //    ui->label_res->setHidden(true);
 
         ui->listbox_IWADs->setHidden(true);
-        ui->listbox_res->setHidden(true);
+       // ui->listbox_res->setHidden(true);
 
         //Disable Skill, IWAD, Patch Wad, Monsters, and Demo Recording Buttons
         ui->combo_skill->currentText() = "Default";
@@ -519,8 +499,8 @@ void RocketLauncher2::on_engine_check()
         ui->button_addiwad->setHidden(true);
         ui->button_deliwad->setHidden(true);
 
-        ui->button_addres->setHidden(true);
-        ui->button_delres->setHidden(true);
+       // ui->button_addres->setHidden(true);
+      //  ui->button_delres->setHidden(true);
 
         ui->check_nomonsters->setHidden(true);
         ui->check_nomonsters->setChecked(false);
