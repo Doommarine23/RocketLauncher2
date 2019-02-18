@@ -413,12 +413,19 @@ void RocketLauncher2::on_pushButton_3_clicked() //RUN
     }
 
     QFileInfo engineDir(enginefile);
-    QDir::setCurrent(engineDir.absolutePath());
+
+#if defined(Q_OS_LINUX)
+        QDir::setCurrent("LD_LIBRARY_PATH=~/.steam/bin32/ ~/.steam/bin32/steam-runtime/run.sh ./" + enginefile);   // DoomMarine23 fallback for Linux, investigate later.
+#elif defined (Q_OS_WIN)
+        QDir::setCurrent(engineDir.absolutePath());
+#endif
+
     process = new QProcess();
     process->setProcessChannelMode(QProcess::ForwardedChannels);
 
     try
     {
+
         qDebug() << cmd;
         process->start(enginefile,cmd);
     }
