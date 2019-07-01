@@ -46,7 +46,7 @@ extern QStringList RocketLauncher2::genturok1cmds(bool displayOnly=true)
 
     //Doommarine23 - Just a message to prevent crashes as I try to figure out how to prevent them.
     //Basically, Rocket Launcher freaks out if there is no string data for the IWAD, even if I've removed all the checks for it.
-    ret << "IGNORE";
+   // ret << nullptr;
     bool filesadded = false;
 
 
