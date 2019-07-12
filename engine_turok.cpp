@@ -44,9 +44,7 @@ extern QStringList RocketLauncher2::genturok1cmds(bool displayOnly=true)
 {
     QStringList ret;
 
-    //Doommarine23 - Just a message to prevent crashes as I try to figure out how to prevent them.
-    //Basically, Rocket Launcher freaks out if there is no string data for the IWAD, even if I've removed all the checks for it.
-   // ret << nullptr;
+   // ret << "IGNORE ME"; RocketLauncher was crashing without this, but I think I finally fixed it somehow? Simply keeping it incase it must return...
     bool filesadded = false;
 
 
@@ -80,7 +78,6 @@ extern QStringList RocketLauncher2::genturok1cmds(bool displayOnly=true)
 
     if (ui->check_nointro->isChecked())
         ret << "-skipintromovies";
-                // ret << "-uselocalmods";
 
       /* Basically Unusable right now. Investigate these functions.
 

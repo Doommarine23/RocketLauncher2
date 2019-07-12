@@ -53,7 +53,7 @@
         </sizepolicy>
        </property>
        <attribute name="title">
-        <string>Launch Wad</string>
+        <string>Launch Engine / Game</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_4" rowstretch="3,0,0">
         <property name="topMargin">
@@ -87,7 +87,7 @@
                </sizepolicy>
               </property>
               <property name="text">
-               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;Engine&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;Engine / Game&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
               </property>
              </widget>
             </item>
@@ -571,12 +571,18 @@
                 <widget class="QPushButton" name="button_deliwad">
                  <property name="maximumSize">
                   <size>
-                   <width>30</width>
+                   <width>80</width>
                    <height>16777215</height>
                   </size>
                  </property>
                  <property name="text">
-                  <string>Del</string>
+                  <string>Remove IWAD</string>
+                 </property>
+                 <property name="iconSize">
+                  <size>
+                   <width>16</width>
+                   <height>16</height>
+                  </size>
                  </property>
                 </widget>
                </item>
@@ -595,7 +601,7 @@
              <item>
               <widget class="QLabel" name="label_pwads">
                <property name="text">
-                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;Files to Load&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;Files or Archives to Load&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                </property>
               </widget>
              </item>
@@ -627,7 +633,7 @@
                 <widget class="QPushButton" name="button_pwadsclear">
                  <property name="minimumSize">
                   <size>
-                   <width>60</width>
+                   <width>80</width>
                    <height>0</height>
                   </size>
                  </property>
@@ -638,7 +644,7 @@
                   </size>
                  </property>
                  <property name="text">
-                  <string>Clear</string>
+                  <string>Remove ALL</string>
                  </property>
                 </widget>
                </item>
@@ -859,7 +865,7 @@ External File</string>
       </widget>
       <widget class="QWidget" name="tab_EngSetup">
        <attribute name="title">
-        <string>Engine Setup</string>
+        <string>Engine / Game Setup </string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_9">
         <property name="verticalSpacing">
@@ -870,7 +876,7 @@ External File</string>
           <item>
            <widget class="QLabel" name="label_engList">
             <property name="text">
-             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:14pt; font-weight:600;&quot;&gt;Engines&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:14pt; font-weight:600;&quot;&gt;Engines / Games&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
            </widget>
           </item>
@@ -923,7 +929,7 @@ External File</string>
            <bool>false</bool>
           </property>
           <property name="title">
-           <string>Engine Properties</string>
+           <string>Engine / Game Properties</string>
           </property>
           <layout class="QGridLayout" name="gridLayout_8">
            <item row="0" column="0">

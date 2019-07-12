@@ -469,18 +469,12 @@ void RocketLauncher2::on_engine_check()
 
         //Enable IWAD and Patch Wad Boxes
         ui->IWAD_label->setHidden(false);
-
-       // ui->label_res->setHidden(false);
-
         ui->listbox_IWADs->setHidden(false);
-       // ui->listbox_res->setHidden(false);
 
         //Enable Skill, IWAD, Patch Wad, Monsters, and Demo Recording Buttons
         ui->combo_skill->setHidden(false);
         ui->button_addiwad->setHidden(false);
         ui->button_deliwad->setHidden(false);
-    //    ui->button_addres->setHidden(false);
-     //   ui->button_delres->setHidden(false);
         ui->check_nomonsters->setHidden(false);
         ui->check_nomusic->setHidden(false);
         ui->check_record->setHidden(false);
@@ -494,10 +488,7 @@ void RocketLauncher2::on_engine_check()
 
         //Disable IWAD and Patch Wad Boxes
         ui->IWAD_label->setHidden(true);
-    //    ui->label_res->setHidden(true);
-
         ui->listbox_IWADs->setHidden(true);
-       // ui->listbox_res->setHidden(true);
 
         //Disable Skill, IWAD, Patch Wad, Monsters, and Demo Recording Buttons
         ui->combo_skill->currentText() = "Default";
@@ -505,9 +496,6 @@ void RocketLauncher2::on_engine_check()
 
         ui->button_addiwad->setHidden(true);
         ui->button_deliwad->setHidden(true);
-
-       // ui->button_addres->setHidden(true);
-      //  ui->button_delres->setHidden(true);
 
         ui->check_nomonsters->setHidden(true);
         ui->check_nomonsters->setChecked(false);
@@ -517,6 +505,7 @@ void RocketLauncher2::on_engine_check()
 
         ui->check_record->setHidden(true);
         ui->check_record->setChecked(false);
+
         ui->input_record->setHidden(true);
 
         ui->combo_skill->setHidden(true);
