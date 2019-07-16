@@ -517,39 +517,41 @@ void RocketLauncher2::on_engine_check()
 
 }
 
-void RocketLauncher2::SetEnginePic(EnginePic pic)
+void RocketLauncher2::SetEnginePic(EnginePic pic) //Originally a ton of else if statements. Rewritten as switch/case.
 {
-    if (pic == Pic_Default)
-        ui->img_engine->setPixmap(enginepics->at(0));
-    else if (pic == Pic_Zandronum)
-        ui->img_engine->setPixmap(enginepics->at(1));
-    else if (pic == Pic_Zdoom)
-        ui->img_engine->setPixmap(enginepics->at(2));
-    else if (pic == Pic_GZdoom)
-        ui->img_engine->setPixmap(enginepics->at(3));
-    else if (pic == Pic_Chocolate)
-        ui->img_engine->setPixmap(enginepics->at(4));
-    else if (pic == Pic_PrBoom)
-        ui->img_engine->setPixmap(enginepics->at(5));
-    else if (pic == Pic_ZDaemon)
-        ui->img_engine->setPixmap(enginepics->at(6));
-    else if (pic == Pic_Odamex)
-        ui->img_engine->setPixmap(enginepics->at(7));
-    else if (pic == Pic_Eternity)
-        ui->img_engine->setPixmap(enginepics->at(8));
-    else if (pic == Pic_Legacy)
-        ui->img_engine->setPixmap(enginepics->at(9));
-    else if (pic == Pic_Edge)
-        ui->img_engine->setPixmap(enginepics->at(10));
-    else if (pic == Pic_Retro)
-        ui->img_engine->setPixmap(enginepics->at(11));
-    else if (pic == Pic_Vavoom)
-        ui->img_engine->setPixmap(enginepics->at(12));
-    else if (pic == Pic_Doomsday)
-        ui->img_engine->setPixmap(enginepics->at(13));
-    else if (pic == Pic_Turok1)
-        ui->img_engine->setPixmap(enginepics->at(14));
-
+    switch(pic)
+    {
+        default:
+            ui->img_engine->setPixmap(enginepics->at(0)); break;
+        case Pic_Zandronum:
+            ui->img_engine->setPixmap(enginepics->at(1)); break;
+        case Pic_Zdoom:
+            ui->img_engine->setPixmap(enginepics->at(2)); break;
+        case Pic_GZdoom:
+            ui->img_engine->setPixmap(enginepics->at(3)); break;
+        case Pic_Chocolate:
+            ui->img_engine->setPixmap(enginepics->at(4)); break;
+        case Pic_PrBoom:
+            ui->img_engine->setPixmap(enginepics->at(5)); break;
+        case Pic_ZDaemon:
+            ui->img_engine->setPixmap(enginepics->at(6)); break;
+        case Pic_Odamex:
+            ui->img_engine->setPixmap(enginepics->at(7)); break;
+        case Pic_Eternity:
+            ui->img_engine->setPixmap(enginepics->at(8)); break;
+        case Pic_Legacy:
+            ui->img_engine->setPixmap(enginepics->at(9)); break;
+        case Pic_Edge:
+            ui->img_engine->setPixmap(enginepics->at(10)); break;
+        case Pic_Retro:
+            ui->img_engine->setPixmap(enginepics->at(11)); break;
+        case Pic_Vavoom:
+            ui->img_engine->setPixmap(enginepics->at(12)); break;
+        case Pic_Doomsday:
+            ui->img_engine->setPixmap(enginepics->at(13)); break;
+        case Pic_Turok1:
+            ui->img_engine->setPixmap(enginepics->at(14)); break;
+    }
 }
 
 
@@ -607,6 +609,7 @@ void RocketLauncher2::on_button_add_clicked()
             ";;Any files (*)");
             */
     addpwad(QFileDialog::getOpenFileName(this,tr("Add a pwad"),"",pwadFilter));
+
 }
 
 void RocketLauncher2::on_button_pwadsclear_clicked()
