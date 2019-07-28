@@ -13,21 +13,40 @@
   <property name="windowTitle">
    <string>Doomseeker - Copy Text</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">background-color:rgb(54,57,63);
+font: 8pt &quot;Roboto&quot;;
+color:222222;</string>
+  </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <widget class="QLabel" name="lblDescription">
+     <property name="styleSheet">
+      <string notr="true">color:#c6c6cc</string>
+     </property>
      <property name="text">
       <string>Text to copy:</string>
      </property>
     </widget>
    </item>
    <item>
-    <widget class="QPlainTextEdit" name="text_cmd"/>
+    <widget class="QPlainTextEdit" name="text_cmd">
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(47, 49, 54);
+border: 3px solid rgb(92, 96, 106);
+color:#c6c6cc</string>
+     </property>
+    </widget>
    </item>
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
       <widget class="QPushButton" name="button_copycmd">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(47, 49, 54);
+border: 1px solid rgb(92, 96, 106);
+color:#c6c6cc</string>
+       </property>
        <property name="text">
         <string>Copy to clipboard</string>
        </property>
@@ -35,6 +54,11 @@
      </item>
      <item>
       <widget class="QDialogButtonBox" name="buttonBox">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(47, 49, 54);
+border: 1px solid rgb(92, 96, 106);
+color:#c6c6cc</string>
+       </property>
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
        </property>

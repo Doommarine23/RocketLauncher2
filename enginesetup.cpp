@@ -58,7 +58,7 @@ void RocketLauncher2::on_button_removeEng_clicked()
 
 
 void RocketLauncher2::on_listbox_engines_clicked(const QModelIndex &index)
-{
+{//Refactor Switch Case
     ui->groupBox_4->setEnabled(true);
     ui->input_selEngName->setText(
                 enginelist->data(index,Qt::DisplayRole).toString()
@@ -157,7 +157,7 @@ void RocketLauncher2::on_button_selEngBrowse_clicked()
 
 
 void RocketLauncher2::on_combo_EngType_currentTextChanged(const QString &arg1)
-{
+{//Refactor Switch Case
     if (ui->listbox_engines->selectionModel()->selectedIndexes().size() < 1)
         return;
     QModelIndex index = ui->listbox_engines->selectionModel()->selectedIndexes()[0];
@@ -175,7 +175,7 @@ void RocketLauncher2::on_combo_EngType_currentTextChanged(const QString &arg1)
 }
 
 void RocketLauncher2::on_combo_EngPic_currentTextChanged(const QString &arg1)
-{
+{ //Refactor Switch Case
     if (ui->listbox_engines->selectionModel()->selectedIndexes().size() < 1)
         return;
     QModelIndex index = ui->listbox_engines->selectionModel()->selectedIndexes()[0];

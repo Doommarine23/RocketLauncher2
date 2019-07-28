@@ -93,6 +93,8 @@ private slots:
 
     void on_button_helpmap_clicked();
 
+    void on_button_mapfilename_clicked();
+
     void on_button_loadConfigExt_clicked();
 
     void on_button_addConfToFav_clicked();
@@ -171,6 +173,7 @@ private:
     QSettings AutoLoad;
 
     QString pwadFilter;
+    QString mapFilter;
 };
 
 #endif // ROCKETLAUNCHER2_H

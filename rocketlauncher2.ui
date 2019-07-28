@@ -29,6 +29,16 @@
    <iconset resource="resources.qrc">
     <normaloff>:/engine/img/rocket.ico</normaloff>:/engine/img/rocket.ico</iconset>
   </property>
+  <property name="statusTip">
+   <string notr="true"/>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-color:rgb(54,57,63);
+font: 8pt &quot;Roboto&quot;;
+QStatusBar {
+    background: brown;
+}</string>
+  </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QGridLayout" name="gridLayout_5">
     <item row="0" column="0">
@@ -41,6 +51,44 @@
       </property>
       <property name="toolTip">
        <string/>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QTabWidget::pane { /* The tab widget frame */
+    border-top: 2px solid #C2C7CB;
+}
+
+QTabWidget::tab-bar {
+    left: 5px; /* move to the right by 5px */
+}
+
+/* Style the tab using the tab sub-control. Note that
+    it reads QTabBar _not_ QTabWidget */
+QTabBar::tab {
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                stop: 0 #E1E1E1, stop: 0.4 #DDDDDD,
+                                stop: 0.5 #D8D8D8, stop: 1.0 #D3D3D3);
+    border: 2px solid #C4C4C3;
+    border-bottom-color: #C2C7CB; /* same as the pane color */
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    min-width: 8ex;
+    padding: 2px;
+}
+
+QTabBar::tab:selected, QTabBar::tab:hover {
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                stop: 0 #fafafa, stop: 0.4 #f4f4f4,
+                                stop: 0.5 #e7e7e7, stop: 1.0 #fafafa);
+}
+
+QTabBar::tab:selected {
+    border-color: #9B9B9B;
+    border-bottom-color: #C2C7CB; /* same as pane color */
+}
+
+QTabBar::tab:!selected {
+    margin-top: 2px; /* make non-selected tabs look smaller */
+}</string>
       </property>
       <property name="currentIndex">
        <number>0</number>
@@ -55,465 +103,53 @@
        <attribute name="title">
         <string>Launch Engine / Game</string>
        </attribute>
-       <layout class="QGridLayout" name="gridLayout_4" rowstretch="3,0,0">
-        <property name="topMargin">
-         <number>10</number>
+       <widget class="QGroupBox" name="wadGroupBox">
+        <property name="enabled">
+         <bool>true</bool>
         </property>
-        <property name="rightMargin">
-         <number>10</number>
+        <property name="geometry">
+         <rect>
+          <x>9</x>
+          <y>206</y>
+          <width>424</width>
+          <height>241</height>
+         </rect>
         </property>
-        <property name="bottomMargin">
-         <number>10</number>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
         </property>
-        <property name="horizontalSpacing">
-         <number>6</number>
+        <property name="title">
+         <string/>
         </property>
-        <property name="verticalSpacing">
-         <number>0</number>
+        <property name="alignment">
+         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
         </property>
-        <item row="0" column="0">
-         <layout class="QHBoxLayout" name="horizontalLayout_7" stretch="1,0,1">
-          <item>
-           <layout class="QGridLayout" name="gridLayout_3">
-            <property name="sizeConstraint">
-             <enum>QLayout::SetDefaultConstraint</enum>
-            </property>
-            <item row="0" column="0">
-             <widget class="QLabel" name="label_5">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="text">
-               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;Engine / Game&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="0">
-             <widget class="QComboBox" name="combo_Engines">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="minimumSize">
-               <size>
-                <width>150</width>
-                <height>22</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>16777215</width>
-                <height>22</height>
-               </size>
-              </property>
-             </widget>
-            </item>
-            <item row="4" column="0">
-             <widget class="QPushButton" name="pushButton_2">
-              <property name="minimumSize">
-               <size>
-                <width>0</width>
-                <height>22</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>16777215</width>
-                <height>22</height>
-               </size>
-              </property>
-              <property name="text">
-               <string>Add Engine</string>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="0" alignment="Qt::AlignHCenter">
-             <widget class="QLabel" name="img_engine">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="minimumSize">
-               <size>
-                <width>105</width>
-                <height>105</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>305</width>
-                <height>305</height>
-               </size>
-              </property>
-              <property name="text">
-               <string/>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-          <item>
-           <widget class="QGroupBox" name="groupBox_2">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>0</height>
-             </size>
-            </property>
-            <property name="title">
-             <string>Launch Engine!</string>
-            </property>
-            <layout class="QFormLayout" name="formLayout">
-             <item row="0" column="0">
-              <layout class="QFormLayout" name="formLayout_2">
-               <item row="1" column="0">
-                <layout class="QHBoxLayout" name="horizontalLayout_3" stretch="1,1">
-                 <property name="spacing">
-                  <number>6</number>
-                 </property>
-                 <item>
-                  <widget class="QLabel" name="label_skill">
-                   <property name="sizePolicy">
-                    <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-                     <horstretch>0</horstretch>
-                     <verstretch>0</verstretch>
-                    </sizepolicy>
-                   </property>
-                   <property name="maximumSize">
-                    <size>
-                     <width>50</width>
-                     <height>16777215</height>
-                    </size>
-                   </property>
-                   <property name="text">
-                    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;Skill&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QComboBox" name="combo_skill">
-                   <property name="sizePolicy">
-                    <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
-                     <horstretch>0</horstretch>
-                     <verstretch>0</verstretch>
-                    </sizepolicy>
-                   </property>
-                   <property name="minimumSize">
-                    <size>
-                     <width>122</width>
-                     <height>0</height>
-                    </size>
-                   </property>
-                   <item>
-                    <property name="text">
-                     <string>Default</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>I'm too young to die</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>Hey, not too rough</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>Hurt me plenty</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>Ultra-Violence</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>Nightmare!</string>
-                    </property>
-                   </item>
-                  </widget>
-                 </item>
-                </layout>
-               </item>
-               <item row="2" column="0">
-                <layout class="QHBoxLayout" name="horizontalLayout_4">
-                 <item>
-                  <widget class="QCheckBox" name="check_record">
-                   <property name="maximumSize">
-                    <size>
-                     <width>16777215</width>
-                     <height>16777215</height>
-                    </size>
-                   </property>
-                   <property name="text">
-                    <string>Record Demo:</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QLineEdit" name="input_record">
-                   <property name="sizePolicy">
-                    <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
-                     <horstretch>0</horstretch>
-                     <verstretch>0</verstretch>
-                    </sizepolicy>
-                   </property>
-                   <property name="minimumSize">
-                    <size>
-                     <width>74</width>
-                     <height>0</height>
-                    </size>
-                   </property>
-                   <property name="text">
-                    <string>demo_name</string>
-                   </property>
-                  </widget>
-                 </item>
-                </layout>
-               </item>
-               <item row="3" column="0">
-                <widget class="QCheckBox" name="check_nomonsters">
-                 <property name="text">
-                  <string>No Monsters</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="5" column="0">
-                <widget class="QCheckBox" name="check_nomusic">
-                 <property name="text">
-                  <string>No Music</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="0" colspan="2">
-                <layout class="QHBoxLayout" name="horizontalLayout_2">
-                 <property name="spacing">
-                  <number>6</number>
-                 </property>
-                 <item>
-                  <widget class="QLabel" name="label_map">
-                   <property name="sizePolicy">
-                    <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-                     <horstretch>0</horstretch>
-                     <verstretch>0</verstretch>
-                    </sizepolicy>
-                   </property>
-                   <property name="minimumSize">
-                    <size>
-                     <width>0</width>
-                     <height>0</height>
-                    </size>
-                   </property>
-                   <property name="text">
-                    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;Map/Warp&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QLineEdit" name="input_map">
-                   <property name="sizePolicy">
-                    <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
-                     <horstretch>0</horstretch>
-                     <verstretch>0</verstretch>
-                    </sizepolicy>
-                   </property>
-                   <property name="minimumSize">
-                    <size>
-                     <width>140</width>
-                     <height>0</height>
-                    </size>
-                   </property>
-                   <property name="maximumSize">
-                    <size>
-                     <width>50</width>
-                     <height>16777215</height>
-                    </size>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QPushButton" name="button_helpmap">
-                   <property name="minimumSize">
-                    <size>
-                     <width>20</width>
-                     <height>0</height>
-                    </size>
-                   </property>
-                   <property name="maximumSize">
-                    <size>
-                     <width>20</width>
-                     <height>16777215</height>
-                    </size>
-                   </property>
-                   <property name="text">
-                    <string>?</string>
-                   </property>
-                  </widget>
-                 </item>
-                </layout>
-               </item>
-               <item row="6" column="0">
-                <widget class="QCheckBox" name="check_nointro">
-                 <property name="text">
-                  <string>Skip Intro Movies</string>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-             <item row="0" column="1">
-              <layout class="QVBoxLayout" name="verticalLayout_2">
-               <property name="spacing">
-                <number>5</number>
-               </property>
-               <property name="bottomMargin">
-                <number>53</number>
-               </property>
-               <item>
-                <widget class="QPushButton" name="pushButton_3">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                 <property name="minimumSize">
-                  <size>
-                   <width>0</width>
-                   <height>0</height>
-                  </size>
-                 </property>
-                 <property name="maximumSize">
-                  <size>
-                   <width>16777215</width>
-                   <height>90</height>
-                  </size>
-                 </property>
-                 <property name="text">
-                  <string>Play Doom!</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <layout class="QHBoxLayout" name="horizontalLayout_11">
-                 <item>
-                  <spacer name="horizontalSpacer_2">
-                   <property name="orientation">
-                    <enum>Qt::Horizontal</enum>
-                   </property>
-                   <property name="sizeHint" stdset="0">
-                    <size>
-                     <width>40</width>
-                     <height>20</height>
-                    </size>
-                   </property>
-                  </spacer>
-                 </item>
-                 <item>
-                  <widget class="QPushButton" name="button_rocketmenu">
-                   <property name="text">
-                    <string>Rocket Menu</string>
-                   </property>
-                  </widget>
-                 </item>
-                </layout>
-               </item>
-              </layout>
-             </item>
-            </layout>
-           </widget>
-          </item>
-          <item>
-           <layout class="QVBoxLayout" name="verticalLayout_3" stretch="0,0,0">
-            <item>
-             <widget class="QLabel" name="label_fav">
-              <property name="text">
-               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;Favorites &lt;/span&gt;&lt;span style=&quot; font-size:7pt;&quot;&gt;(drag and drop)&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="DndFileSystemListView" name="listbox_fav"/>
-            </item>
-            <item>
-             <layout class="QHBoxLayout" name="horizontalLayout_6">
-              <property name="spacing">
-               <number>16</number>
-              </property>
-              <item alignment="Qt::AlignLeft">
-               <widget class="QPushButton" name="button_favadd">
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                  <horstretch>1</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="text">
-                 <string>Add</string>
-                </property>
-               </widget>
-              </item>
-              <item alignment="Qt::AlignRight">
-               <widget class="QPushButton" name="button_favremove">
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                  <horstretch>2</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="text">
-                 <string>Remove</string>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </item>
-           </layout>
-          </item>
-         </layout>
-        </item>
-        <item row="1" column="0">
-         <widget class="QGroupBox" name="wadGroupBox">
-          <property name="enabled">
-           <bool>true</bool>
-          </property>
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="title">
-           <string/>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-          </property>
-          <property name="flat">
-           <bool>false</bool>
-          </property>
-          <layout class="QHBoxLayout" name="horizontalLayout_10" stretch="2,5">
+        <property name="flat">
+         <bool>false</bool>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout_10" stretch="5">
+         <property name="spacing">
+          <number>6</number>
+         </property>
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
+         <item>
+          <layout class="QVBoxLayout" name="verticalLayout_8">
            <property name="spacing">
             <number>6</number>
-           </property>
-           <property name="leftMargin">
-            <number>0</number>
            </property>
            <property name="topMargin">
             <number>0</number>
@@ -521,194 +157,834 @@
            <property name="rightMargin">
             <number>0</number>
            </property>
-           <property name="bottomMargin">
-            <number>0</number>
-           </property>
            <item>
-            <layout class="QVBoxLayout" name="livlayout1">
+            <widget class="QLabel" name="label_pwads">
+             <property name="text">
+              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600; color:#c6c6cc;&quot;&gt;Files or Archives to Load - Drag and Drop Load Order&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="DndFileSystemListView" name="listbox_pwadload">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="sizeIncrement">
+              <size>
+               <width>0</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="acceptDrops">
+              <bool>true</bool>
+             </property>
+             <property name="toolTip">
+              <string>To change the load order, just drag and move the files within to their desired placement</string>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">background-color: rgb(237, 237, 241)</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout">
+             <item>
+              <widget class="QPushButton" name="button_add">
+               <property name="minimumSize">
+                <size>
+                 <width>80</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">background-color: rgb(47, 49, 54);
+border: 2px solid rgb(92, 96, 106);
+color:#c6c6cc</string>
+               </property>
+               <property name="text">
+                <string>Add</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="horizontalSpacer_3">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <widget class="QPushButton" name="button_pwadsclear">
+               <property name="minimumSize">
+                <size>
+                 <width>80</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>60</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">background-color: rgb(47, 49, 54);
+border: 2px solid rgb(92, 96, 106);
+color:#c6c6cc</string>
+               </property>
+               <property name="text">
+                <string>Remove ALL</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="horizontalSpacer">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <widget class="QPushButton" name="button_remove">
+               <property name="minimumSize">
+                <size>
+                 <width>80</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">background-color: rgb(47, 49, 54);
+border: 2px solid rgb(92, 96, 106);
+color:#c6c6cc</string>
+               </property>
+               <property name="text">
+                <string>Remove</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QGroupBox" name="groupBox_2">
+        <property name="geometry">
+         <rect>
+          <x>439</x>
+          <y>9</y>
+          <width>431</width>
+          <height>251</height>
+         </rect>
+        </property>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>Roboto</family>
+          <pointsize>8</pointsize>
+          <weight>50</weight>
+          <italic>false</italic>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="title">
+         <string notr="true"/>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+        <property name="flat">
+         <bool>false</bool>
+        </property>
+        <property name="checkable">
+         <bool>false</bool>
+        </property>
+        <layout class="QFormLayout" name="formLayout">
+         <item row="2" column="0" colspan="2">
+          <widget class="QLabel" name="label_6">
+           <property name="text">
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600; color:#c6c6cc;&quot;&gt;Launch!&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="0">
+          <layout class="QFormLayout" name="formLayout_2">
+           <item row="0" column="0" colspan="2">
+            <layout class="QHBoxLayout" name="horizontalLayout_2">
              <property name="spacing">
               <number>6</number>
              </property>
              <item>
-              <widget class="QLabel" name="IWAD_label">
-               <property name="text">
-                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;IWAD&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="DndFileSystemListView" name="listbox_IWADs">
-               <property name="enabled">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <layout class="QHBoxLayout" name="liblayout">
-               <property name="spacing">
-                <number>10</number>
-               </property>
-               <item alignment="Qt::AlignLeft">
-                <widget class="QPushButton" name="button_addiwad">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                 <property name="minimumSize">
-                  <size>
-                   <width>60</width>
-                   <height>0</height>
-                  </size>
-                 </property>
-                 <property name="text">
-                  <string>Add IWAD</string>
-                 </property>
-                </widget>
-               </item>
-               <item alignment="Qt::AlignRight">
-                <widget class="QPushButton" name="button_deliwad">
-                 <property name="maximumSize">
-                  <size>
-                   <width>80</width>
-                   <height>16777215</height>
-                  </size>
-                 </property>
-                 <property name="text">
-                  <string>Remove IWAD</string>
-                 </property>
-                 <property name="iconSize">
-                  <size>
-                   <width>16</width>
-                   <height>16</height>
-                  </size>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-            </layout>
-           </item>
-           <item>
-            <layout class="QVBoxLayout" name="verticalLayout_8">
-             <property name="topMargin">
-              <number>0</number>
-             </property>
-             <property name="rightMargin">
-              <number>0</number>
-             </property>
-             <item>
-              <widget class="QLabel" name="label_pwads">
-               <property name="text">
-                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;Files or Archives to Load&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="DndFileSystemListView" name="listbox_pwadload">
+              <widget class="QLabel" name="label_map">
                <property name="sizePolicy">
-                <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
                  <horstretch>0</horstretch>
                  <verstretch>0</verstretch>
                 </sizepolicy>
                </property>
-               <property name="sizeIncrement">
+               <property name="minimumSize">
                 <size>
                  <width>0</width>
                  <height>0</height>
                 </size>
                </property>
-               <property name="acceptDrops">
-                <bool>true</bool>
-               </property>
-               <property name="toolTip">
-                <string>To change the load order, just drag and move the files within to their desired placement</string>
+               <property name="text">
+                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt; color:#c6c6cc;&quot;&gt;Map/Warp&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                </property>
               </widget>
              </item>
              <item>
-              <layout class="QHBoxLayout" name="horizontalLayout">
+              <widget class="QLineEdit" name="input_map">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>140</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>50</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">background-color: rgb(237, 237, 241)</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="button_helpmap">
+               <property name="minimumSize">
+                <size>
+                 <width>20</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>20</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">background-color: rgb(47, 49, 54);
+border: 1px solid rgb(92, 96, 106);
+color:#c6c6cc</string>
+               </property>
+               <property name="text">
+                <string>?</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item row="1" column="0">
+            <layout class="QHBoxLayout" name="horizontalLayout_3" stretch="1,1">
+             <property name="spacing">
+              <number>6</number>
+             </property>
+             <item>
+              <widget class="QLabel" name="label_skill">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>50</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">color:#c6c6cc</string>
+               </property>
+               <property name="text">
+                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;Skill&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QComboBox" name="combo_skill">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>122</width>
+                 <height>0</height>
+                </size>
+               </property>
                <item>
-                <widget class="QPushButton" name="button_pwadsclear">
-                 <property name="minimumSize">
-                  <size>
-                   <width>80</width>
-                   <height>0</height>
-                  </size>
-                 </property>
-                 <property name="maximumSize">
-                  <size>
-                   <width>60</width>
-                   <height>16777215</height>
-                  </size>
-                 </property>
-                 <property name="text">
-                  <string>Remove ALL</string>
-                 </property>
-                </widget>
+                <property name="text">
+                 <string>Default</string>
+                </property>
                </item>
                <item>
-                <spacer name="horizontalSpacer">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>100</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
+                <property name="text">
+                 <string>I'm too young to die</string>
+                </property>
                </item>
-               <item alignment="Qt::AlignRight">
-                <widget class="QPushButton" name="button_add">
-                 <property name="minimumSize">
-                  <size>
-                   <width>18</width>
-                   <height>0</height>
-                  </size>
-                 </property>
-                 <property name="text">
-                  <string>Add</string>
-                 </property>
-                </widget>
+               <item>
+                <property name="text">
+                 <string>Hey, not too rough</string>
+                </property>
                </item>
-               <item alignment="Qt::AlignRight">
-                <widget class="QPushButton" name="button_remove">
-                 <property name="minimumSize">
-                  <size>
-                   <width>18</width>
-                   <height>0</height>
-                  </size>
-                 </property>
-                 <property name="text">
-                  <string>Remove</string>
-                 </property>
-                </widget>
+               <item>
+                <property name="text">
+                 <string>Hurt me plenty</string>
+                </property>
                </item>
-              </layout>
+               <item>
+                <property name="text">
+                 <string>Ultra-Violence</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>Nightmare!</string>
+                </property>
+               </item>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item row="2" column="0">
+            <layout class="QHBoxLayout" name="horizontalLayout_4">
+             <item>
+              <widget class="QCheckBox" name="check_record">
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">color:#c6c6cc</string>
+               </property>
+               <property name="text">
+                <string>Record Demo:</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="input_record">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>74</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">background-color: rgb(237, 237, 241)</string>
+               </property>
+               <property name="text">
+                <string>demo_name</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item row="3" column="0">
+            <widget class="QCheckBox" name="check_nomonsters">
+             <property name="styleSheet">
+              <string notr="true">color:#c6c6cc;</string>
+             </property>
+             <property name="text">
+              <string>No Monsters</string>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="0">
+            <widget class="QCheckBox" name="check_nomusic">
+             <property name="styleSheet">
+              <string notr="true">color:#c6c6cc</string>
+             </property>
+             <property name="text">
+              <string>No Music</string>
+             </property>
+            </widget>
+           </item>
+           <item row="6" column="0">
+            <widget class="QCheckBox" name="check_nointro">
+             <property name="styleSheet">
+              <string notr="true">color:#c6c6cc;</string>
+             </property>
+             <property name="text">
+              <string>Skip Intro Movies</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item row="3" column="1">
+          <layout class="QVBoxLayout" name="verticalLayout_2">
+           <property name="spacing">
+            <number>5</number>
+           </property>
+           <property name="bottomMargin">
+            <number>53</number>
+           </property>
+           <item>
+            <widget class="QPushButton" name="pushButton_3">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>90</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <family>Roboto</family>
+               <pointsize>8</pointsize>
+               <weight>50</weight>
+               <italic>false</italic>
+               <bold>false</bold>
+              </font>
+             </property>
+             <property name="autoFillBackground">
+              <bool>false</bool>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">background-color: rgb(47, 49, 54);
+border: 3px solid rgb(92, 96, 106);
+color:#c6c6cc</string>
+             </property>
+             <property name="text">
+              <string>Play Doom!</string>
+             </property>
+             <property name="iconSize">
+              <size>
+               <width>16</width>
+               <height>16</height>
+              </size>
+             </property>
+             <property name="checkable">
+              <bool>false</bool>
+             </property>
+             <property name="autoRepeat">
+              <bool>false</bool>
+             </property>
+             <property name="default">
+              <bool>false</bool>
+             </property>
+             <property name="flat">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_11">
+             <item>
+              <spacer name="horizontalSpacer_2">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
              </item>
             </layout>
            </item>
           </layout>
-         </widget>
-        </item>
-        <item row="2" column="0">
-         <layout class="QVBoxLayout" name="verticalLayout_4">
-          <item>
-           <widget class="QLabel" name="label_4">
-            <property name="text">
-             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;Additional Command Line Arguments&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLineEdit" name="input_argbox"/>
-          </item>
-         </layout>
-        </item>
-       </layout>
+         </item>
+         <item row="4" column="0" colspan="2">
+          <widget class="QLabel" name="label_4">
+           <property name="text">
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600; color:#c6c6cc;&quot;&gt;Additional Command Line Arguments&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           </property>
+          </widget>
+         </item>
+         <item row="5" column="0" colspan="2">
+          <widget class="QLineEdit" name="input_argbox">
+           <property name="styleSheet">
+            <string notr="true">background-color: rgb(237, 237, 241)</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QLabel" name="img_engine">
+        <property name="geometry">
+         <rect>
+          <x>304</x>
+          <y>460</y>
+          <width>301</width>
+          <height>121</height>
+         </rect>
+        </property>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>105</width>
+          <height>105</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>305</width>
+          <height>305</height>
+         </size>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QWidget" name="layoutWidget">
+        <property name="geometry">
+         <rect>
+          <x>9</x>
+          <y>9</y>
+          <width>424</width>
+          <height>191</height>
+         </rect>
+        </property>
+        <layout class="QGridLayout" name="gridLayout_4">
+         <item row="0" column="0">
+          <layout class="QGridLayout" name="gridLayout_3">
+           <property name="sizeConstraint">
+            <enum>QLayout::SetDefaultConstraint</enum>
+           </property>
+           <item row="2" column="0">
+            <widget class="QPushButton" name="pushButton_2">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>22</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>22</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">background-color: rgb(47, 49, 54);
+border: 2px solid rgb(92, 96, 106);
+color:#c6c6cc</string>
+             </property>
+             <property name="text">
+              <string>Add Engine / Game</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="0">
+            <widget class="QLabel" name="label_5">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="text">
+              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600; color:#c6c6cc;&quot;&gt;Engine / Game&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QComboBox" name="combo_Engines">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>150</width>
+               <height>22</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>22</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">background-color: rgb(237, 237, 241)</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="0">
+            <widget class="QPushButton" name="button_rocketmenu">
+             <property name="styleSheet">
+              <string notr="true">background-color: rgb(47, 49, 54);
+border: 2px solid rgb(92, 96, 106);
+color:#c6c6cc</string>
+             </property>
+             <property name="text">
+              <string>Rocket Menu</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item row="0" column="1">
+          <layout class="QVBoxLayout" name="livlayout1">
+           <property name="spacing">
+            <number>6</number>
+           </property>
+           <item>
+            <widget class="QLabel" name="IWAD_label">
+             <property name="text">
+              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600; color:#c6c6cc;&quot;&gt;IWADs&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="DndFileSystemListView" name="listbox_IWADs">
+             <property name="enabled">
+              <bool>true</bool>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">background-color: rgb(237, 237, 241)</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="liblayout">
+             <property name="spacing">
+              <number>10</number>
+             </property>
+             <item>
+              <widget class="QPushButton" name="button_addiwad">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>60</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">background-color: rgb(47, 49, 54);
+border: 2px solid rgb(92, 96, 106);
+color:#c6c6cc</string>
+               </property>
+               <property name="text">
+                <string>Add IWAD</string>
+               </property>
+              </widget>
+             </item>
+             <item alignment="Qt::AlignRight">
+              <widget class="QPushButton" name="button_deliwad">
+               <property name="maximumSize">
+                <size>
+                 <width>80</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">background-color: rgb(47, 49, 54);
+border: 2px solid rgb(92, 96, 106);
+color:#c6c6cc</string>
+               </property>
+               <property name="text">
+                <string>Remove IWAD</string>
+               </property>
+               <property name="iconSize">
+                <size>
+                 <width>16</width>
+                 <height>16</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QWidget" name="layoutWidget">
+        <property name="geometry">
+         <rect>
+          <x>440</x>
+          <y>260</y>
+          <width>424</width>
+          <height>185</height>
+         </rect>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_3" stretch="0,0,0">
+         <item>
+          <widget class="QLabel" name="label_fav">
+           <property name="text">
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600; color:#c6c6cc;&quot;&gt;Favorites - Always Load&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="DndFileSystemListView" name="listbox_fav">
+           <property name="toolTip">
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;These files are always loaded&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">background-color: rgb(237, 237, 241)</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_6">
+           <property name="spacing">
+            <number>16</number>
+           </property>
+           <item alignment="Qt::AlignLeft">
+            <widget class="QPushButton" name="button_favadd">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+               <horstretch>1</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>80</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">background-color: rgb(47, 49, 54);
+border: 2px solid rgb(92, 96, 106);
+color:#c6c6cc</string>
+             </property>
+             <property name="text">
+              <string>Add</string>
+             </property>
+            </widget>
+           </item>
+           <item alignment="Qt::AlignRight">
+            <widget class="QPushButton" name="button_favremove">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+               <horstretch>2</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>80</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">background-color: rgb(47, 49, 54);
+border: 2px solid rgb(92, 96, 106);
+color:#c6c6cc</string>
+             </property>
+             <property name="text">
+              <string>Remove</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QPushButton" name="button_mapfilename">
+        <property name="geometry">
+         <rect>
+          <x>490</x>
+          <y>470</y>
+          <width>261</width>
+          <height>17</height>
+         </rect>
+        </property>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>60</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: rgb(47, 49, 54);
+border: 2px solid rgb(92, 96, 106);
+color:#c6c6cc</string>
+        </property>
+        <property name="text">
+         <string>Get Map name from File</string>
+        </property>
+       </widget>
       </widget>
       <widget class="QWidget" name="tab_loadsave">
        <attribute name="title">
@@ -720,6 +996,9 @@
         </property>
         <item>
          <widget class="QGroupBox" name="groupBox_favConfigs">
+          <property name="styleSheet">
+           <string notr="true">color:#c6c6cc</string>
+          </property>
           <property name="title">
            <string>Load From Favorites</string>
           </property>
@@ -727,15 +1006,24 @@
            <item row="0" column="0" colspan="2">
             <widget class="QLabel" name="label_favorieConf">
              <property name="text">
-              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;Favorites&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600; color:#c6c6cc;&quot;&gt;Favorites&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
              </property>
             </widget>
            </item>
            <item row="1" column="0" colspan="2">
-            <widget class="QListView" name="listbox_configFavs"/>
+            <widget class="QListView" name="listbox_configFavs">
+             <property name="styleSheet">
+              <string notr="true">background-color: rgb(237, 237, 241)</string>
+             </property>
+            </widget>
            </item>
            <item row="2" column="0">
             <widget class="QPushButton" name="button_loadFavConfig">
+             <property name="styleSheet">
+              <string notr="true">background-color: rgb(47, 49, 54);
+border: 3px solid rgb(92, 96, 106);
+color:#c6c6cc</string>
+             </property>
              <property name="text">
               <string>Load Selected</string>
              </property>
@@ -743,6 +1031,11 @@
            </item>
            <item row="2" column="1">
             <widget class="QPushButton" name="button_delConfig">
+             <property name="styleSheet">
+              <string notr="true">background-color: rgb(47, 49, 54);
+border: 3px solid rgb(92, 96, 106);
+color:#c6c6cc</string>
+             </property>
              <property name="text">
               <string>Delete</string>
              </property>
@@ -761,6 +1054,9 @@
           </property>
           <item>
            <widget class="QGroupBox" name="groupBox_3">
+            <property name="styleSheet">
+             <string notr="true">color:#c6c6cc</string>
+            </property>
             <property name="title">
              <string>Save</string>
             </property>
@@ -774,12 +1070,16 @@
                 </sizepolicy>
                </property>
                <property name="text">
-                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;Name Your Config&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600; color:#c6c6cc;&quot;&gt;Name Your Config&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                </property>
               </widget>
              </item>
              <item row="1" column="0" colspan="2" alignment="Qt::AlignTop">
-              <widget class="QLineEdit" name="input_confName"/>
+              <widget class="QLineEdit" name="input_confName">
+               <property name="styleSheet">
+                <string notr="true">background-color: rgb(237, 237, 241); color:000000</string>
+               </property>
+              </widget>
              </item>
              <item row="2" column="1">
               <widget class="QPushButton" name="button_saveConfigExt">
@@ -794,6 +1094,11 @@
                  <width>100</width>
                  <height>50</height>
                 </size>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">background-color: rgb(47, 49, 54);
+border: 3px solid rgb(92, 96, 106);
+color:#c6c6cc</string>
                </property>
                <property name="text">
                 <string>Save To
@@ -815,6 +1120,11 @@ External File</string>
                  <height>50</height>
                 </size>
                </property>
+               <property name="styleSheet">
+                <string notr="true">background-color: rgb(47, 49, 54);
+border: 3px solid rgb(92, 96, 106);
+color:#c6c6cc</string>
+               </property>
                <property name="text">
                 <string>Add To
 Favorites </string>
@@ -826,6 +1136,9 @@ Favorites </string>
           </item>
           <item alignment="Qt::AlignVCenter">
            <widget class="QGroupBox" name="groupBox">
+            <property name="styleSheet">
+             <string notr="true">color:#c6c6cc</string>
+            </property>
             <property name="title">
              <string>Load</string>
             </property>
@@ -849,6 +1162,11 @@ Favorites </string>
                  <width>121</width>
                  <height>101</height>
                 </size>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">background-color: rgb(47, 49, 54);
+border: 3px solid rgb(92, 96, 106);
+color:#c6c6cc</string>
                </property>
                <property name="text">
                 <string>Load From
@@ -876,17 +1194,26 @@ External File</string>
           <item>
            <widget class="QLabel" name="label_engList">
             <property name="text">
-             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:14pt; font-weight:600;&quot;&gt;Engines / Games&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:14pt; font-weight:600; color:#c6c6cc;&quot;&gt;Engines / Games&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QListView" name="listbox_engines"/>
+           <widget class="QListView" name="listbox_engines">
+            <property name="styleSheet">
+             <string notr="true">background-color: rgb(237, 237, 241)</string>
+            </property>
+           </widget>
           </item>
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout_9">
             <item>
              <widget class="QPushButton" name="button_addCustEng">
+              <property name="styleSheet">
+               <string notr="true">background-color: rgb(47, 49, 54);
+border: 3px solid rgb(92, 96, 106);
+color:#c6c6cc</string>
+              </property>
               <property name="text">
                <string>Add Custom</string>
               </property>
@@ -894,6 +1221,11 @@ External File</string>
             </item>
             <item>
              <widget class="QPushButton" name="button_detectEng">
+              <property name="styleSheet">
+               <string notr="true">background-color: rgb(47, 49, 54);
+border: 3px solid rgb(92, 96, 106);
+color:#c6c6cc</string>
+              </property>
               <property name="text">
                <string>Detect from File</string>
               </property>
@@ -901,6 +1233,11 @@ External File</string>
             </item>
             <item>
              <widget class="QPushButton" name="button_removeEng">
+              <property name="styleSheet">
+               <string notr="true">background-color: rgb(47, 49, 54);
+border: 3px solid rgb(92, 96, 106);
+color:#c6c6cc</string>
+              </property>
               <property name="text">
                <string>Remove</string>
               </property>
@@ -928,22 +1265,35 @@ External File</string>
           <property name="enabled">
            <bool>false</bool>
           </property>
+          <property name="styleSheet">
+           <string notr="true">color:#c6c6cc</string>
+          </property>
           <property name="title">
            <string>Engine / Game Properties</string>
           </property>
           <layout class="QGridLayout" name="gridLayout_8">
            <item row="0" column="0">
             <widget class="QLabel" name="label_selEngName">
+             <property name="styleSheet">
+              <string notr="true">color:#c6c6cc</string>
+             </property>
              <property name="text">
               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;Name:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
              </property>
             </widget>
            </item>
            <item row="0" column="1">
-            <widget class="QLineEdit" name="input_selEngName"/>
+            <widget class="QLineEdit" name="input_selEngName">
+             <property name="styleSheet">
+              <string notr="true">background-color: rgb(237, 237, 241); color:000000</string>
+             </property>
+            </widget>
            </item>
            <item row="1" column="0">
             <widget class="QLabel" name="label_selEngPath">
+             <property name="styleSheet">
+              <string notr="true">color:#c6c6cc</string>
+             </property>
              <property name="text">
               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;Path:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
              </property>
@@ -951,6 +1301,9 @@ External File</string>
            </item>
            <item row="1" column="1" colspan="2">
             <widget class="QLineEdit" name="input_selEngPath">
+             <property name="styleSheet">
+              <string notr="true">background-color: rgb(237, 237, 241); color:000000</string>
+             </property>
              <property name="readOnly">
               <bool>true</bool>
              </property>
@@ -958,6 +1311,11 @@ External File</string>
            </item>
            <item row="2" column="2">
             <widget class="QPushButton" name="button_selEngBrowse">
+             <property name="styleSheet">
+              <string notr="true">background-color: rgb(47, 49, 54);
+border: 3px solid rgb(92, 96, 106);
+color:#c6c6cc</string>
+             </property>
              <property name="text">
               <string>Browse</string>
              </property>
@@ -965,6 +1323,9 @@ External File</string>
            </item>
            <item row="3" column="0">
             <widget class="QLabel" name="label_selEngType">
+             <property name="styleSheet">
+              <string notr="true">color:#c6c6cc</string>
+             </property>
              <property name="text">
               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;Type:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
              </property>
@@ -972,6 +1333,9 @@ External File</string>
            </item>
            <item row="3" column="1" alignment="Qt::AlignLeft">
             <widget class="QComboBox" name="combo_EngType">
+             <property name="styleSheet">
+              <string notr="true">background-color: rgb(237, 237, 241); color:000000</string>
+             </property>
              <item>
               <property name="text">
                <string>Default</string>
@@ -1001,6 +1365,9 @@ External File</string>
            </item>
            <item row="4" column="0">
             <widget class="QLabel" name="label_selEngPic">
+             <property name="styleSheet">
+              <string notr="true">color:#c6c6cc</string>
+             </property>
              <property name="text">
               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;Picture:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
              </property>
@@ -1008,6 +1375,9 @@ External File</string>
            </item>
            <item row="4" column="1" alignment="Qt::AlignLeft">
             <widget class="QComboBox" name="combo_EngPic">
+             <property name="styleSheet">
+              <string notr="true">background-color: rgb(237, 237, 241); color:000000</string>
+             </property>
              <item>
               <property name="text">
                <string>Default</string>
@@ -1087,6 +1457,11 @@ External File</string>
            </item>
            <item row="0" column="2">
             <widget class="QPushButton" name="button_enginename">
+             <property name="styleSheet">
+              <string notr="true">background-color: rgb(47, 49, 54);
+border: 3px solid rgb(92, 96, 106);
+color:#c6c6cc</string>
+             </property>
              <property name="text">
               <string>Ok</string>
              </property>
@@ -1097,12 +1472,18 @@ External File</string>
         </item>
         <item row="1" column="2" alignment="Qt::AlignTop">
          <widget class="QGroupBox" name="groupBox_5">
+          <property name="styleSheet">
+           <string notr="true">color:#c6c6cc</string>
+          </property>
           <property name="title">
            <string>iD Executable (for DOSBox)</string>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_6">
            <item alignment="Qt::AlignTop">
             <widget class="QLabel" name="label_idExePath">
+             <property name="styleSheet">
+              <string notr="true">color:#c6c6cc</string>
+             </property>
              <property name="text">
               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;Original iD Engine Path:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
              </property>
@@ -1110,6 +1491,9 @@ External File</string>
            </item>
            <item alignment="Qt::AlignTop">
             <widget class="QLineEdit" name="input_idExePath">
+             <property name="styleSheet">
+              <string notr="true">background-color: rgb(237, 237, 241); color:000000</string>
+             </property>
              <property name="readOnly">
               <bool>true</bool>
              </property>
@@ -1117,6 +1501,11 @@ External File</string>
            </item>
            <item alignment="Qt::AlignHCenter|Qt::AlignTop">
             <widget class="QPushButton" name="button_idExeBrowse">
+             <property name="styleSheet">
+              <string notr="true">background-color: rgb(47, 49, 54);
+border: 3px solid rgb(92, 96, 106);
+color:#c6c6cc</string>
+             </property>
              <property name="text">
               <string>Browse</string>
              </property>

@@ -43,10 +43,8 @@
 extern QStringList RocketLauncher2::genturok1cmds(bool displayOnly=true)
 {
     QStringList ret;
-
-   // ret << "IGNORE ME"; RocketLauncher was crashing without this, but I think I finally fixed it somehow? Simply keeping it incase it must return...
+    //ret << nullptr;
     bool filesadded = false;
-
 
     if (pwadloadlist->rowCount() > 0)
     {
@@ -62,7 +60,7 @@ extern QStringList RocketLauncher2::genturok1cmds(bool displayOnly=true)
                 if (displayOnly == true){
                     ret << '"'+pwadloadlist->item(i)->data(Qt::UserRole).toString()+'"';
                 } else {
-                  ret << pwadloadlist->item(i)->data(Qt::UserRole).toString();
+                    ret << pwadloadlist->item(i)->data(Qt::UserRole).toString();
                 }
             }
         }
@@ -71,27 +69,38 @@ extern QStringList RocketLauncher2::genturok1cmds(bool displayOnly=true)
     if (ui->input_map->text() != "" && ui->input_map->text() != NULL)
     {
 
-          ret << "-runmap" << "levels/" + ui->input_map->text() + ".map";
+        ret << "-runmap" << "levels/" + ui->input_map->text() + ".map";
     }
-
-    //DoomMarine23 NEW FEATURES
 
     if (ui->check_nointro->isChecked())
         ret << "-skipintromovies";
 
-      /* Basically Unusable right now. Investigate these functions.
-
-       * if (ui->combo_skill->currentText() != "Default")
-     {
-        qint16 skill = ui->combo_skill->currentIndex();
-       ret << "DifficultyMode = " + QString::number(skill);
-        ret << "g_difficulty" + QString::number(skill);
-        ret << "snd_musicvolume " + QString::number(0.2);
-     }
-      */
-
     if (ui->input_argbox->text() != "" && ui->input_argbox->text() != NULL)
         ret.append(splitArgs(ui->input_argbox->text()));
 
-    return ret;
+
+        return ret;
+    // Return the command list for cmdline or steam.
+   // if(ret[0] != nullptr)
+     //   return ret;
+
+
+   /*  if (ret.length() == NULL)
+    {return ret << "ppboiz";}
+    else
+    {return ret;}
+*/
+    /*
+    for (int i=0; i<ret.length(); i++)
+           {
+               if(ret[i] == nullptr)
+                   {
+                    return ret << "buttholeboiz"; break;
+
+                   }
+               else
+                   {
+                   return ret; break;
+                   }
+           }*/
 }

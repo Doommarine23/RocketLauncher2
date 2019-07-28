@@ -57,7 +57,6 @@ void removeSelectedFromDnDListView(DndFileSystemListView *listview, QStandardIte
 
     listview->setUpdatesEnabled(true);
 }
-
 void removeSelectedFromDnDListViewSave(DndFileSystemListView *listview, QStandardItemModel *model, QString ArrayName, QString key, QSettings &settings)
 {
     listview->setUpdatesEnabled(false);

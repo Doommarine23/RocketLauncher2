@@ -91,8 +91,15 @@ RocketLauncher2::RocketLauncher2(QWidget *parent, int argc, char *argv[]) :
             ";;PK7 Files (*.pk7 *.PK7)"
             ";;PKZ Files (*.pkz *.PKZ)"
             ";;P7Z Files (*.p7z *.P7Z)"
-            ";;KPF Files (*.kpf)" // KPF is used by Turok - DoomMarine23
+            ";;KPF Files (*.kpf)"
             ";;zip Files (*.zip *.ZIP)");
+
+    //TODO add more map formats to filter as game list expands.
+    mapFilter = tr("Any files (*)"
+            ";;MAP "
+            "(*.map)"
+            ";;MAP Files (*.map *.MAP)");
+
 }
 
 void RocketLauncher2::closeEvent(QCloseEvent* event){
@@ -128,7 +135,7 @@ void RocketLauncher2::initPixmaps()
     enginepics->append((QPixmap(":/engine/img/retrologo.png").scaled(105,105,Qt::KeepAspectRatio))); //11 RetroDoom
     enginepics->append((QPixmap(":/engine/img/vavoom2.png").scaled(105,105,Qt::KeepAspectRatio))); //12 Vavoom
     enginepics->append((QPixmap(":/engine/img/ddlogo.png").scaled(105,105,Qt::KeepAspectRatio))); //13 DoomsDay
-    enginepics->append((QPixmap(":/engine/img/turoklogo.png").scaled(105,105,Qt::KeepAspectRatio))); //14 Turok Doommarine23
+    enginepics->append((QPixmap(":/engine/img/turoklogo.png").scaled(105,105,Qt::KeepAspectRatio))); //14 Turok
     ui->img_engine->setPixmap(enginepics->at(0));
 }
 
@@ -275,25 +282,61 @@ void RocketLauncher2::showCommandLine(){
     }
 
     enginefile = enginelist->getCurrentEngine()->path;
-    QStringList cmd = genCommandline(true);
+    QStringList cmd = genCommandline(false);
 
-    if (cmd[1] == "fail_IWADSELECT")
-    {
-        QMessageBox::information(this,"Error" ,"Please select your IWAD");
-        return;
-    }
-    else if (cmd[0] == "fail_DOOMEXE")
-    {
-        QMessageBox::information(this,"Error" , "Could not find original Doom Executable for DOSBox");
-        return;
+if (enginelist->getCurrentEngine()->type != Engine_Turok1) // NOTE Required! Turok doesn't need these warnings (expand to other games later)
+   {
+        if (cmd[1] == "fail_IWADSELECT")
+        {
+            QMessageBox::information(this,"Error" ,"Please select your IWAD"); return;
+        }
+        else if (cmd[0] == "fail_DOOMEXE")
+        {
+            QMessageBox::information(this,"Error" , "Could not find original Doom Executable for DOSBox"); return;
+        }
     }
 
-    QString showargs;
-    showargs = enginefile+" "+cmd.join(' ');
-    CommandLineDialog *cmdDialog = new CommandLineDialog();
-    cmdDialog->setWindowTitle("Command Line");
-    cmdDialog->setTextBox(showargs);
-    cmdDialog->show();
+    //NOTE REQUIRED! Prevents crashes when commandline is empty.
+       /* if(!cmd.isEmpty() || cmd.size() != NULL)
+            {
+
+            QString showargs;
+            showargs = enginefile+" "+cmd.join(' ');
+            CommandLineDialog *cmdDialog = new CommandLineDialog();
+            cmdDialog->setWindowTitle("Command Line");
+            cmdDialog->setTextBox(showargs);
+            cmdDialog->show();
+            }*/
+
+
+
+        QString showargs;
+        showargs = enginefile+" "+cmd.join(' ');
+        CommandLineDialog *cmdDialog = new CommandLineDialog();
+        cmdDialog->setWindowTitle("Command Line");
+        cmdDialog->setTextBox(showargs);
+        cmdDialog->show();
+
+
+
+    /*for (int i=0; i<cmd.length(); i++)
+        {
+            if(cmd[i] == NULL)
+                {
+                QMessageBox::information(this,"Error" , "Could not find original Doom Executable for DOSBox"); return;
+                }
+            else
+                {
+                    QString showargs;
+                    showargs = enginefile+" "+cmd.join(' ');
+                    CommandLineDialog *cmdDialog = new CommandLineDialog();
+                    cmdDialog->setWindowTitle("Command Line");
+                    cmdDialog->setTextBox(showargs);
+                    cmdDialog->show();
+                }
+        }*/
+
+
 
 }
 
@@ -301,91 +344,24 @@ void RocketLauncher2::showCommandLine(){
 
 
 QStringList RocketLauncher2::genCommandline(bool displayOnly=false)
-{
+{   // TODO: Turn into a Switch statement later.
     if (enginelist->getCurrentEngine()->type == Engine_DosBox)
     {
         return genDOSBoxcmd();
     }
-
     if (enginelist->getCurrentEngine()->type == Engine_Turok1)
     {
+       // if(genturok1cmds(false)[0] != nullptr)
         return genturok1cmds(false);
     }
-
-    //Externalize ZDoom and other engines again later.
-
-    QStringList ret;
-    QString iwadpath = returnSelectedDndViewItemData(ui->listbox_IWADs);
-    bool filesadded = false;
-    ret << "-IWAD";
-
-    if (iwadpath == "")
+    if (enginelist->getCurrentEngine()->type == Engine_Default)
     {
-        ret << "fail_IWADSELECT";
-        return ret;
+        return genZDoomcmds(false);
     }
-    if (displayOnly == true){
-       ret << '"'+iwadpath+'"';
-    } else {
-       ret << iwadpath;
-    }
-
-    if (pwadloadlist->rowCount() > 0)
+    if (enginelist->getCurrentEngine()->type == Engine_ZDoom)
     {
-        for (int i = 0; i < pwadloadlist->rowCount(); i++ )
-        {
-            if (pwadloadlist->item(i)->checkState() == Qt::Checked)
-            {
-                if (!filesadded)
-                {
-                    ret << "-file";
-                    filesadded = true;
-                }
-                if (displayOnly == true){
-                    ret << '"'+pwadloadlist->item(i)->data(Qt::UserRole).toString()+'"';
-                } else {
-                  ret << pwadloadlist->item(i)->data(Qt::UserRole).toString();
-                }
-            }
-        }
+        return genZDoomcmds(false);
     }
-
-    if (ui->input_map->text() != "" && ui->input_map->text() != NULL)
-    {
-        if (enginelist->getEngineType() == Engine_ZDoom)
-        {
-            ret << "+MAP" << ui->input_map->text();
-        }
-        else
-        {
-            QStringList warp = ui->input_map->text().split(" ");
-            ret << "-warp";
-            ret.append(warp);
-        }
-    }
-
-    if (ui->combo_skill->currentText() != "Default")
-    {
-        qint16 skill = ui->combo_skill->currentIndex();
-        ret << "-skill" << QString::number(skill);
-    }
-
-    if (ui->check_nomonsters->isChecked())
-        ret << "-nomonsters";
-
-    if (ui->check_nomusic->isChecked())
-        ret << "-nomusic";
-
-    if (ui->check_record->isChecked())
-    {
-        ret << "-record";
-        ret << ui->input_record->text();
-    }
-
-    if (ui->input_argbox->text() != "" && ui->input_argbox->text() != NULL)
-        ret.append(splitArgs(ui->input_argbox->text()));
-
-    return ret;
 }
 
 void RocketLauncher2::on_pushButton_3_clicked() //RUN
@@ -399,8 +375,10 @@ void RocketLauncher2::on_pushButton_3_clicked() //RUN
     }
 
     enginefile = enginelist->getCurrentEngine()->path;
-    QStringList cmd = genCommandline();
+    QStringList cmd = genCommandline(true);
 
+    if (enginelist->getCurrentEngine()->type != Engine_Turok1) // NOTE Required! Turok doesn't need these warnings (expand to other games later)
+    {
     if (cmd[1] == "fail_IWADSELECT")
     {
         QMessageBox::information(this,"Error" ,"Please select your IWAD");
@@ -411,6 +389,7 @@ void RocketLauncher2::on_pushButton_3_clicked() //RUN
         QMessageBox::information(this,"Error" , "Could not find original Doom Executable for DOSBox");
         return;
     }
+}
 
     QFileInfo engineDir(enginefile);
 
@@ -422,12 +401,31 @@ void RocketLauncher2::on_pushButton_3_clicked() //RUN
 
     process = new QProcess();
     process->setProcessChannelMode(QProcess::ForwardedChannels);
-
     try
     {
 
         qDebug() << cmd;
+
+
+      /*  if(cmd.length() == NULL)
+            {process->start(enginefile,cmd);}
+        else*/
+
         process->start(enginefile,cmd);
+
+
+/*for (int i=0; i<cmd.length(); i++)
+               {
+                   if(cmd[i] == nullptr)
+                       {
+                        process->startDetached(enginefile); break;
+                       }
+                   else
+                       {
+                         process->start(enginefile,cmd); break;
+                       }
+               }*/
+
     }
     catch(QException &e)
     {
@@ -460,7 +458,7 @@ void RocketLauncher2::on_engine_check()
 {
 
     // Hide/Enable features specific to your chosen engine.
-    // Possibly externalize these functions?
+    // TODO Possibly externalize these functions?
     switch(enginelist->getCurrentEngine()->type)
     {
 
@@ -700,7 +698,7 @@ void RocketLauncher2::on_listbox_IWADs_clicked(const QModelIndex &index)
 
 //==========MISC==========
 
-//Add a proper help function that documents the program.
+// TODO Add a proper help function that documents the program.
 
 bool RocketLauncher2::savesettings(QString key, QString value)
 {
@@ -711,10 +709,9 @@ bool RocketLauncher2::savesettings(QString key, QString value)
     settings.setValue(key, value);
     return true;
 }
-//Change this to open from a help file, making life easier for writing.
+// TODO Change this to open from a help file, making life easier for writing.
 void RocketLauncher2::on_button_helpmap_clicked()
 {
-
         switch(enginelist->getCurrentEngine()->type)
         {
 
@@ -727,4 +724,14 @@ void RocketLauncher2::on_button_helpmap_clicked()
 
         }
 
+}
+
+
+void RocketLauncher2::on_button_mapfilename_clicked()
+{
+    //TODO Add NULL/ERROR sanity check? Seems un-needed right now.
+    QFileInfo file = QFileDialog::getOpenFileName(this,tr("Select Map File"),"",mapFilter);
+    QString mapfilename = file.baseName();
+        ui->input_map->clear();
+        ui->input_map->insert(mapfilename);
 }
