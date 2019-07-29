@@ -43,7 +43,6 @@
 extern QStringList RocketLauncher2::genturok1cmds(bool displayOnly=true)
 {
     QStringList ret;
-    //ret << nullptr;
     bool filesadded = false;
 
     if (pwadloadlist->rowCount() > 0)
@@ -80,27 +79,4 @@ extern QStringList RocketLauncher2::genturok1cmds(bool displayOnly=true)
 
 
         return ret;
-    // Return the command list for cmdline or steam.
-   // if(ret[0] != nullptr)
-     //   return ret;
-
-
-   /*  if (ret.length() == NULL)
-    {return ret << "ppboiz";}
-    else
-    {return ret;}
-*/
-    /*
-    for (int i=0; i<ret.length(); i++)
-           {
-               if(ret[i] == nullptr)
-                   {
-                    return ret << "buttholeboiz"; break;
-
-                   }
-               else
-                   {
-                   return ret; break;
-                   }
-           }*/
 }

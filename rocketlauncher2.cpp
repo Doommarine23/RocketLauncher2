@@ -295,49 +295,12 @@ if (enginelist->getCurrentEngine()->type != Engine_Turok1) // NOTE Required! Tur
             QMessageBox::information(this,"Error" , "Could not find original Doom Executable for DOSBox"); return;
         }
     }
-
-    //NOTE REQUIRED! Prevents crashes when commandline is empty.
-       /* if(!cmd.isEmpty() || cmd.size() != NULL)
-            {
-
-            QString showargs;
-            showargs = enginefile+" "+cmd.join(' ');
-            CommandLineDialog *cmdDialog = new CommandLineDialog();
-            cmdDialog->setWindowTitle("Command Line");
-            cmdDialog->setTextBox(showargs);
-            cmdDialog->show();
-            }*/
-
-
-
         QString showargs;
         showargs = enginefile+" "+cmd.join(' ');
         CommandLineDialog *cmdDialog = new CommandLineDialog();
         cmdDialog->setWindowTitle("Command Line");
         cmdDialog->setTextBox(showargs);
         cmdDialog->show();
-
-
-
-    /*for (int i=0; i<cmd.length(); i++)
-        {
-            if(cmd[i] == NULL)
-                {
-                QMessageBox::information(this,"Error" , "Could not find original Doom Executable for DOSBox"); return;
-                }
-            else
-                {
-                    QString showargs;
-                    showargs = enginefile+" "+cmd.join(' ');
-                    CommandLineDialog *cmdDialog = new CommandLineDialog();
-                    cmdDialog->setWindowTitle("Command Line");
-                    cmdDialog->setTextBox(showargs);
-                    cmdDialog->show();
-                }
-        }*/
-
-
-
 }
 
 //==========LAUNCH ENGINE==========
@@ -351,7 +314,6 @@ QStringList RocketLauncher2::genCommandline(bool displayOnly=false)
     }
     if (enginelist->getCurrentEngine()->type == Engine_Turok1)
     {
-       // if(genturok1cmds(false)[0] != nullptr)
         return genturok1cmds(false);
     }
     if (enginelist->getCurrentEngine()->type == Engine_Default)
@@ -405,26 +367,7 @@ void RocketLauncher2::on_pushButton_3_clicked() //RUN
     {
 
         qDebug() << cmd;
-
-
-      /*  if(cmd.length() == NULL)
-            {process->start(enginefile,cmd);}
-        else*/
-
         process->start(enginefile,cmd);
-
-
-/*for (int i=0; i<cmd.length(); i++)
-               {
-                   if(cmd[i] == nullptr)
-                       {
-                        process->startDetached(enginefile); break;
-                       }
-                   else
-                       {
-                         process->start(enginefile,cmd); break;
-                       }
-               }*/
 
     }
     catch(QException &e)
@@ -515,7 +458,7 @@ void RocketLauncher2::on_engine_check()
 
 }
 
-void RocketLauncher2::SetEnginePic(EnginePic pic) //Originally a ton of else if statements. Rewritten as switch/case.
+void RocketLauncher2::SetEnginePic(EnginePic pic)
 {
     switch(pic)
     {
