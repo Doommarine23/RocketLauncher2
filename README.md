@@ -1,5 +1,10 @@
 # DoomMarine23 -- Adding Turok support and other games after.
 
+### Special Thanks to:
+<br>
+Paynworth: Allowing me to fork his awesome version of Rocket Launcher 2 that has a lot of bug fixes and quality of life changes
+<br>
+
 # Rocket Launcher 2.0
 
 Rocket Launcher 2.0 is a cross platform front end for all DOOM source ports. This is an open source GPL licensed cross platform sequel to the original Rocket Launcher front end, adding extended functionality.
