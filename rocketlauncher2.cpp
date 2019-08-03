@@ -282,7 +282,8 @@ void RocketLauncher2::showCommandLine(){
     }
 
     enginefile = enginelist->getCurrentEngine()->path;
-    QStringList cmd = genCommandline(false);
+    //NOTE: Always show files in the RL command line, even if user was to click "don't load files"
+    QStringList cmd = genCommandline(false,true);
 
 if (enginelist->getCurrentEngine()->type != Engine_Turok1) // NOTE Required! Turok doesn't need these warnings (expand to other games later)
    {
@@ -306,7 +307,7 @@ if (enginelist->getCurrentEngine()->type != Engine_Turok1) // NOTE Required! Tur
 //==========LAUNCH ENGINE==========
 
 
-QStringList RocketLauncher2::genCommandline(bool displayOnly=false)
+QStringList RocketLauncher2::genCommandline(bool displayOnly=false, bool loadFiles=false)
 {   // TODO: Turn into a Switch statement later.
     if (enginelist->getCurrentEngine()->type == Engine_DosBox)
     {
@@ -314,19 +315,74 @@ QStringList RocketLauncher2::genCommandline(bool displayOnly=false)
     }
     if (enginelist->getCurrentEngine()->type == Engine_Turok1)
     {
-        return genturok1cmds(false);
+        if (loadFiles) return genturok1cmds(false,true);
+        else return genturok1cmds(false,false);
     }
     if (enginelist->getCurrentEngine()->type == Engine_Default)
     {
-        return genZDoomcmds(false);
+        if (loadFiles) return genZDoomcmds(false,true);
+        else return genZDoomcmds(false,false);
     }
     if (enginelist->getCurrentEngine()->type == Engine_ZDoom)
     {
-        return genZDoomcmds(false);
+        if (loadFiles) return genZDoomcmds(false,true);
+        else return genZDoomcmds(false,false);
+
     }
 }
 
-void RocketLauncher2::on_pushButton_3_clicked() //RUN
+void RocketLauncher2::on_pushButton_3_clicked() //RUN WITH ARCHIVES
+{
+    QString enginefile;
+
+    if (!enginelist->EngineSet)
+    {
+        QMessageBox::information(this,"Error" ,"Please select or add an engine (source port).");
+        return;
+    }
+    enginefile = enginelist->getCurrentEngine()->path;
+    QStringList cmd = genCommandline(true,true);
+
+    if (enginelist->getCurrentEngine()->type != Engine_Turok1) // NOTE Required! Turok doesn't need these warnings (expand to other games later)
+    {
+    if (cmd[1] == "fail_IWADSELECT")
+    {
+        QMessageBox::information(this,"Error" ,"Please select your IWAD");
+        return;
+    }
+    else if (cmd[0] == "fail_DOOMEXE")
+    {
+        QMessageBox::information(this,"Error" , "Could not find original Doom Executable for DOSBox");
+        return;
+    }
+}
+
+    QFileInfo engineDir(enginefile);
+
+#if defined(Q_OS_LINUX)
+        QDir::setCurrent("LD_LIBRARY_PATH=~/.steam/bin32/ ~/.steam/bin32/steam-runtime/run.sh ./" + enginefile);   // DoomMarine23 fallback for Linux, investigate later.
+#elif defined (Q_OS_WIN)
+        QDir::setCurrent(engineDir.absolutePath());
+#endif
+
+    process = new QProcess();
+    process->setProcessChannelMode(QProcess::ForwardedChannels);
+    try
+    {
+
+        qDebug() << cmd;
+        process->start(enginefile,cmd);
+
+    }
+    catch(QException &e)
+    {
+        QMessageBox::warning(this,"Error" ,"Engine failed to start.");
+    }
+}
+
+
+
+void RocketLauncher2::on_pushButton_4_clicked() //RUN WITHOUT ARCHIVES
 {
     QString enginefile;
 
@@ -337,7 +393,7 @@ void RocketLauncher2::on_pushButton_3_clicked() //RUN
     }
 
     enginefile = enginelist->getCurrentEngine()->path;
-    QStringList cmd = genCommandline(true);
+    QStringList cmd = genCommandline(true,false);
 
     if (enginelist->getCurrentEngine()->type != Engine_Turok1) // NOTE Required! Turok doesn't need these warnings (expand to other games later)
     {
@@ -662,7 +718,7 @@ void RocketLauncher2::on_button_helpmap_clicked()
             QMessageBox::information(this, "Map/Warp", "If the engine is a modern ZDoom based engine, use the maplump name, e.g. 'MAP01', otherwise if it's a more oldschool engine, use the map number, e.g. '01'");
             break;
         case Engine_Turok1:
-            QMessageBox::information(this, "Map/Warp", "NOTE: Disables achivements, and is NOT  case sensitive. Only type in the level's name: level06 If level is inside a folder, include it: doommarine23/lavacave");
+            QMessageBox::information(this, "Map/Warp", "NOTE: Disables achivements, and is NOT case sensitive. Only type in the level's name: level06 If level is inside a folder, include it: doommarine23/lavacave");
             break;
 
         }

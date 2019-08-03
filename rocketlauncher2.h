@@ -50,6 +50,8 @@ protected:
 
 private slots:
 
+    void on_pushButton_4_clicked();
+
     void on_pushButton_3_clicked();
 
     void on_pushButton_2_clicked();
@@ -139,7 +141,7 @@ private:
     QStandardItemModel *favlist;
     ConfigListModel *conflist;
     CommandLineDialog *cmdDialog;
-    QStringList genCommandline(bool displayOnly);
+    QStringList genCommandline(bool displayOnly, bool loadFiles);
     QProcess *process;
     void SetEnginePic(EnginePic pic);
     void initPixmaps();
@@ -157,8 +159,8 @@ private:
     void initListViews();
     void setupAdditionalUi();
     QStringList genDOSBoxcmd();
-    QStringList genturok1cmds(bool displayOnly);
-    QStringList genZDoomcmds(bool displayOnly);
+    QStringList genturok1cmds(bool displayOnly, bool loadFiles);
+    QStringList genZDoomcmds(bool displayOnly, bool loadFiles);
     //configs
     RocketFile makeConfigFromCurrent(QString name);
     void loadExtConfig(QString path);

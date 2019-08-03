@@ -41,7 +41,7 @@
 #include "hyp_commonfunc.h"
 #include "commandlinedialog.h"
 
-extern QStringList RocketLauncher2::genZDoomcmds(bool displayOnly)
+extern QStringList RocketLauncher2::genZDoomcmds(bool displayOnly, bool loadFiles)
 {
     QStringList ret;
     QString iwadpath = returnSelectedDndViewItemData(ui->listbox_IWADs);
@@ -59,7 +59,7 @@ extern QStringList RocketLauncher2::genZDoomcmds(bool displayOnly)
        ret << iwadpath;
     }
 
-    if (pwadloadlist->rowCount() > 0)
+    if (loadFiles && pwadloadlist->rowCount() > 0 )
     {
         for (int i = 0; i < pwadloadlist->rowCount(); i++ )
         {

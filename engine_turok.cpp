@@ -40,12 +40,14 @@
 #include "hyp_commonfunc.h"
 #include "commandlinedialog.h"
 
-extern QStringList RocketLauncher2::genturok1cmds(bool displayOnly=true)
+// TODO: Add bool for launching without pwads
+extern QStringList RocketLauncher2::genturok1cmds(bool displayOnly=true, bool loadFiles = false)
 {
     QStringList ret;
     bool filesadded = false;
 
-    if (pwadloadlist->rowCount() > 0)
+
+    if (loadFiles && pwadloadlist->rowCount() > 0 )
     {
         for (int i = 0; i < pwadloadlist->rowCount(); i++ )
         {
