@@ -171,7 +171,7 @@ void RocketLauncher2::applyConfig(RocketFile *rocket)
     }
     else
     {
-        if(enginelist->getCurrentEngine()->type != Engine_Turok1)
+        if(enginelist->getCurrentEngine()->type != Engine_Turok1 && enginelist->getCurrentEngine()->type != Engine_Turok2) //REQUIRED to prevent needless warnings. Make this a better system someday.
         QMessageBox::information(this, "IWAD not found!", QString("Warning, %1 IWAD could not be found.").arg(rocket->iwadName));
     }
 

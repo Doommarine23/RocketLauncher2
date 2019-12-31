@@ -136,6 +136,7 @@ void RocketLauncher2::initPixmaps()
     enginepics->append((QPixmap(":/engine/img/vavoom2.png").scaled(105,105,Qt::KeepAspectRatio))); //12 Vavoom
     enginepics->append((QPixmap(":/engine/img/ddlogo.png").scaled(105,105,Qt::KeepAspectRatio))); //13 DoomsDay
     enginepics->append((QPixmap(":/engine/img/turoklogo.png").scaled(105,105,Qt::KeepAspectRatio))); //14 Turok
+    enginepics->append((QPixmap(":/engine/img/turok2logo.png").scaled(105,105,Qt::KeepAspectRatio))); //15 Turok 2
     ui->img_engine->setPixmap(enginepics->at(0));
 }
 
@@ -285,7 +286,7 @@ void RocketLauncher2::showCommandLine(){
     //NOTE: Always show files in the RL command line, even if user was to click "don't load files"
     QStringList cmd = genCommandline(false,true);
 
-if (enginelist->getCurrentEngine()->type != Engine_Turok1) // NOTE Required! Turok doesn't need these warnings (expand to other games later)
+if(enginelist->getCurrentEngine()->type != Engine_Turok1 || enginelist->getCurrentEngine()->type != Engine_Turok2)  // NOTE Required! Turok doesn't need these warnings (expand to other games later)
    {
         if (cmd[1] == "fail_IWADSELECT")
         {
@@ -318,6 +319,13 @@ QStringList RocketLauncher2::genCommandline(bool displayOnly=false, bool loadFil
         if (loadFiles) return genturok1cmds(false,true);
         else return genturok1cmds(false,false);
     }
+
+    if (enginelist->getCurrentEngine()->type == Engine_Turok2)
+    {
+        if (loadFiles) return genturok2cmds(false,true);
+        else return genturok2cmds(false,false);
+    }
+
     if (enginelist->getCurrentEngine()->type == Engine_Default)
     {
         if (loadFiles) return genZDoomcmds(false,true);
@@ -342,8 +350,7 @@ void RocketLauncher2::on_pushButton_3_clicked() //RUN WITH ARCHIVES
     }
     enginefile = enginelist->getCurrentEngine()->path;
     QStringList cmd = genCommandline(true,true);
-
-    if (enginelist->getCurrentEngine()->type != Engine_Turok1) // NOTE Required! Turok doesn't need these warnings (expand to other games later)
+if(enginelist->getCurrentEngine()->type != Engine_Turok1 && enginelist->getCurrentEngine()->type != Engine_Turok2) // NOTE Required! Turok doesn't need these warnings (expand to other games later)
     {
     if (cmd[1] == "fail_IWADSELECT")
     {
@@ -395,7 +402,7 @@ void RocketLauncher2::on_pushButton_4_clicked() //RUN WITHOUT ARCHIVES
     enginefile = enginelist->getCurrentEngine()->path;
     QStringList cmd = genCommandline(true,false);
 
-    if (enginelist->getCurrentEngine()->type != Engine_Turok1) // NOTE Required! Turok doesn't need these warnings (expand to other games later)
+if(enginelist->getCurrentEngine()->type != Engine_Turok1 && enginelist->getCurrentEngine()->type != Engine_Turok2) // NOTE Required! Turok doesn't need these warnings (expand to other games later)
     {
     if (cmd[1] == "fail_IWADSELECT")
     {
@@ -457,7 +464,7 @@ void RocketLauncher2::on_engine_check()
 {
 
     // Hide/Enable features specific to your chosen engine.
-    // TODO Possibly externalize these functions?
+    // TODO Possibly externalize these functions? NOTE: As the number of supported games increases, this will become vital.
     switch(enginelist->getCurrentEngine()->type)
     {
 
@@ -468,7 +475,7 @@ void RocketLauncher2::on_engine_check()
         ui->IWAD_label->setHidden(false);
         ui->listbox_IWADs->setHidden(false);
 
-        //Enable Skill, IWAD, Patch Wad, Monsters, and Demo Recording Buttons
+        //Enable Skill, IWAD, Patch Wad, Monsters, and Demo Recording Buttons, also enable map selection
         ui->combo_skill->setHidden(false);
         ui->button_addiwad->setHidden(false);
         ui->button_deliwad->setHidden(false);
@@ -478,10 +485,43 @@ void RocketLauncher2::on_engine_check()
         ui->input_record->setHidden(false);
         ui->combo_skill->setHidden(false);
         ui->label_skill->setHidden(false);
+        ui->input_map->setDisabled(false);
         break;
 
     case Engine_Turok1:
         ui->pushButton_3->setText("Play Turok!");
+        //Enable map selection
+         ui->input_map->setDisabled(false);
+        //Disable IWAD and Patch Wad Boxes
+        ui->IWAD_label->setHidden(true);
+        ui->listbox_IWADs->setHidden(true);
+
+        //Disable Skill, IWAD, Patch Wad, Monsters, and Demo Recording Buttons
+        ui->combo_skill->currentText() = "Default";
+        ui->combo_skill->setEnabled(false);
+
+        ui->button_addiwad->setHidden(true);
+        ui->button_deliwad->setHidden(true);
+
+        ui->check_nomonsters->setHidden(true);
+        ui->check_nomonsters->setChecked(false);
+
+        ui->check_nomusic->setHidden(true);
+        ui->check_nomusic->setChecked(false);
+
+        ui->check_record->setHidden(true);
+        ui->check_record->setChecked(false);
+
+        ui->input_record->setHidden(true);
+
+        ui->combo_skill->setHidden(true);
+        ui->label_skill->setHidden(true);
+        break;
+
+
+
+    case Engine_Turok2:
+        ui->pushButton_3->setText("Play Turok 2!");
 
         //Disable IWAD and Patch Wad Boxes
         ui->IWAD_label->setHidden(true);
@@ -507,6 +547,9 @@ void RocketLauncher2::on_engine_check()
 
         ui->combo_skill->setHidden(true);
         ui->label_skill->setHidden(true);
+        //Disable Map Selection, this is not supported by Turok 2 sadly.
+        ui->input_map->setDisabled(true);
+        // Make this look nicer, later. ui->input_map->setStyleSheet("QLineEdit {background-color: black;}");
         break;
 
     }
@@ -548,6 +591,8 @@ void RocketLauncher2::SetEnginePic(EnginePic pic)
             ui->img_engine->setPixmap(enginepics->at(13)); break;
         case Pic_Turok1:
             ui->img_engine->setPixmap(enginepics->at(14)); break;
+        case Pic_Turok2:
+            ui->img_engine->setPixmap(enginepics->at(15)); break;
     }
 }
 
@@ -719,6 +764,9 @@ void RocketLauncher2::on_button_helpmap_clicked()
             break;
         case Engine_Turok1:
             QMessageBox::information(this, "Map/Warp", "NOTE: Disables achivements, and is NOT case sensitive. Only type in the level's name: level06 If level is inside a folder, include it: doommarine23/lavacave");
+            break;
+        case Engine_Turok2:
+            QMessageBox::information(this, "Map/Warp", "Turok 2 does NOT support launching with a map, I am sorry! This command is DISABLED!");
             break;
 
         }

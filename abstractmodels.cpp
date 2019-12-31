@@ -61,7 +61,7 @@ EngineInfo* EngineListModel::getCurrentEngine()
     return selectedEngine_;
 }
 
-QString EngineListModel::addEngine(QFileInfo file)
+QString EngineListModel::addEngine(QFileInfo file) //TODO: Turn this into a switch case.
 {
     if (!file.exists())
         return "Error";
@@ -78,6 +78,12 @@ QString EngineListModel::addEngine(QFileInfo file)
     {
         return updateEngine("Turok", file.absoluteFilePath(), Engine_Turok1, Pic_Turok1, true);
     }
+    //NOTE: need to grab Linux filename!!!
+    if (file.baseName().compare( QString("horus_x64"), Qt::CaseInsensitive) == 0 or file.baseName().compare( QString("TurokEX"), Qt::CaseInsensitive) == 0  )
+    {
+        return updateEngine("Turok 2: Seeds of Evil", file.absoluteFilePath(), Engine_Turok2, Pic_Turok2, true);
+    }
+
     else if (file.baseName().compare( QString("zdoom"), Qt::CaseInsensitive) == 0)
     {
         return updateEngine("ZDoom", file.absoluteFilePath(), Engine_ZDoom, Pic_Zdoom, true);

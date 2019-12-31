@@ -35,6 +35,7 @@
   <property name="styleSheet">
    <string notr="true">background-color:rgb(54,57,63);
 font: 8pt &quot;Roboto&quot;;
+color: rgb(255, 255, 255);
 QStatusBar {
     background: brown;
 }</string>
@@ -84,14 +85,16 @@ QTabBar::tab:selected, QTabBar::tab:hover {
 QTabBar::tab:selected {
     border-color: #9B9B9B;
     border-bottom-color: #C2C7CB; /* same as pane color */
+    color: rgb(0, 0, 0);
 }
 
 QTabBar::tab:!selected {
     margin-top: 2px; /* make non-selected tabs look smaller */
+color: rgb(0, 0, 0);
 }</string>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tab_launchwad">
        <property name="sizePolicy">
@@ -179,7 +182,8 @@ QTabBar::tab:!selected {
                 <string>To change the load order, just drag and move the files within to their desired placement</string>
                </property>
                <property name="styleSheet">
-                <string notr="true">background-color: rgb(237, 237, 241)</string>
+                <string notr="true">background-color: rgb(237, 237, 241);
+color: rgb(0, 0, 0);</string>
                </property>
               </widget>
              </item>
@@ -374,7 +378,8 @@ color:#c6c6cc</string>
                   </size>
                  </property>
                  <property name="styleSheet">
-                  <string notr="true">background-color: rgb(237, 237, 241)</string>
+                  <string notr="true">background-color: rgb(237, 237, 241);
+color: rgb(0, 0, 0);</string>
                  </property>
                 </widget>
                </item>
@@ -512,7 +517,8 @@ color:#c6c6cc</string>
                   </size>
                  </property>
                  <property name="styleSheet">
-                  <string notr="true">background-color: rgb(237, 237, 241)</string>
+                  <string notr="true">background-color: rgb(237, 237, 241);
+color: rgb(0, 0, 0);</string>
                  </property>
                  <property name="text">
                   <string>demo_name</string>
@@ -727,7 +733,8 @@ color:#c6c6cc</string>
            <item row="6" column="0" colspan="2">
             <widget class="QLineEdit" name="input_argbox">
              <property name="styleSheet">
-              <string notr="true">background-color: rgb(237, 237, 241)</string>
+              <string notr="true">background-color: rgb(237, 237, 241);
+color: rgb(0, 0, 0);</string>
              </property>
             </widget>
            </item>
@@ -769,7 +776,8 @@ color:#c6c6cc</string>
                </size>
               </property>
               <property name="styleSheet">
-               <string notr="true">background-color: rgb(237, 237, 241)</string>
+               <string notr="true">background-color: rgb(237, 237, 241);
+color: rgb(0, 0, 0);</string>
               </property>
              </widget>
             </item>
@@ -842,7 +850,8 @@ color:#c6c6cc</string>
                <bool>true</bool>
               </property>
               <property name="styleSheet">
-               <string notr="true">background-color: rgb(237, 237, 241)</string>
+               <string notr="true">background-color: rgb(237, 237, 241);
+color: rgb(0, 0, 0);</string>
               </property>
              </widget>
             </item>
@@ -945,7 +954,8 @@ color:#c6c6cc</string>
              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;These files are always loaded&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
             <property name="styleSheet">
-             <string notr="true">background-color: rgb(237, 237, 241)</string>
+             <string notr="true">background-color: rgb(237, 237, 241);
+color: rgb(0, 0, 0);</string>
             </property>
            </widget>
           </item>
@@ -1025,7 +1035,8 @@ color:#c6c6cc</string>
           <item>
            <widget class="QListView" name="listbox_engines">
             <property name="styleSheet">
-             <string notr="true">background-color: rgb(237, 237, 241)</string>
+             <string notr="true">background-color: rgb(237, 237, 241);
+color: rgb(0, 0, 0);</string>
             </property>
            </widget>
           </item>
@@ -1367,7 +1378,8 @@ color:#c6c6cc</string>
            <item row="1" column="0" colspan="2">
             <widget class="QListView" name="listbox_configFavs">
              <property name="styleSheet">
-              <string notr="true">background-color: rgb(237, 237, 241)</string>
+              <string notr="true">background-color: rgb(237, 237, 241);
+color: rgb(0, 0, 0);</string>
              </property>
             </widget>
            </item>

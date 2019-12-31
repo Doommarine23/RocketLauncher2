@@ -13,6 +13,7 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
+    engine_turok2.cpp \
         rocketlauncher2.cpp \
     abstractmodels.cpp \
     dndfilesystemlistview.cpp \
