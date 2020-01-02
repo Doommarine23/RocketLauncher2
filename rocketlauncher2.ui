@@ -163,6 +163,9 @@ color: rgb(0, 0, 0);
              </item>
              <item>
               <widget class="DndFileSystemListView" name="listbox_pwadload">
+               <property name="enabled">
+                <bool>true</bool>
+               </property>
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                  <horstretch>0</horstretch>
@@ -184,6 +187,21 @@ color: rgb(0, 0, 0);
                <property name="styleSheet">
                 <string notr="true">background-color: rgb(237, 237, 241);
 color: rgb(0, 0, 0);</string>
+               </property>
+               <property name="editTriggers">
+                <set>QAbstractItemView::NoEditTriggers</set>
+               </property>
+               <property name="iconSize">
+                <size>
+                 <width>0</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="movement">
+                <enum>QListView::Static</enum>
+               </property>
+               <property name="flow">
+                <enum>QListView::TopToBottom</enum>
                </property>
               </widget>
              </item>
@@ -281,6 +299,197 @@ color:#c6c6cc</string>
            </item>
           </layout>
          </widget>
+        </item>
+        <item row="0" column="0">
+         <layout class="QGridLayout" name="gridLayout_4">
+          <item row="0" column="0">
+           <layout class="QGridLayout" name="gridLayout_3">
+            <property name="sizeConstraint">
+             <enum>QLayout::SetDefaultConstraint</enum>
+            </property>
+            <item row="0" column="0">
+             <widget class="QLabel" name="label_5">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="text">
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600; color:#c6c6cc;&quot;&gt;Engine / Game&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="0">
+             <widget class="QComboBox" name="combo_Engines">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>150</width>
+                <height>22</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>16777215</width>
+                <height>22</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">background-color: rgb(237, 237, 241);
+color: rgb(0, 0, 0);</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="0">
+             <widget class="QPushButton" name="pushButton_2">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>22</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>16777215</width>
+                <height>22</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">background-color: rgb(47, 49, 54);
+border: 2px solid rgb(92, 96, 106);
+color:#c6c6cc</string>
+              </property>
+              <property name="text">
+               <string>Add Engine / Game</string>
+              </property>
+             </widget>
+            </item>
+            <item row="5" column="0">
+             <widget class="QPushButton" name="button_rocketmenu">
+              <property name="styleSheet">
+               <string notr="true">background-color: rgb(47, 49, 54);
+border: 2px solid rgb(92, 96, 106);
+color:#c6c6cc</string>
+              </property>
+              <property name="text">
+               <string>Rocket Menu</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0" alignment="Qt::AlignHCenter|Qt::AlignVCenter">
+             <widget class="QLabel" name="img_engine">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>105</width>
+                <height>105</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>305</width>
+                <height>305</height>
+               </size>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="0" column="1">
+           <layout class="QVBoxLayout" name="livlayout1">
+            <property name="spacing">
+             <number>6</number>
+            </property>
+            <item>
+             <widget class="QLabel" name="IWAD_label">
+              <property name="text">
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600; color:#c6c6cc;&quot;&gt;IWADs&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="DndFileSystemListView" name="listbox_IWADs">
+              <property name="enabled">
+               <bool>true</bool>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">background-color: rgb(237, 237, 241);
+color: rgb(0, 0, 0);</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <layout class="QHBoxLayout" name="liblayout">
+              <property name="spacing">
+               <number>10</number>
+              </property>
+              <item>
+               <widget class="QPushButton" name="button_addiwad">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="minimumSize">
+                 <size>
+                  <width>60</width>
+                  <height>0</height>
+                 </size>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">background-color: rgb(47, 49, 54);
+border: 2px solid rgb(92, 96, 106);
+color:#c6c6cc</string>
+                </property>
+                <property name="text">
+                 <string>Add IWAD</string>
+                </property>
+               </widget>
+              </item>
+              <item alignment="Qt::AlignRight">
+               <widget class="QPushButton" name="button_deliwad">
+                <property name="maximumSize">
+                 <size>
+                  <width>80</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">background-color: rgb(47, 49, 54);
+border: 2px solid rgb(92, 96, 106);
+color:#c6c6cc</string>
+                </property>
+                <property name="text">
+                 <string>Remove IWAD</string>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>16</width>
+                  <height>16</height>
+                 </size>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+           </layout>
+          </item>
+         </layout>
         </item>
         <item row="0" column="1" rowspan="2">
          <widget class="QGroupBox" name="groupBox_2">
@@ -574,7 +783,8 @@ color: rgb(0, 0, 0);</string>
                <property name="styleSheet">
                 <string notr="true">background-color: rgb(47, 49, 54);
 border: 2px solid rgb(92, 96, 106);
-color:#c6c6cc</string>
+color:#c6c6cc;
+</string>
                </property>
                <property name="text">
                 <string>Get Map name from File</string>
@@ -746,197 +956,6 @@ color: rgb(0, 0, 0);</string>
             </widget>
            </item>
           </layout>
-         </widget>
-        </item>
-        <item row="0" column="0">
-         <layout class="QGridLayout" name="gridLayout_4">
-          <item row="0" column="0">
-           <layout class="QGridLayout" name="gridLayout_3">
-            <property name="sizeConstraint">
-             <enum>QLayout::SetDefaultConstraint</enum>
-            </property>
-            <item row="1" column="0">
-             <widget class="QComboBox" name="combo_Engines">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="minimumSize">
-               <size>
-                <width>150</width>
-                <height>22</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>16777215</width>
-                <height>22</height>
-               </size>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">background-color: rgb(237, 237, 241);
-color: rgb(0, 0, 0);</string>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="0">
-             <widget class="QLabel" name="label_5">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="text">
-               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600; color:#c6c6cc;&quot;&gt;Engine / Game&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-              </property>
-             </widget>
-            </item>
-            <item row="3" column="0">
-             <widget class="QPushButton" name="button_rocketmenu">
-              <property name="styleSheet">
-               <string notr="true">background-color: rgb(47, 49, 54);
-border: 2px solid rgb(92, 96, 106);
-color:#c6c6cc</string>
-              </property>
-              <property name="text">
-               <string>Rocket Menu</string>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="0">
-             <widget class="QPushButton" name="pushButton_2">
-              <property name="minimumSize">
-               <size>
-                <width>0</width>
-                <height>22</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>16777215</width>
-                <height>22</height>
-               </size>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">background-color: rgb(47, 49, 54);
-border: 2px solid rgb(92, 96, 106);
-color:#c6c6cc</string>
-              </property>
-              <property name="text">
-               <string>Add Engine / Game</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-          <item row="0" column="1">
-           <layout class="QVBoxLayout" name="livlayout1">
-            <property name="spacing">
-             <number>6</number>
-            </property>
-            <item>
-             <widget class="QLabel" name="IWAD_label">
-              <property name="text">
-               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600; color:#c6c6cc;&quot;&gt;IWADs&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="DndFileSystemListView" name="listbox_IWADs">
-              <property name="enabled">
-               <bool>true</bool>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">background-color: rgb(237, 237, 241);
-color: rgb(0, 0, 0);</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <layout class="QHBoxLayout" name="liblayout">
-              <property name="spacing">
-               <number>10</number>
-              </property>
-              <item>
-               <widget class="QPushButton" name="button_addiwad">
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="minimumSize">
-                 <size>
-                  <width>60</width>
-                  <height>0</height>
-                 </size>
-                </property>
-                <property name="styleSheet">
-                 <string notr="true">background-color: rgb(47, 49, 54);
-border: 2px solid rgb(92, 96, 106);
-color:#c6c6cc</string>
-                </property>
-                <property name="text">
-                 <string>Add IWAD</string>
-                </property>
-               </widget>
-              </item>
-              <item alignment="Qt::AlignRight">
-               <widget class="QPushButton" name="button_deliwad">
-                <property name="maximumSize">
-                 <size>
-                  <width>80</width>
-                  <height>16777215</height>
-                 </size>
-                </property>
-                <property name="styleSheet">
-                 <string notr="true">background-color: rgb(47, 49, 54);
-border: 2px solid rgb(92, 96, 106);
-color:#c6c6cc</string>
-                </property>
-                <property name="text">
-                 <string>Remove IWAD</string>
-                </property>
-                <property name="iconSize">
-                 <size>
-                  <width>16</width>
-                  <height>16</height>
-                 </size>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </item>
-           </layout>
-          </item>
-         </layout>
-        </item>
-        <item row="3" column="0">
-         <widget class="QLabel" name="img_engine">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="minimumSize">
-           <size>
-            <width>105</width>
-            <height>105</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>305</width>
-            <height>305</height>
-           </size>
-          </property>
-          <property name="text">
-           <string/>
-          </property>
          </widget>
         </item>
         <item row="2" column="1">
@@ -1154,6 +1173,11 @@ color:#c6c6cc</string>
                <string>Turok</string>
               </property>
              </item>
+             <item>
+              <property name="text">
+               <string>Turok 2</string>
+              </property>
+             </item>
             </widget>
            </item>
            <item row="1" column="1" colspan="2">
@@ -1285,6 +1309,11 @@ color:#c6c6cc</string>
              <item>
               <property name="text">
                <string>Turok</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Turok 2</string>
               </property>
              </item>
             </widget>
