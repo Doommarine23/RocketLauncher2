@@ -17,5 +17,9 @@
         <file>img/Zdaemonlogo.png</file>
         <file>img/turoklogo.png</file>
         <file>img/turok2logo.png</file>
+        <file>img/UI/UI_Button.png</file>
+        <file>img/UI/UI_Button_Pressed.png</file>
+        <file>img/UI/UI_Button_Disabled.png</file>
+        <file>img/Light_Burden_logo.ico</file>
     </qresource>
 </RCC>

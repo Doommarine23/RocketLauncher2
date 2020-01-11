@@ -23,22 +23,25 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>Rocket Launcher</string>
+   <string>Light Burden: Game Launcher - Version: 0.7</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="resources.qrc">
-    <normaloff>:/engine/img/rocket.ico</normaloff>:/engine/img/rocket.ico</iconset>
+   <iconset>
+    <normaloff>img/Light_Burden_logo.ico</normaloff>img/Light_Burden_logo.ico</iconset>
   </property>
   <property name="statusTip">
    <string notr="true"/>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color:rgb(54,57,63);
+   <string notr="true">background-color:rgb(40,40,47);
 font: 8pt &quot;Roboto&quot;;
 color: rgb(255, 255, 255);
 QStatusBar {
     background: brown;
 }</string>
+  </property>
+  <property name="tabShape">
+   <enum>QTabWidget::Rounded</enum>
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QGridLayout" name="gridLayout_5">
@@ -127,6 +130,9 @@ color: rgb(0, 0, 0);
           <property name="flat">
            <bool>false</bool>
           </property>
+          <property name="checkable">
+           <bool>false</bool>
+          </property>
           <layout class="QHBoxLayout" name="horizontalLayout_10" stretch="0">
            <property name="spacing">
             <number>6</number>
@@ -185,7 +191,7 @@ color: rgb(0, 0, 0);
                 <string>To change the load order, just drag and move the files within to their desired placement</string>
                </property>
                <property name="styleSheet">
-                <string notr="true">background-color: rgb(237, 237, 241);
+                <string notr="true">background-color: #c2c2d3;
 color: rgb(0, 0, 0);</string>
                </property>
                <property name="editTriggers">
@@ -216,9 +222,25 @@ color: rgb(0, 0, 0);</string>
                   </size>
                  </property>
                  <property name="styleSheet">
-                  <string notr="true">background-color: rgb(47, 49, 54);
-border: 2px solid rgb(92, 96, 106);
-color:#c6c6cc</string>
+                  <string notr="true">QPushButton
+{
+color: #c6c6cc;
+border-image: url(:engine/img/UI/UI_Button.png) 10 10 10 10;
+border-top: 3px transparent;
+border-bottom: 3px transparent;
+border-right: 10px transparent;
+border-left: 10px transparent;
+}
+
+QPushButton:pressed
+{
+color: #adadb3;
+border-image: url(:engine/img/UI/UI_Button_Pressed.png) 10 10 10 10;
+border-top: 3px transparent;
+border-bottom: 3px transparent;
+border-right: 10px transparent;
+border-left: 10px transparent;
+}</string>
                  </property>
                  <property name="text">
                   <string>Add</string>
@@ -253,9 +275,25 @@ color:#c6c6cc</string>
                   </size>
                  </property>
                  <property name="styleSheet">
-                  <string notr="true">background-color: rgb(47, 49, 54);
-border: 2px solid rgb(92, 96, 106);
-color:#c6c6cc</string>
+                  <string notr="true">QPushButton
+{
+color: #c6c6cc;
+border-image: url(:engine/img/UI/UI_Button.png) 10 10 10 10;
+border-top: 3px transparent;
+border-bottom: 3px transparent;
+border-right: 10px transparent;
+border-left: 10px transparent;
+}
+
+QPushButton:pressed
+{
+color: #adadb3;
+border-image: url(:engine/img/UI/UI_Button_Pressed.png) 10 10 10 10;
+border-top: 3px transparent;
+border-bottom: 3px transparent;
+border-right: 10px transparent;
+border-left: 10px transparent;
+}</string>
                  </property>
                  <property name="text">
                   <string>Remove ALL</string>
@@ -284,9 +322,25 @@ color:#c6c6cc</string>
                   </size>
                  </property>
                  <property name="styleSheet">
-                  <string notr="true">background-color: rgb(47, 49, 54);
-border: 2px solid rgb(92, 96, 106);
-color:#c6c6cc</string>
+                  <string notr="true">QPushButton
+{
+color: #c6c6cc;
+border-image: url(:engine/img/UI/UI_Button.png) 10 10 10 10;
+border-top: 3px transparent;
+border-bottom: 3px transparent;
+border-right: 10px transparent;
+border-left: 10px transparent;
+}
+
+QPushButton:pressed
+{
+color: #adadb3;
+border-image: url(:engine/img/UI/UI_Button_Pressed.png) 10 10 10 10;
+border-top: 3px transparent;
+border-bottom: 3px transparent;
+border-right: 10px transparent;
+border-left: 10px transparent;
+}</string>
                  </property>
                  <property name="text">
                   <string>Remove</string>
@@ -341,8 +395,21 @@ color:#c6c6cc</string>
                </size>
               </property>
               <property name="styleSheet">
-               <string notr="true">background-color: rgb(237, 237, 241);
-color: rgb(0, 0, 0);</string>
+               <string notr="true">QComboBox:enabled{background-color: #c2c2d3;
+color: rgb(0, 0, 0);}
+
+QComboBox:disabled{
+background-color:#7b7b7c;
+color: rgb(0, 0, 0);
+}
+
+</string>
+              </property>
+              <property name="frame">
+               <bool>true</bool>
+              </property>
+              <property name="modelColumn">
+               <number>0</number>
               </property>
              </widget>
             </item>
@@ -361,9 +428,25 @@ color: rgb(0, 0, 0);</string>
                </size>
               </property>
               <property name="styleSheet">
-               <string notr="true">background-color: rgb(47, 49, 54);
-border: 2px solid rgb(92, 96, 106);
-color:#c6c6cc</string>
+               <string notr="true">QPushButton
+{
+color: #c6c6cc;
+border-image: url(:engine/img/UI/UI_Button.png) 10 10 10 10;
+border-top: 3px transparent;
+border-bottom: 3px transparent;
+border-right: 10px transparent;
+border-left: 10px transparent;
+}
+
+QPushButton:pressed
+{
+color: #adadb3;
+border-image: url(:engine/img/UI/UI_Button_Pressed.png) 10 10 10 10;
+border-top: 3px transparent;
+border-bottom: 3px transparent;
+border-right: 10px transparent;
+border-left: 10px transparent;
+}</string>
               </property>
               <property name="text">
                <string>Add Engine / Game</string>
@@ -373,9 +456,25 @@ color:#c6c6cc</string>
             <item row="5" column="0">
              <widget class="QPushButton" name="button_rocketmenu">
               <property name="styleSheet">
-               <string notr="true">background-color: rgb(47, 49, 54);
-border: 2px solid rgb(92, 96, 106);
-color:#c6c6cc</string>
+               <string notr="true">QPushButton
+{
+color: #c6c6cc;
+border-image: url(:engine/img/UI/UI_Button.png) 10 10 10 10;
+border-top: 3px transparent;
+border-bottom: 3px transparent;
+border-right: 10px transparent;
+border-left: 10px transparent;
+}
+
+QPushButton:pressed
+{
+color: #adadb3;
+border-image: url(:engine/img/UI/UI_Button_Pressed.png) 10 10 10 10;
+border-top: 3px transparent;
+border-bottom: 3px transparent;
+border-right: 10px transparent;
+border-left: 10px transparent;
+}</string>
               </property>
               <property name="text">
                <string>Rocket Menu</string>
@@ -427,7 +526,7 @@ color:#c6c6cc</string>
                <bool>true</bool>
               </property>
               <property name="styleSheet">
-               <string notr="true">background-color: rgb(237, 237, 241);
+               <string notr="true">background-color: #c2c2d3;
 color: rgb(0, 0, 0);</string>
               </property>
              </widget>
@@ -452,9 +551,25 @@ color: rgb(0, 0, 0);</string>
                  </size>
                 </property>
                 <property name="styleSheet">
-                 <string notr="true">background-color: rgb(47, 49, 54);
-border: 2px solid rgb(92, 96, 106);
-color:#c6c6cc</string>
+                 <string notr="true">QPushButton
+{
+color: #c6c6cc;
+border-image: url(:engine/img/UI/UI_Button.png) 10 10 10 10;
+border-top: 3px transparent;
+border-bottom: 3px transparent;
+border-right: 10px transparent;
+border-left: 10px transparent;
+}
+
+QPushButton:pressed
+{
+color: #adadb3;
+border-image: url(:engine/img/UI/UI_Button_Pressed.png) 10 10 10 10;
+border-top: 3px transparent;
+border-bottom: 3px transparent;
+border-right: 10px transparent;
+border-left: 10px transparent;
+}</string>
                 </property>
                 <property name="text">
                  <string>Add IWAD</string>
@@ -470,9 +585,25 @@ color:#c6c6cc</string>
                  </size>
                 </property>
                 <property name="styleSheet">
-                 <string notr="true">background-color: rgb(47, 49, 54);
-border: 2px solid rgb(92, 96, 106);
-color:#c6c6cc</string>
+                 <string notr="true">QPushButton
+{
+color: #c6c6cc;
+border-image: url(:engine/img/UI/UI_Button.png) 10 10 10 10;
+border-top: 3px transparent;
+border-bottom: 3px transparent;
+border-right: 4px transparent;
+border-left: 4px transparent;
+}
+
+QPushButton:pressed
+{
+color: #adadb3;
+border-image: url(:engine/img/UI/UI_Button_Pressed.png) 10 10 10 10;
+border-top: 3px transparent;
+border-bottom: 3px transparent;
+border-right: 4px transparent;
+border-left: 4px transparent;
+}</string>
                 </property>
                 <property name="text">
                  <string>Remove IWAD</string>
@@ -587,8 +718,18 @@ color:#c6c6cc</string>
                   </size>
                  </property>
                  <property name="styleSheet">
-                  <string notr="true">background-color: rgb(237, 237, 241);
-color: rgb(0, 0, 0);</string>
+                  <string notr="true">QLineEdit:enabled{background-color: #c2c2d3;
+color: rgb(0, 0, 0);}
+
+QLineEdit:disabled{
+background-color:#7b7b7c;
+color: rgb(0, 0, 0);
+}
+
+</string>
+                 </property>
+                 <property name="clearButtonEnabled">
+                  <bool>false</bool>
                  </property>
                 </widget>
                </item>
@@ -607,9 +748,25 @@ color: rgb(0, 0, 0);</string>
                   </size>
                  </property>
                  <property name="styleSheet">
-                  <string notr="true">background-color: rgb(47, 49, 54);
-border: 1px solid rgb(92, 96, 106);
-color:#c6c6cc</string>
+                  <string notr="true">QPushButton
+{
+color: #c6c6cc;
+border-image: url(:engine/img/UI/UI_Button.png) 10 10 10 10;
+border-top: 3px transparent;
+border-bottom: 3px transparent;
+border-right: 4px transparent;
+border-left: 4px transparent;
+}
+
+QPushButton:pressed
+{
+color: #adadb3;
+border-image: url(:engine/img/UI/UI_Button_Pressed.png) 10 10 10 10;
+border-top: 3px transparent;
+border-bottom: 3px transparent;
+border-right: 4px transparent;
+border-left: 4px transparent;
+}</string>
                  </property>
                  <property name="text">
                   <string>?</string>
@@ -617,6 +774,56 @@ color:#c6c6cc</string>
                 </widget>
                </item>
               </layout>
+             </item>
+             <item row="1" column="0">
+              <widget class="QPushButton" name="button_mapfilename">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>60</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">QPushButton:enabled
+{
+color: #c6c6cc;
+border-image: url(:engine/img/UI/UI_Button.png) 10 10 10 10;
+border-top: 3px transparent;
+border-bottom: 3px transparent;
+border-right: 10px transparent;
+border-left: 10px transparent;
+}
+
+QPushButton:disabled
+{
+color: #c6c6cc;
+border-image: url(:engine/img/UI/UI_Button_Disabled.png) 10 10 10 10;
+border-top: 3px transparent;
+border-bottom: 3px transparent;
+border-right: 10px transparent;
+border-left: 10px transparent;
+}
+
+QPushButton:pressed
+{
+color: #adadb3;
+border-image: url(:engine/img/UI/UI_Button_Pressed.png) 10 10 10 10;
+border-top: 3px transparent;
+border-bottom: 3px transparent;
+border-right: 10px transparent;
+border-left: 10px transparent;
+}</string>
+               </property>
+               <property name="text">
+                <string>Get Map name from File</string>
+               </property>
+              </widget>
              </item>
              <item row="2" column="0">
               <layout class="QHBoxLayout" name="horizontalLayout_3" stretch="1,1">
@@ -658,6 +865,17 @@ color:#c6c6cc</string>
                    <width>122</width>
                    <height>0</height>
                   </size>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true">QComboBox:enabled{background-color: #c2c2d3;
+color: rgb(0, 0, 0);}
+
+QComboBox:disabled{
+background-color:#7b7b7c;
+color: rgb(0, 0, 0);
+}
+
+</string>
                  </property>
                  <item>
                   <property name="text">
@@ -704,7 +922,14 @@ color:#c6c6cc</string>
                   </size>
                  </property>
                  <property name="styleSheet">
-                  <string notr="true">color:#c6c6cc</string>
+                  <string notr="true">QCheckBox{
+color:#c6c6cc;
+}
+
+QCheckBox::indicator:disabled
+{
+background-color:#7b7b7c;
+}</string>
                  </property>
                  <property name="text">
                   <string>Record Demo:</string>
@@ -726,8 +951,15 @@ color:#c6c6cc</string>
                   </size>
                  </property>
                  <property name="styleSheet">
-                  <string notr="true">background-color: rgb(237, 237, 241);
-color: rgb(0, 0, 0);</string>
+                  <string notr="true">QLineEdit:enabled{background-color: #c2c2d3;
+color: rgb(0, 0, 0);}
+
+QLineEdit:disabled{
+background-color:#7b7b7c;
+color: rgb(0, 0, 0);
+}
+
+</string>
                  </property>
                  <property name="text">
                   <string>demo_name</string>
@@ -736,20 +968,17 @@ color: rgb(0, 0, 0);</string>
                </item>
               </layout>
              </item>
-             <item row="4" column="0">
-              <widget class="QCheckBox" name="check_nomonsters">
-               <property name="styleSheet">
-                <string notr="true">color:#c6c6cc;</string>
-               </property>
-               <property name="text">
-                <string>No Monsters</string>
-               </property>
-              </widget>
-             </item>
              <item row="6" column="0">
               <widget class="QCheckBox" name="check_nomusic">
                <property name="styleSheet">
-                <string notr="true">color:#c6c6cc</string>
+                <string notr="true">QCheckBox{
+color:#c6c6cc;
+}
+
+QCheckBox::indicator:disabled
+{
+background-color:#7b7b7c;
+}</string>
                </property>
                <property name="text">
                 <string>No Music</string>
@@ -764,30 +993,25 @@ color: rgb(0, 0, 0);</string>
                <property name="text">
                 <string>Skip Intro Movies</string>
                </property>
+               <property name="tristate">
+                <bool>false</bool>
+               </property>
               </widget>
              </item>
-             <item row="1" column="0">
-              <widget class="QPushButton" name="button_mapfilename">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="minimumSize">
-                <size>
-                 <width>60</width>
-                 <height>0</height>
-                </size>
-               </property>
+             <item row="4" column="0">
+              <widget class="QCheckBox" name="check_nomonsters">
                <property name="styleSheet">
-                <string notr="true">background-color: rgb(47, 49, 54);
-border: 2px solid rgb(92, 96, 106);
+                <string notr="true">QCheckBox{
 color:#c6c6cc;
-</string>
+}
+
+QCheckBox::indicator:disabled
+{
+background-color:#7b7b7c;
+}</string>
                </property>
                <property name="text">
-                <string>Get Map name from File</string>
+                <string>No Monsters</string>
                </property>
               </widget>
              </item>
@@ -834,9 +1058,25 @@ color:#c6c6cc;
                 <bool>false</bool>
                </property>
                <property name="styleSheet">
-                <string notr="true">background-color: rgb(47, 49, 54);
-border: 3px solid rgb(92, 96, 106);
-color:#c6c6cc</string>
+                <string notr="true">QPushButton
+{
+color: #c6c6cc;
+border-image: url(:engine/img/UI/UI_Button.png) 10 10 10 10;
+border-top: 3px transparent;
+border-bottom: 3px transparent;
+border-right: 10px transparent;
+border-left: 10px transparent;
+}
+
+QPushButton:pressed
+{
+color: #adadb3;
+border-image: url(:engine/img/UI/UI_Button_Pressed.png) 10 10 10 10;
+border-top: 3px transparent;
+border-bottom: 3px transparent;
+border-right: 10px transparent;
+border-left: 10px transparent;
+}</string>
                </property>
                <property name="text">
                 <string>Play Doom!</string>
@@ -857,7 +1097,7 @@ color:#c6c6cc</string>
                 <bool>false</bool>
                </property>
                <property name="flat">
-                <bool>true</bool>
+                <bool>false</bool>
                </property>
               </widget>
              </item>
@@ -894,9 +1134,25 @@ color:#c6c6cc</string>
                 <bool>false</bool>
                </property>
                <property name="styleSheet">
-                <string notr="true">background-color: rgb(47, 49, 54);
-border: 3px solid rgb(92, 96, 106);
-color:#c6c6cc</string>
+                <string notr="true">QPushButton
+{
+color: #c6c6cc;
+border-image: url(:engine/img/UI/UI_Button.png) 10 10 10 10;
+border-top: 3px transparent;
+border-bottom: 3px transparent;
+border-right: 10px transparent;
+border-left: 10px transparent;
+}
+
+QPushButton:pressed
+{
+color: #adadb3;
+border-image: url(:engine/img/UI/UI_Button_Pressed.png) 10 10 10 10;
+border-top: 3px transparent;
+border-bottom: 3px transparent;
+border-right: 10px transparent;
+border-left: 10px transparent;
+}</string>
                </property>
                <property name="text">
                 <string>Launch without Files/Archives</string>
@@ -943,7 +1199,7 @@ color:#c6c6cc</string>
            <item row="6" column="0" colspan="2">
             <widget class="QLineEdit" name="input_argbox">
              <property name="styleSheet">
-              <string notr="true">background-color: rgb(237, 237, 241);
+              <string notr="true">background-color: #c2c2d3;
 color: rgb(0, 0, 0);</string>
              </property>
             </widget>
@@ -973,7 +1229,7 @@ color: rgb(0, 0, 0);</string>
              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;These files are always loaded&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
             <property name="styleSheet">
-             <string notr="true">background-color: rgb(237, 237, 241);
+             <string notr="true">background-color: #c2c2d3;
 color: rgb(0, 0, 0);</string>
             </property>
            </widget>
@@ -998,9 +1254,25 @@ color: rgb(0, 0, 0);</string>
                </size>
               </property>
               <property name="styleSheet">
-               <string notr="true">background-color: rgb(47, 49, 54);
-border: 2px solid rgb(92, 96, 106);
-color:#c6c6cc</string>
+               <string notr="true">QPushButton
+{
+color: #c6c6cc;
+border-image: url(:engine/img/UI/UI_Button.png) 10 10 10 10;
+border-top: 3px transparent;
+border-bottom: 3px transparent;
+border-right: 10px transparent;
+border-left: 10px transparent;
+}
+
+QPushButton:pressed
+{
+color: #adadb3;
+border-image: url(:engine/img/UI/UI_Button_Pressed.png) 10 10 10 10;
+border-top: 3px transparent;
+border-bottom: 3px transparent;
+border-right: 10px transparent;
+border-left: 10px transparent;
+}</string>
               </property>
               <property name="text">
                <string>Add</string>
@@ -1022,9 +1294,25 @@ color:#c6c6cc</string>
                </size>
               </property>
               <property name="styleSheet">
-               <string notr="true">background-color: rgb(47, 49, 54);
-border: 2px solid rgb(92, 96, 106);
-color:#c6c6cc</string>
+               <string notr="true">QPushButton
+{
+color: #c6c6cc;
+border-image: url(:engine/img/UI/UI_Button.png) 10 10 10 10;
+border-top: 3px transparent;
+border-bottom: 3px transparent;
+border-right: 10px transparent;
+border-left: 10px transparent;
+}
+
+QPushButton:pressed
+{
+color: #adadb3;
+border-image: url(:engine/img/UI/UI_Button_Pressed.png) 10 10 10 10;
+border-top: 3px transparent;
+border-bottom: 3px transparent;
+border-right: 10px transparent;
+border-left: 10px transparent;
+}</string>
               </property>
               <property name="text">
                <string>Remove</string>
@@ -1054,7 +1342,7 @@ color:#c6c6cc</string>
           <item>
            <widget class="QListView" name="listbox_engines">
             <property name="styleSheet">
-             <string notr="true">background-color: rgb(237, 237, 241);
+             <string notr="true">background-color: #c2c2d3;
 color: rgb(0, 0, 0);</string>
             </property>
            </widget>
@@ -1064,9 +1352,25 @@ color: rgb(0, 0, 0);</string>
             <item>
              <widget class="QPushButton" name="button_addCustEng">
               <property name="styleSheet">
-               <string notr="true">background-color: rgb(47, 49, 54);
-border: 3px solid rgb(92, 96, 106);
-color:#c6c6cc</string>
+               <string notr="true">QPushButton
+{
+color: #c6c6cc;
+border-image: url(:engine/img/UI/UI_Button.png) 10 10 10 10;
+border-top: 3px transparent;
+border-bottom: 3px transparent;
+border-right: 10px transparent;
+border-left: 10px transparent;
+}
+
+QPushButton:pressed
+{
+color: #adadb3;
+border-image: url(:engine/img/UI/UI_Button_Pressed.png) 10 10 10 10;
+border-top: 3px transparent;
+border-bottom: 3px transparent;
+border-right: 10px transparent;
+border-left: 10px transparent;
+}</string>
               </property>
               <property name="text">
                <string>Add Custom</string>
@@ -1076,9 +1380,25 @@ color:#c6c6cc</string>
             <item>
              <widget class="QPushButton" name="button_detectEng">
               <property name="styleSheet">
-               <string notr="true">background-color: rgb(47, 49, 54);
-border: 3px solid rgb(92, 96, 106);
-color:#c6c6cc</string>
+               <string notr="true">QPushButton
+{
+color: #c6c6cc;
+border-image: url(:engine/img/UI/UI_Button.png) 10 10 10 10;
+border-top: 3px transparent;
+border-bottom: 3px transparent;
+border-right: 10px transparent;
+border-left: 10px transparent;
+}
+
+QPushButton:pressed
+{
+color: #adadb3;
+border-image: url(:engine/img/UI/UI_Button_Pressed.png) 10 10 10 10;
+border-top: 3px transparent;
+border-bottom: 3px transparent;
+border-right: 10px transparent;
+border-left: 10px transparent;
+}</string>
               </property>
               <property name="text">
                <string>Detect from File</string>
@@ -1088,9 +1408,25 @@ color:#c6c6cc</string>
             <item>
              <widget class="QPushButton" name="button_removeEng">
               <property name="styleSheet">
-               <string notr="true">background-color: rgb(47, 49, 54);
-border: 3px solid rgb(92, 96, 106);
-color:#c6c6cc</string>
+               <string notr="true">QPushButton
+{
+color: #c6c6cc;
+border-image: url(:engine/img/UI/UI_Button.png) 10 10 10 10;
+border-top: 3px transparent;
+border-bottom: 3px transparent;
+border-right: 10px transparent;
+border-left: 10px transparent;
+}
+
+QPushButton:pressed
+{
+color: #adadb3;
+border-image: url(:engine/img/UI/UI_Button_Pressed.png) 10 10 10 10;
+border-top: 3px transparent;
+border-bottom: 3px transparent;
+border-right: 10px transparent;
+border-left: 10px transparent;
+}</string>
               </property>
               <property name="text">
                <string>Remove</string>
@@ -1146,7 +1482,15 @@ color:#c6c6cc</string>
            <item row="3" column="1">
             <widget class="QComboBox" name="combo_EngType">
              <property name="styleSheet">
-              <string notr="true">background-color: rgb(237, 237, 241); color:000000</string>
+              <string notr="true">QComboBox:enabled{background-color: #c2c2d3;
+color: rgb(0, 0, 0);}
+
+QComboBox:disabled{
+background-color:#7b7b7c;
+color: rgb(0, 0, 0);
+}
+
+</string>
              </property>
              <item>
               <property name="text">
@@ -1183,7 +1527,8 @@ color:#c6c6cc</string>
            <item row="1" column="1" colspan="2">
             <widget class="QLineEdit" name="input_selEngPath">
              <property name="styleSheet">
-              <string notr="true">background-color: rgb(237, 237, 241); color:000000</string>
+              <string notr="true">background-color: #c2c2d3;
+color: rgb(0, 0, 0);</string>
              </property>
              <property name="readOnly">
               <bool>true</bool>
@@ -1193,9 +1538,25 @@ color:#c6c6cc</string>
            <item row="2" column="2">
             <widget class="QPushButton" name="button_selEngBrowse">
              <property name="styleSheet">
-              <string notr="true">background-color: rgb(47, 49, 54);
-border: 3px solid rgb(92, 96, 106);
-color:#c6c6cc</string>
+              <string notr="true">QPushButton
+{
+color: #c6c6cc;
+border-image: url(:engine/img/UI/UI_Button.png) 10 10 10 10;
+border-top: 3px transparent;
+border-bottom: 3px transparent;
+border-right: 10px transparent;
+border-left: 10px transparent;
+}
+
+QPushButton:pressed
+{
+color: #adadb3;
+border-image: url(:engine/img/UI/UI_Button_Pressed.png) 10 10 10 10;
+border-top: 3px transparent;
+border-bottom: 3px transparent;
+border-right: 10px transparent;
+border-left: 10px transparent;
+}</string>
              </property>
              <property name="text">
               <string>Browse</string>
@@ -1205,9 +1566,25 @@ color:#c6c6cc</string>
            <item row="0" column="2">
             <widget class="QPushButton" name="button_enginename">
              <property name="styleSheet">
-              <string notr="true">background-color: rgb(47, 49, 54);
-border: 3px solid rgb(92, 96, 106);
-color:#c6c6cc</string>
+              <string notr="true">QPushButton
+{
+color: #c6c6cc;
+border-image: url(:engine/img/UI/UI_Button.png) 10 10 10 10;
+border-top: 3px transparent;
+border-bottom: 3px transparent;
+border-right: 10px transparent;
+border-left: 10px transparent;
+}
+
+QPushButton:pressed
+{
+color: #adadb3;
+border-image: url(:engine/img/UI/UI_Button_Pressed.png) 10 10 10 10;
+border-top: 3px transparent;
+border-bottom: 3px transparent;
+border-right: 10px transparent;
+border-left: 10px transparent;
+}</string>
              </property>
              <property name="text">
               <string>Ok</string>
@@ -1227,14 +1604,23 @@ color:#c6c6cc</string>
            <item row="0" column="1">
             <widget class="QLineEdit" name="input_selEngName">
              <property name="styleSheet">
-              <string notr="true">background-color: rgb(237, 237, 241); color:000000</string>
+              <string notr="true">background-color: #c2c2d3;
+color: rgb(0, 0, 0);</string>
              </property>
             </widget>
            </item>
            <item row="4" column="1" alignment="Qt::AlignLeft">
             <widget class="QComboBox" name="combo_EngPic">
              <property name="styleSheet">
-              <string notr="true">background-color: rgb(237, 237, 241); color:000000</string>
+              <string notr="true">QComboBox:enabled{background-color: #c2c2d3;
+color: rgb(0, 0, 0);}
+
+QComboBox:disabled{
+background-color:#7b7b7c;
+color: rgb(0, 0, 0);
+}
+
+</string>
              </property>
              <item>
               <property name="text">
@@ -1356,7 +1742,8 @@ color:#c6c6cc</string>
            <item alignment="Qt::AlignTop">
             <widget class="QLineEdit" name="input_idExePath">
              <property name="styleSheet">
-              <string notr="true">background-color: rgb(237, 237, 241); color:000000</string>
+              <string notr="true">background-color: #c2c2d3;
+color: rgb(0, 0, 0);</string>
              </property>
              <property name="readOnly">
               <bool>true</bool>
@@ -1366,9 +1753,25 @@ color:#c6c6cc</string>
            <item alignment="Qt::AlignHCenter|Qt::AlignTop">
             <widget class="QPushButton" name="button_idExeBrowse">
              <property name="styleSheet">
-              <string notr="true">background-color: rgb(47, 49, 54);
-border: 3px solid rgb(92, 96, 106);
-color:#c6c6cc</string>
+              <string notr="true">QPushButton
+{
+color: #c6c6cc;
+border-image: url(:engine/img/UI/UI_Button.png) 10 10 10 10;
+border-top: 3px transparent;
+border-bottom: 3px transparent;
+border-right: 10px transparent;
+border-left: 10px transparent;
+}
+
+QPushButton:pressed
+{
+color: #adadb3;
+border-image: url(:engine/img/UI/UI_Button_Pressed.png) 10 10 10 10;
+border-top: 3px transparent;
+border-bottom: 3px transparent;
+border-right: 10px transparent;
+border-left: 10px transparent;
+}</string>
              </property>
              <property name="text">
               <string>Browse</string>
@@ -1407,7 +1810,7 @@ color:#c6c6cc</string>
            <item row="1" column="0" colspan="2">
             <widget class="QListView" name="listbox_configFavs">
              <property name="styleSheet">
-              <string notr="true">background-color: rgb(237, 237, 241);
+              <string notr="true">background-color: #c2c2d3;
 color: rgb(0, 0, 0);</string>
              </property>
             </widget>
@@ -1415,9 +1818,25 @@ color: rgb(0, 0, 0);</string>
            <item row="2" column="0">
             <widget class="QPushButton" name="button_loadFavConfig">
              <property name="styleSheet">
-              <string notr="true">background-color: rgb(47, 49, 54);
-border: 3px solid rgb(92, 96, 106);
-color:#c6c6cc</string>
+              <string notr="true">QPushButton
+{
+color: #c6c6cc;
+border-image: url(:engine/img/UI/UI_Button.png) 10 10 10 10;
+border-top: 3px transparent;
+border-bottom: 3px transparent;
+border-right: 10px transparent;
+border-left: 10px transparent;
+}
+
+QPushButton:pressed
+{
+color: #adadb3;
+border-image: url(:engine/img/UI/UI_Button_Pressed.png) 10 10 10 10;
+border-top: 3px transparent;
+border-bottom: 3px transparent;
+border-right: 10px transparent;
+border-left: 10px transparent;
+}</string>
              </property>
              <property name="text">
               <string>Load Selected</string>
@@ -1427,9 +1846,25 @@ color:#c6c6cc</string>
            <item row="2" column="1">
             <widget class="QPushButton" name="button_delConfig">
              <property name="styleSheet">
-              <string notr="true">background-color: rgb(47, 49, 54);
-border: 3px solid rgb(92, 96, 106);
-color:#c6c6cc</string>
+              <string notr="true">QPushButton
+{
+color: #c6c6cc;
+border-image: url(:engine/img/UI/UI_Button.png) 10 10 10 10;
+border-top: 3px transparent;
+border-bottom: 3px transparent;
+border-right: 10px transparent;
+border-left: 10px transparent;
+}
+
+QPushButton:pressed
+{
+color: #adadb3;
+border-image: url(:engine/img/UI/UI_Button_Pressed.png) 10 10 10 10;
+border-top: 3px transparent;
+border-bottom: 3px transparent;
+border-right: 10px transparent;
+border-left: 10px transparent;
+}</string>
              </property>
              <property name="text">
               <string>Delete</string>
@@ -1472,7 +1907,8 @@ color:#c6c6cc</string>
              <item row="1" column="0" colspan="2" alignment="Qt::AlignTop">
               <widget class="QLineEdit" name="input_confName">
                <property name="styleSheet">
-                <string notr="true">background-color: rgb(237, 237, 241); color:000000</string>
+                <string notr="true">background-color: #c2c2d3;
+color: rgb(0, 0, 0);</string>
                </property>
               </widget>
              </item>
@@ -1491,9 +1927,25 @@ color:#c6c6cc</string>
                 </size>
                </property>
                <property name="styleSheet">
-                <string notr="true">background-color: rgb(47, 49, 54);
-border: 3px solid rgb(92, 96, 106);
-color:#c6c6cc</string>
+                <string notr="true">QPushButton
+{
+color: #c6c6cc;
+border-image: url(:engine/img/UI/UI_Button.png) 10 10 10 10;
+border-top: 3px transparent;
+border-bottom: 3px transparent;
+border-right: 10px transparent;
+border-left: 10px transparent;
+}
+
+QPushButton:pressed
+{
+color: #adadb3;
+border-image: url(:engine/img/UI/UI_Button_Pressed.png) 10 10 10 10;
+border-top: 3px transparent;
+border-bottom: 3px transparent;
+border-right: 10px transparent;
+border-left: 10px transparent;
+}</string>
                </property>
                <property name="text">
                 <string>Save To
@@ -1516,9 +1968,25 @@ External File</string>
                 </size>
                </property>
                <property name="styleSheet">
-                <string notr="true">background-color: rgb(47, 49, 54);
-border: 3px solid rgb(92, 96, 106);
-color:#c6c6cc</string>
+                <string notr="true">QPushButton
+{
+color: #c6c6cc;
+border-image: url(:engine/img/UI/UI_Button.png) 10 10 10 10;
+border-top: 3px transparent;
+border-bottom: 3px transparent;
+border-right: 10px transparent;
+border-left: 10px transparent;
+}
+
+QPushButton:pressed
+{
+color: #adadb3;
+border-image: url(:engine/img/UI/UI_Button_Pressed.png) 10 10 10 10;
+border-top: 3px transparent;
+border-bottom: 3px transparent;
+border-right: 10px transparent;
+border-left: 10px transparent;
+}</string>
                </property>
                <property name="text">
                 <string>Add To
@@ -1559,9 +2027,25 @@ Favorites </string>
                 </size>
                </property>
                <property name="styleSheet">
-                <string notr="true">background-color: rgb(47, 49, 54);
-border: 3px solid rgb(92, 96, 106);
-color:#c6c6cc</string>
+                <string notr="true">QPushButton
+{
+color: #c6c6cc;
+border-image: url(:engine/img/UI/UI_Button.png) 10 10 10 10;
+border-top: 3px transparent;
+border-bottom: 3px transparent;
+border-right: 10px transparent;
+border-left: 10px transparent;
+}
+
+QPushButton:pressed
+{
+color: #adadb3;
+border-image: url(:engine/img/UI/UI_Button_Pressed.png) 10 10 10 10;
+border-top: 3px transparent;
+border-bottom: 3px transparent;
+border-right: 10px transparent;
+border-left: 10px transparent;
+}</string>
                </property>
                <property name="text">
                 <string>Load From
@@ -1589,8 +2073,6 @@ External File</string>
    <header>dndfilesystemlistview.h</header>
   </customwidget>
  </customwidgets>
- <resources>
-  <include location="resources.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

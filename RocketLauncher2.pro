@@ -8,7 +8,7 @@ QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = RocketLauncher2
+TARGET = "Light Burden"
 TEMPLATE = app
 
 
@@ -40,7 +40,7 @@ RESOURCES += \
 
 CONFIG(release, debug|release):DEFINES += QT_NO_DEBUG_OUTPUT
 
-RC_ICONS = RocketLauncher2.ico
+RC_ICONS = Light_Burden_logo.ico
 
 CONFIG += c++11
 CONFIG += static

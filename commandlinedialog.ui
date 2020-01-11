@@ -43,9 +43,25 @@ color:#c6c6cc</string>
      <item>
       <widget class="QPushButton" name="button_copycmd">
        <property name="styleSheet">
-        <string notr="true">background-color: rgb(47, 49, 54);
-border: 1px solid rgb(92, 96, 106);
-color:#c6c6cc</string>
+        <string notr="true">QPushButton
+{
+color: #c6c6cc;
+border-image: url(:engine/img/UI/UI_Button.png) 10 10 10 10;
+border-top: 3px transparent;
+border-bottom: 3px transparent;
+border-right: 10px transparent;
+border-left: 10px transparent;
+}
+
+QPushButton:pressed
+{
+color: #adadb3;
+border-image: url(:engine/img/UI/UI_Button_Pressed.png) 10 10 10 10;
+border-top: 3px transparent;
+border-bottom: 3px transparent;
+border-right: 10px transparent;
+border-left: 10px transparent;
+}</string>
        </property>
        <property name="text">
         <string>Copy to clipboard</string>
@@ -55,9 +71,25 @@ color:#c6c6cc</string>
      <item>
       <widget class="QDialogButtonBox" name="buttonBox">
        <property name="styleSheet">
-        <string notr="true">background-color: rgb(47, 49, 54);
-border: 1px solid rgb(92, 96, 106);
-color:#c6c6cc</string>
+        <string notr="true">QPushButton
+{
+color: #c6c6cc;
+border-image: url(:engine/img/UI/UI_Button.png) 10 10 10 10;
+border-top: 3px transparent;
+border-bottom: 3px transparent;
+border-right: 10px transparent;
+border-left: 10px transparent;
+}
+
+QPushButton:pressed
+{
+color: #adadb3;
+border-image: url(:engine/img/UI/UI_Button_Pressed.png) 10 10 10 10;
+border-top: 3px transparent;
+border-bottom: 3px transparent;
+border-right: 10px transparent;
+border-left: 10px transparent;
+}</string>
        </property>
        <property name="orientation">
         <enum>Qt::Horizontal</enum>

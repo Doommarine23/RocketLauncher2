@@ -275,7 +275,7 @@ void RocketLauncher2::parseCmdLine(int argc, char *argv[])
 }
 
 void RocketLauncher2::showCommandLine(){
-    QString enginefile;
+    QString enginefile; //TODO: Fix the crashes on blank commandlines, which is easily reproducable on Turok (KEX) engine games.
     if (!enginelist->EngineSet)
     {
         QMessageBox::information(this,"Error" ,"Please select or add an engine (source port).");
@@ -301,6 +301,10 @@ if(enginelist->getCurrentEngine()->type != Engine_Turok1 || enginelist->getCurre
         showargs = enginefile+" "+cmd.join(' ');
         CommandLineDialog *cmdDialog = new CommandLineDialog();
         cmdDialog->setWindowTitle("Command Line");
+
+        if (showargs.isEmpty())
+        {showargs = "No Arguments";}
+
         cmdDialog->setTextBox(showargs);
         cmdDialog->show();
 }
@@ -474,82 +478,71 @@ void RocketLauncher2::on_engine_check()
         //Enable IWAD and Patch Wad Boxes
         ui->IWAD_label->setHidden(false);
         ui->listbox_IWADs->setHidden(false);
+        ui->button_mapfilename->setDisabled(false);
 
         //Enable Skill, IWAD, Patch Wad, Monsters, and Demo Recording Buttons, also enable map selection
-        ui->combo_skill->setHidden(false);
+        ui->combo_skill->setDisabled(false);
         ui->button_addiwad->setHidden(false);
         ui->button_deliwad->setHidden(false);
-        ui->check_nomonsters->setHidden(false);
-        ui->check_nomusic->setHidden(false);
-        ui->check_record->setHidden(false);
-        ui->input_record->setHidden(false);
-        ui->combo_skill->setHidden(false);
-        ui->label_skill->setHidden(false);
+        ui->check_nomonsters->setDisabled(false);
+        ui->check_nomusic->setDisabled(false);
+        ui->check_record->setDisabled(false);
+        ui->input_record->setDisabled(false);
+        ui->combo_skill->setDisabled(false);
+        ui->label_skill->setDisabled(false);
         ui->input_map->setDisabled(false);
         break;
 
     case Engine_Turok1:
-        ui->pushButton_3->setText("Play Turok!");
-        //Enable map selection
-         ui->input_map->setDisabled(false);
-        //Disable IWAD and Patch Wad Boxes
+        ui->pushButton_3->setText("Play Turok: Dinosaur Hunter!");
+
+        ui->input_map->setDisabled(false);
+        ui->button_mapfilename->setDisabled(false);
+        //Hide IWAD and Patch Wad Boxes
         ui->IWAD_label->setHidden(true);
         ui->listbox_IWADs->setHidden(true);
-
-        //Disable Skill, IWAD, Patch Wad, Monsters, and Demo Recording Buttons
-        ui->combo_skill->currentText() = "Default";
-        ui->combo_skill->setEnabled(false);
 
         ui->button_addiwad->setHidden(true);
         ui->button_deliwad->setHidden(true);
 
-        ui->check_nomonsters->setHidden(true);
-        ui->check_nomonsters->setChecked(false);
+        //Disable Skill, IWAD, Patch Wad, Monsters, and Demo Recording Buttons
+       // ui->combo_skill->setEnabled(false);
 
-        ui->check_nomusic->setHidden(true);
-        ui->check_nomusic->setChecked(false);
+        ui->check_nomonsters->setDisabled(true);
+        ui->check_nomusic->setDisabled(true);
+        ui->check_record->setDisabled(true);
+        ui->input_record->setDisabled(true);
 
-        ui->check_record->setHidden(true);
-        ui->check_record->setChecked(false);
-
-        ui->input_record->setHidden(true);
-
-        ui->combo_skill->setHidden(true);
-        ui->label_skill->setHidden(true);
+        ui->combo_skill->setDisabled(true);
+        ui->label_skill->setDisabled(true);
         break;
 
 
 
     case Engine_Turok2:
-        ui->pushButton_3->setText("Play Turok 2!");
+        ui->pushButton_3->setText("Play Turok 2: Seeds of Evil!");
 
-        //Disable IWAD and Patch Wad Boxes
+        //Hide IWAD and Patch Wad Boxes
         ui->IWAD_label->setHidden(true);
         ui->listbox_IWADs->setHidden(true);
-
-        //Disable Skill, IWAD, Patch Wad, Monsters, and Demo Recording Buttons
-        ui->combo_skill->currentText() = "Default";
-        ui->combo_skill->setEnabled(false);
 
         ui->button_addiwad->setHidden(true);
         ui->button_deliwad->setHidden(true);
 
-        ui->check_nomonsters->setHidden(true);
-        ui->check_nomonsters->setChecked(false);
+        //Disable Skill, IWAD, Patch Wad, Monsters, and Demo Recording Buttons
+        ui->combo_skill->setEnabled(false);
 
-        ui->check_nomusic->setHidden(true);
-        ui->check_nomusic->setChecked(false);
+        ui->check_nomonsters->setDisabled(true);
+        ui->check_nomusic->setDisabled(true);
+        ui->check_record->setDisabled(true);
+        ui->input_record->setDisabled(true);
 
-        ui->check_record->setHidden(true);
-        ui->check_record->setChecked(false);
-
-        ui->input_record->setHidden(true);
-
-        ui->combo_skill->setHidden(true);
-        ui->label_skill->setHidden(true);
+        ui->combo_skill->setDisabled(true);
+        ui->label_skill->setDisabled(true);
         //Disable Map Selection, this is not supported by Turok 2 sadly.
         ui->input_map->setDisabled(true);
-        // Make this look nicer, later. ui->input_map->setStyleSheet("QLineEdit {background-color: black;}");
+        ui->button_mapfilename->setDisabled(true);
+        // TODO Make this look nicer, later. ui->input_map->setStyleSheet("QLineEdit {background-color: black;}");
         break;
 
     }
@@ -601,7 +594,6 @@ void RocketLauncher2::SetEnginePic(EnginePic pic)
 void RocketLauncher2::setEngineSelection(const QString text)
 {
     ui->combo_Engines->setCurrentText(text);
-
 }
 
 void RocketLauncher2::setEngineSelectionIndex(int index)
@@ -609,7 +601,6 @@ void RocketLauncher2::setEngineSelectionIndex(int index)
     qDebug() << "updating index";
     //qDebug().quote();
     ui->combo_Engines->setCurrentIndex(index);
-
 }
 
 //==========WAD LISTVIEW HANDLING==========
@@ -766,7 +757,7 @@ void RocketLauncher2::on_button_helpmap_clicked()
             QMessageBox::information(this, "Map/Warp", "NOTE: Disables achivements, and is NOT case sensitive. Only type in the level's name: level06 If level is inside a folder, include it: doommarine23/lavacave");
             break;
         case Engine_Turok2:
-            QMessageBox::information(this, "Map/Warp", "Turok 2 does NOT support launching with a map, I am sorry! This command is DISABLED!");
+            QMessageBox::information(this, "Map/Warp", "Turok 2 does NOT support launching with a map, thus this is disabled.");
             break;
 
         }
