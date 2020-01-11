@@ -1,4 +1,4 @@
-# DoomMarine23 -- Adding Turok support and other games after.
+# NOTE: This readme is in the process of being updated!
 
 ### Special Thanks to:
 <br>
