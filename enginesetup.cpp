@@ -80,6 +80,8 @@ void RocketLauncher2::on_listbox_engines_clicked(const QModelIndex &index)
         ui->combo_EngType->setCurrentText("Turok");
     else if (temptype == Engine_Turok2)
         ui->combo_EngType->setCurrentText("Turok 2");
+    else if (temptype == Engine_Doom64EX)
+        ui->combo_EngType->setCurrentText("Doom64 EX");
 
     EnginePic pic = enginelist->getEnginePicFromIndex(index);
 
@@ -115,6 +117,8 @@ void RocketLauncher2::on_listbox_engines_clicked(const QModelIndex &index)
         ui->combo_EngPic->setCurrentText("Turok");
     else if (pic == Pic_Turok2)
         ui->combo_EngPic->setCurrentText("Turok 2");
+    else if (pic == Pic_Doom64EX)
+        ui->combo_EngPic->setCurrentText("Doom64 EX");
 }
 
 void RocketLauncher2::on_button_addCustEng_clicked()
@@ -178,6 +182,8 @@ void RocketLauncher2::on_combo_EngType_currentTextChanged(const QString &arg1)
         enginelist->setTypeFromIndex(Engine_Turok1, index);
     else if (arg1 == "Turok 2")
         enginelist->setTypeFromIndex(Engine_Turok2, index);
+    else if (arg1 == "Doom 64EX")
+        enginelist->setTypeFromIndex(Engine_Doom64EX, index);
 }
 
 void RocketLauncher2::on_combo_EngPic_currentTextChanged(const QString &arg1)
@@ -218,6 +224,8 @@ void RocketLauncher2::on_combo_EngPic_currentTextChanged(const QString &arg1)
         enginelist->setPicFromIndex(Pic_Turok1, index);
     else if (arg1 == "Turok 2")
         enginelist->setPicFromIndex(Pic_Turok2, index);
+    else if (arg1 == "Doom 64EX")
+        enginelist->setPicFromIndex(Pic_Doom64EX, index);
 
     SetEnginePic(enginelist->getCurrentEngine()->EngineImage);
 }

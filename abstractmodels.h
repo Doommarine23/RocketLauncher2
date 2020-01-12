@@ -37,7 +37,8 @@ enum EngineType
     Engine_Oldschool,
     Engine_DosBox,
     Engine_Turok1, // Doommarine23, Turok 1 Nightdive Support.
-    Engine_Turok2 // DoomMarine23, Turok 2 Nightdive Support.
+    Engine_Turok2, // DoomMarine23, Turok 2 Nightdive Support.
+    Engine_Doom64EX
 };
 
 enum EnginePic
@@ -57,7 +58,8 @@ enum EnginePic
     Pic_Doomsday,
     Pic_Edge,
     Pic_Turok1,
-    Pic_Turok2
+    Pic_Turok2,
+    Pic_Doom64EX
 };
 
 struct EngineInfo

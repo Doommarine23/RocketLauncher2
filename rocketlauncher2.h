@@ -162,6 +162,7 @@ private:
     QStringList genturok1cmds(bool displayOnly, bool loadFiles);
     QStringList genturok2cmds(bool displayOnly, bool loadFiles);
     QStringList genZDoomcmds(bool displayOnly, bool loadFiles);
+    QStringList genDoom64EXcmds(bool displayOnly, bool loadFiles);
     //configs
     RocketFile makeConfigFromCurrent(QString name);
     void loadExtConfig(QString path);

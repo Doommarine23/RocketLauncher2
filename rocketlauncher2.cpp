@@ -137,6 +137,7 @@ void RocketLauncher2::initPixmaps()
     enginepics->append((QPixmap(":/engine/img/ddlogo.png").scaled(105,105,Qt::KeepAspectRatio))); //13 DoomsDay
     enginepics->append((QPixmap(":/engine/img/turoklogo.png").scaled(105,105,Qt::KeepAspectRatio))); //14 Turok
     enginepics->append((QPixmap(":/engine/img/turok2logo.png").scaled(105,105,Qt::KeepAspectRatio))); //15 Turok 2
+    enginepics->append((QPixmap(":/engine/img/d64exlogo.png").scaled(105,105,Qt::KeepAspectRatio))); //16 Doom64EX
     ui->img_engine->setPixmap(enginepics->at(0));
 }
 
@@ -285,8 +286,7 @@ void RocketLauncher2::showCommandLine(){
     enginefile = enginelist->getCurrentEngine()->path;
     //NOTE: Always show files in the RL command line, even if user was to click "don't load files"
     QStringList cmd = genCommandline(false,true);
-
-if(enginelist->getCurrentEngine()->type != Engine_Turok1 || enginelist->getCurrentEngine()->type != Engine_Turok2)  // NOTE Required! Turok doesn't need these warnings (expand to other games later)
+if(enginelist->getCurrentEngine()->type != Engine_Turok1 && enginelist->getCurrentEngine()->type != Engine_Turok2 && enginelist->getCurrentEngine()->type != Engine_Doom64EX)   // NOTE Required! Turok doesn't need these warnings (expand to other games later)
    {
         if (cmd[1] == "fail_IWADSELECT")
         {
@@ -341,6 +341,12 @@ QStringList RocketLauncher2::genCommandline(bool displayOnly=false, bool loadFil
         else return genZDoomcmds(false,false);
 
     }
+    if (enginelist->getCurrentEngine()->type == Engine_Doom64EX)
+    {
+        if (loadFiles) return genDoom64EXcmds(false,true);
+        else return genDoom64EXcmds(false,false);
+
+    }
 }
 
 void RocketLauncher2::on_pushButton_3_clicked() //RUN WITH ARCHIVES
@@ -354,7 +360,8 @@ void RocketLauncher2::on_pushButton_3_clicked() //RUN WITH ARCHIVES
     }
     enginefile = enginelist->getCurrentEngine()->path;
     QStringList cmd = genCommandline(true,true);
-if(enginelist->getCurrentEngine()->type != Engine_Turok1 && enginelist->getCurrentEngine()->type != Engine_Turok2) // NOTE Required! Turok doesn't need these warnings (expand to other games later)
+    //TODO: Just make a goddamn variable that says "Don't bug me because I don't really use IWADs", and check against that. INSTEAD OF THIS INSANITY.
+if(enginelist->getCurrentEngine()->type != Engine_Turok1 && enginelist->getCurrentEngine()->type != Engine_Turok2 && enginelist->getCurrentEngine()->type != Engine_Doom64EX) // NOTE Required! Turok doesn't need these warnings (expand to other games later)
     {
     if (cmd[1] == "fail_IWADSELECT")
     {
@@ -406,7 +413,7 @@ void RocketLauncher2::on_pushButton_4_clicked() //RUN WITHOUT ARCHIVES
     enginefile = enginelist->getCurrentEngine()->path;
     QStringList cmd = genCommandline(true,false);
 
-if(enginelist->getCurrentEngine()->type != Engine_Turok1 && enginelist->getCurrentEngine()->type != Engine_Turok2) // NOTE Required! Turok doesn't need these warnings (expand to other games later)
+if(enginelist->getCurrentEngine()->type != Engine_Turok1 && enginelist->getCurrentEngine()->type != Engine_Turok2 && enginelist->getCurrentEngine()->type != Engine_Doom64EX)  // NOTE Required! Turok doesn't need these warnings (expand to other games later)
     {
     if (cmd[1] == "fail_IWADSELECT")
     {
@@ -484,6 +491,28 @@ void RocketLauncher2::on_engine_check()
         ui->combo_skill->setDisabled(false);
         ui->button_addiwad->setHidden(false);
         ui->button_deliwad->setHidden(false);
+        ui->check_nomonsters->setDisabled(false);
+        ui->check_nomusic->setDisabled(false);
+        ui->check_record->setDisabled(false);
+        ui->input_record->setDisabled(false);
+        ui->combo_skill->setDisabled(false);
+        ui->label_skill->setDisabled(false);
+        ui->input_map->setDisabled(false);
+        break;
+
+    case Engine_Doom64EX:
+        ui->pushButton_3->setText("Play Doom64 EX!");
+
+        // Disable IWAD and Patch Wad Boxes
+        ui->IWAD_label->setHidden(true);
+        ui->listbox_IWADs->setHidden(true);
+        ui->button_addiwad->setHidden(true);
+        ui->button_deliwad->setHidden(true);
+
+        ui->button_mapfilename->setDisabled(false);
+
+        //Enable Skill, Patch Wad, Monsters, and Demo Recording Buttons, also enable map selection
+        ui->combo_skill->setDisabled(false);
         ui->check_nomonsters->setDisabled(false);
         ui->check_nomusic->setDisabled(false);
         ui->check_record->setDisabled(false);
@@ -586,6 +615,8 @@ void RocketLauncher2::SetEnginePic(EnginePic pic)
             ui->img_engine->setPixmap(enginepics->at(14)); break;
         case Pic_Turok2:
             ui->img_engine->setPixmap(enginepics->at(15)); break;
+        case Pic_Doom64EX:
+            ui->img_engine->setPixmap(enginepics->at(16)); break;
     }
 }
 
@@ -759,6 +790,8 @@ void RocketLauncher2::on_button_helpmap_clicked()
         case Engine_Turok2:
             QMessageBox::information(this, "Map/Warp", "Turok 2 does NOT support launching with a map, thus this is disabled.");
             break;
+        case Engine_Doom64EX:
+            QMessageBox::information(this, "Map/Warp", "Use map numbers like oldschool Doom engines, e.g. '1'. Nonexistant maps will cause a game crash.");
 
         }
 

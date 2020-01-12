@@ -83,6 +83,10 @@ QString EngineListModel::addEngine(QFileInfo file) //TODO: Turn this into a swit
     {
         return updateEngine("Turok 2: Seeds of Evil", file.absoluteFilePath(), Engine_Turok2, Pic_Turok2, true);
     }
+    else if (file.baseName().compare( QString("doom64"), Qt::CaseInsensitive) == 0)
+    {
+        return updateEngine("Doom64EX", file.absoluteFilePath(), Engine_Doom64EX, Pic_Doom64EX, true);
+    }
 
     else if (file.baseName().compare( QString("zdoom"), Qt::CaseInsensitive) == 0)
     {

@@ -8,11 +8,12 @@ QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = "Light Burden"
+TARGET = "LightBurden"
 TEMPLATE = app
 
 
 SOURCES += main.cpp\
+    engine_Doom64EX.cpp \
     engine_turok2.cpp \
         rocketlauncher2.cpp \
     abstractmodels.cpp \
@@ -33,6 +34,7 @@ HEADERS  += rocketlauncher2.h \
     commandlinedialog.h
 
 FORMS    += rocketlauncher2.ui \
+    OLDrocketlauncher2.ui \
     commandlinedialog.ui
 
 RESOURCES += \
@@ -46,7 +48,7 @@ CONFIG += c++11
 CONFIG += static
 
 VERSION = 0.1.0.2
-QMAKE_TARGET_COMPANY = Techpillar
-QMAKE_TARGET_PRODUCT = Rocket Launcher 2.0
-QMAKE_TARGET_DESCRIPTION = Rocket Launcher 2.0
-QMAKE_TARGET_COPYRIGHT = Hypnotoad
+QMAKE_TARGET_COMPANY = DM23
+QMAKE_TARGET_PRODUCT = Light Burden 0.6
+QMAKE_TARGET_DESCRIPTION = Light Burden 0.6
+QMAKE_TARGET_COPYRIGHT = Doommarine23 - Extended from Hypnotoad's Rocket Launcher 2 & Paynworth's Custom Edition
