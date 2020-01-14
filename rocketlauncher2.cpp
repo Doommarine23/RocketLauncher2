@@ -482,7 +482,7 @@ void RocketLauncher2::on_engine_check()
     default:
         ui->pushButton_3->setText("Play Doom!");
 
-        //Enable IWAD and Patch Wad Boxes
+        //Enable IWAD and Patch Wad Boxes, and Map File Name
         ui->IWAD_label->setHidden(false);
         ui->listbox_IWADs->setHidden(false);
         ui->button_mapfilename->setDisabled(false);
@@ -498,18 +498,21 @@ void RocketLauncher2::on_engine_check()
         ui->combo_skill->setDisabled(false);
         ui->label_skill->setDisabled(false);
         ui->input_map->setDisabled(false);
+        ui->check_nointro->setDisabled(true);
         break;
 
     case Engine_Doom64EX:
         ui->pushButton_3->setText("Play Doom64 EX!");
 
-        // Disable IWAD and Patch Wad Boxes
+        // Disable IWADs, Map File Name, and No Intro
         ui->IWAD_label->setHidden(true);
         ui->listbox_IWADs->setHidden(true);
         ui->button_addiwad->setHidden(true);
         ui->button_deliwad->setHidden(true);
 
-        ui->button_mapfilename->setDisabled(false);
+        ui->button_mapfilename->setDisabled(true);
+        ui->check_nointro->setDisabled(true);
+
 
         //Enable Skill, Patch Wad, Monsters, and Demo Recording Buttons, also enable map selection
         ui->combo_skill->setDisabled(false);
@@ -520,12 +523,14 @@ void RocketLauncher2::on_engine_check()
         ui->combo_skill->setDisabled(false);
         ui->label_skill->setDisabled(false);
         ui->input_map->setDisabled(false);
+
         break;
 
     case Engine_Turok1:
         ui->pushButton_3->setText("Play Turok: Dinosaur Hunter!");
 
         ui->input_map->setDisabled(false);
+                ui->check_nointro->setDisabled(false);
         ui->button_mapfilename->setDisabled(false);
         //Hide IWAD and Patch Wad Boxes
         ui->IWAD_label->setHidden(true);
@@ -553,6 +558,7 @@ void RocketLauncher2::on_engine_check()
 
         //Hide IWAD and Patch Wad Boxes
         ui->IWAD_label->setHidden(true);
+                        ui->check_nointro->setDisabled(false);
         ui->listbox_IWADs->setHidden(true);
 
         ui->button_addiwad->setHidden(true);
@@ -791,7 +797,7 @@ void RocketLauncher2::on_button_helpmap_clicked()
             QMessageBox::information(this, "Map/Warp", "Turok 2 does NOT support launching with a map, thus this is disabled.");
             break;
         case Engine_Doom64EX:
-            QMessageBox::information(this, "Map/Warp", "Use map numbers like oldschool Doom engines, e.g. '1'. Nonexistant maps will cause a game crash.");
+            QMessageBox::information(this, "Map/Warp", "Use map numbers e.g. '1'. Nonexistant maps will cause a game crash.");
 
         }
 

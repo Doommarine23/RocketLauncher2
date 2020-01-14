@@ -991,7 +991,14 @@ background-color:#7b7b7c;
              <item row="7" column="0">
               <widget class="QCheckBox" name="check_nointro">
                <property name="styleSheet">
-                <string notr="true">color:#c6c6cc;</string>
+                <string notr="true">QCheckBox{
+color:#c6c6cc;
+}
+
+QCheckBox::indicator:disabled
+{
+background-color:#7b7b7c;
+}</string>
                </property>
                <property name="text">
                 <string>Skip Intro Movies</string>
