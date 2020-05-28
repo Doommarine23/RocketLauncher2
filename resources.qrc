@@ -22,5 +22,6 @@
         <file>img/UI/UI_Button_Disabled.png</file>
         <file>img/Light_Burden_logo.ico</file>
         <file>img/d64exlogo.png</file>
+        <file>img/LZDLogo.png</file>
     </qresource>
 </RCC>

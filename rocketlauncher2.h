@@ -32,6 +32,7 @@
 #include <QShortcut>
 #include "configs.h"
 #include "commandlinedialog.h"
+#include "dndfilesystemlistview.h"
 
 namespace Ui {
 class RocketLauncher2;
@@ -87,6 +88,12 @@ private slots:
 
     void copyItemToIwads(QDropEvent* pEvent);
 
+
+    void displayListRightClickMenu_Pwads(const QPoint& pPoint);
+    void displayListRightClickMenu_Iwads(const QPoint& pPoint);
+    void displayListRightClickMenu_Favs(const QPoint& pPoint);
+    void displayListRightClickMenu(const QPoint& pPoint, DndFileSystemListView *listview);
+
     void on_button_addiwad_clicked();
 
     void on_button_deliwad_clicked();
@@ -127,6 +134,10 @@ private slots:
 
     void showCommandLine();
 
+    void on_button_moveEngineUp_clicked();
+
+    void on_button_moveEngineDown_clicked();
+
 private:
     Ui::RocketLauncher2 *ui;
     QString m_settingsfile;
@@ -148,11 +159,16 @@ private:
     QList<QPixmap> *enginepics;
     QSettings settings;
     QMenu *RLMenu;
+    QMenu *ModListboxMenu;
     QShortcut *RLOpenShortcut;
     QShortcut *RLSaveShortcut;
     QAction *rlmCmdLne;
     QAction *rlmLoadRocket;
     QAction *rlmSaveRocket;
+    QAction *mlmOpenFileBrowser;
+    QAction *mlmMoveUp;
+    QAction *mlmMoveDown;
+    QAction *mlmRemove;
     void parseCmdLine(int argc, char *argv[]);
     void updateFavs(QString filepath, bool save);
     void updateIWADs(QString filepath, bool save);

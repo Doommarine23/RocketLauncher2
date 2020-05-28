@@ -1,4 +1,4 @@
-/*  This file (rocketlauncher2.cpp) is part of Rocket Launcher 2.0 - A cross platform
+﻿/*  This file (rocketlauncher2.cpp) is part of Rocket Launcher 2.0 - A cross platform
  *  front end for all DOOM engine source ports.
  *
  *  Copyright (C) Hypnotoad
@@ -33,6 +33,7 @@
 #include <QMimeData>
 #include <QMenu>
 #include <QShortcut>
+#include <QDesktopServices>
 
 #include "dndfilesystemlistview.h"
 #include "rocketlauncher2.h"
@@ -70,6 +71,10 @@ RocketLauncher2::RocketLauncher2(QWidget *parent, int argc, char *argv[]) :
     connect(ui->listbox_pwadload, SIGNAL(internalItemDropped(QDropEvent*)), this, SLOT(copyItemToPwads(QDropEvent*)));
     connect(ui->listbox_IWADs, SIGNAL(internalItemDropped(QDropEvent*)), this, SLOT(copyItemToIwads(QDropEvent*)));
     connect(ui->listbox_IWADs, SIGNAL(fileSystemPathDropped(QString)), this, SLOT(addToIWADs(const QString)));
+    connect(ui->listbox_fav, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(displayListRightClickMenu_Favs(const QPoint)));
+    connect(ui->listbox_IWADs, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(displayListRightClickMenu_Iwads(const QPoint)));
+    connect(ui->listbox_pwadload, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(displayListRightClickMenu_Pwads(const QPoint)));
+
     initPixmaps();
     initConfigs();
     loadsettings();
@@ -138,6 +143,7 @@ void RocketLauncher2::initPixmaps()
     enginepics->append((QPixmap(":/engine/img/turoklogo.png").scaled(105,105,Qt::KeepAspectRatio))); //14 Turok
     enginepics->append((QPixmap(":/engine/img/turok2logo.png").scaled(105,105,Qt::KeepAspectRatio))); //15 Turok 2
     enginepics->append((QPixmap(":/engine/img/d64exlogo.png").scaled(105,105,Qt::KeepAspectRatio))); //16 Doom64EX
+    enginepics->append((QPixmap(":/engine/img/LZDLogo.png").scaled(105,105,Qt::KeepAspectRatio))); //14 LZDoom
     ui->img_engine->setPixmap(enginepics->at(0));
 }
 
@@ -156,6 +162,17 @@ void RocketLauncher2::setupAdditionalUi(){
     connect(rlmCmdLne,SIGNAL(triggered()),this,SLOT(showCommandLine()));
     connect(rlmLoadRocket,SIGNAL(triggered()),this,SLOT(on_button_loadConfigExt_clicked()));
     connect(rlmSaveRocket,SIGNAL(triggered()),this,SLOT(on_button_saveConfigExt_clicked()));
+
+    ModListboxMenu = new QMenu(this);
+    mlmOpenFileBrowser = new QAction("Show in File Browser",this);
+    mlmMoveUp = new QAction("Move Up",this);
+    mlmMoveDown = new QAction("Move Down",this);
+    mlmRemove = new QAction("Remove",this);
+    ModListboxMenu->addAction(mlmOpenFileBrowser);
+    ModListboxMenu->addAction(mlmMoveUp);
+    ModListboxMenu->addAction(mlmMoveDown);
+    ModListboxMenu->addAction(mlmRemove);
+
     adjustSize();
 
     RLOpenShortcut = new QShortcut(QKeySequence(tr("Ctrl+O", "File|Open")), this);
@@ -169,6 +186,11 @@ void RocketLauncher2::initListViews()
     enginelist = new EngineListModel();
     ui->combo_Engines->setModel(enginelist);
     ui->listbox_engines->setModel(enginelist);
+
+    ui->listbox_engines->setAcceptDrops(true);
+    ui->listbox_engines->setDropIndicatorShown(true);
+    ui->listbox_engines->setDragDropMode(QAbstractItemView::InternalMove);
+    ui->listbox_engines->setDefaultDropAction(Qt::MoveAction);
 
     pwadloadlist = new QStandardItemModel;
     ui->listbox_pwadload->setModel(pwadloadlist);
@@ -449,7 +471,6 @@ if(enginelist->getCurrentEngine()->type != Engine_Turok1 && enginelist->getCurre
         QMessageBox::warning(this,"Error" ,"Engine failed to start.");
     }
 }
-
 //==========ENGINE SELECTION HANDLING=========
 
 void RocketLauncher2::on_pushButton_2_clicked() //Select Engine
@@ -623,6 +644,8 @@ void RocketLauncher2::SetEnginePic(EnginePic pic)
             ui->img_engine->setPixmap(enginepics->at(15)); break;
         case Pic_Doom64EX:
             ui->img_engine->setPixmap(enginepics->at(16)); break;
+        case Pic_LZdoom:
+            ui->img_engine->setPixmap(enginepics->at(17)); break;
     }
 }
 
@@ -706,6 +729,83 @@ void RocketLauncher2::on_button_favremove_clicked()
     this->setUpdatesEnabled(true);
 
 }
+void RocketLauncher2::displayListRightClickMenu_Favs(const QPoint& pPoint){
+    displayListRightClickMenu(pPoint, ui->listbox_fav);
+}
+void RocketLauncher2::displayListRightClickMenu_Pwads(const QPoint& pPoint){
+    displayListRightClickMenu(pPoint, ui->listbox_pwadload);
+}
+void RocketLauncher2::displayListRightClickMenu_Iwads(const QPoint& pPoint){
+    displayListRightClickMenu(pPoint, ui->listbox_IWADs);
+}
+void RocketLauncher2::displayListRightClickMenu(const QPoint& pPoint, DndFileSystemListView *listview){
+    QPoint globalpos = listview->mapToGlobal(pPoint);
+    QModelIndexList indexes = listview->selectionModel()->selectedIndexes();
+    if (indexes.empty()) return;
+    QString filePath = returnSelectedDndViewItemData(listview,Qt::UserRole);
+    if (filePath.length() < 1) return;
+    if (!fileExists(filePath)) return;
+    QAction* selectedAction;
+    selectedAction = ModListboxMenu->exec(globalpos);
+    if(selectedAction) {
+        if(selectedAction == mlmOpenFileBrowser) {
+            qDebug() << "File Browser";
+            qDebug() << filePath;
+            QDir d = QFileInfo(filePath).absoluteDir();
+            QString absolute=d.absolutePath();
+            QDesktopServices::openUrl(QUrl::fromLocalFile(absolute));
+        } else if(selectedAction == mlmMoveUp) {
+            qDebug() << "Up";
+
+            if (listview == ui->listbox_fav){
+                qDebug() << "favourites";
+                moveItemWithinDndListViewSave(ui->listbox_fav, favlist,
+                                          "pwad_favs", "fav_path", settings);
+            }
+            else if (listview == ui->listbox_IWADs){
+                qDebug() << "iwads";
+                moveItemWithinDndListViewSave(ui->listbox_IWADs, iwadlist,
+                                          "iwads", "iwad_path", settings, false);
+            }
+            else if (listview == ui->listbox_pwadload){
+                qDebug() << "pwads";
+                moveItemWithinDndListView(ui->listbox_pwadload, pwadloadlist, false);
+            }
+        } else if(selectedAction == mlmMoveDown) {
+            qDebug() << "down";
+            if (listview == ui->listbox_fav){
+                qDebug() << "favourites";
+                moveItemWithinDndListViewSave(ui->listbox_fav, favlist,
+                                          "pwad_favs", "fav_path", settings, true);
+            }
+            else if (listview == ui->listbox_IWADs){
+                qDebug() << "iwads";
+                moveItemWithinDndListViewSave(ui->listbox_IWADs, iwadlist,
+                                          "iwads", "iwad_path", settings, true);
+            }
+            else if (listview == ui->listbox_pwadload){
+                qDebug() << "pwads";
+                moveItemWithinDndListView(ui->listbox_pwadload, pwadloadlist, true);
+            }
+        } else if(selectedAction == mlmRemove) {
+            qDebug() << "remove";
+
+            if (listview == ui->listbox_fav){
+                qDebug() << "favourites";
+                on_button_favremove_clicked();
+            }
+            if (listview == ui->listbox_pwadload){
+                qDebug() << "pwads";
+                on_button_remove_clicked();
+            }
+            if (listview == ui->listbox_IWADs){
+                qDebug() << "iwads";
+                on_button_deliwad_clicked();
+            }
+        }
+    }
+}
+
 
 void RocketLauncher2::copyItemToPwads(QDropEvent* pEvent)
 {
@@ -723,12 +823,12 @@ void RocketLauncher2::copyItemToFav(QDropEvent* pEvent)
 }
 
 void RocketLauncher2::on_button_addiwad_clicked()
-{
+{   
     QString title = tr("Locate an IWAD to add to the list.");
-    QString filter = tr("WAD/pk3/zip (*.WAD *.pk3 *.zip)"
-            ";;WAD Files (*.WAD)"
-            ";;pk3 Files (*.pk3)"
-            ";;zip Files (*.zip)"
+    QString filter = tr("WAD/pk3/zip (*.wad *.pk3 *.zip *.WAD *.PK3 *.ZIP)"
+            ";;WAD Files (*.wad *.WAD)"
+            ";;PK3 Files (*.pk3 *.PK3)"
+            ";;zip Files (*.zip *.ZIP)"
             ";;All files (*)");
     updateIWADs(QFileDialog::getOpenFileName(this,title,"",filter), true);
 }
