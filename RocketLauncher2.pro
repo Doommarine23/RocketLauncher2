@@ -34,7 +34,6 @@ HEADERS  += rocketlauncher2.h \
     commandlinedialog.h
 
 FORMS    += rocketlauncher2.ui \
-    OLDrocketlauncher2.ui \
     commandlinedialog.ui
 
 RESOURCES += \
